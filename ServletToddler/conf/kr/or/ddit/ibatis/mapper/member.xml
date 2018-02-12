@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="member">
+	<typeAlias alias="memberVO" type="kr.or.ddit.vo.MemberVO"/>
+	<sql id="selectAllMember">
+		SELECT *
+	 		FROM MEMBER
+	</sql>
+	<!-- 
+		Map params = new HashMap<String, String>();
+		params.put(mem_id, "a001");
+		params.put(mem_pass, "asdfasdf")	
+		
+		bean			 			클래스 변수 setter/getter
+		VO(Value Object) 			클래스 변수 setter/getter  수정가능
+		DTO(Data Transfer Object) 	클래스 변수 setter/getter  통신 자원(수정불가)
+	 -->
+	<select id="memberInfo" parameterClass = "map" resultClass="memberVO">
+		<include refid="selectAllMember"/>
+		WHERE MEM_ID = #mem_id#
+		<dynamic>
+			<isNotEmpty property="mem_pass">
+		 		AND MEM_PASS = #mem_pass#
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<select id="memberList" resultClass="memberVO">
+		<include refid="selectAllMember"/>
+	</select>
+	
+</sqlMap>
+
+
+
+
+

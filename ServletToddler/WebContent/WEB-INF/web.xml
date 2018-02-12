@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>ServletToddler</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+	
+	  <!-- 
+  			|=============U-R-L==================|
+							|====URI=============|  			
+  	브라우저: http://localhost/ServletToddler/hello
+  	protocol: http	
+	domain(ip: localhost or 127.0.0.1(
+	context root|path: /ServletToddler
+	Servlet path: /hello 	
+		  		
+  		http://ip주소 또는 도메인/
+  	루프백 도메인: 
+  		localhost(127.0.0.1)
+   -->
+	
+	
+   <servlet>
+   		<servlet-name>hello</servlet-name> 
+   		<servlet-class>kr.or.ddit.controller.hello.HelloServlet</servlet-class>
+   </servlet>
+   
+   <servlet-mapping>
+   		<servlet-name>hello</servlet-name> 
+   		<url-pattern>/hello</url-pattern>
+   </servlet-mapping>
+	<!-- 
+		회원관리: 회원가입, 회원정보수정, 회원탈퇴, 로그인, 로그아웃
+		회원가입: http://localhost/ServletToddler/member/regist
+		회원정보수정: http://localhost/ServletToddler/member/update
+		회원탈퇴: http://localhost/ServletToddler/member/delete
+		로그인: http://localhost/ServletToddler/join/loginForm
+		로그아웃: http://localhost/ServletToddler/join/logout
+	 -->   
+	<servlet>
+   		<servlet-name>loginForm</servlet-name> 
+   		<servlet-class>kr.or.ddit.controller.join.LoginFormServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+   		<servlet-name>loginForm</servlet-name> 
+   		<url-pattern>/join/loginForm</url-pattern>
+    </servlet-mapping>
+    	
+    	
+	<servlet>
+   		<servlet-name>loginCheck</servlet-name> 
+   		<servlet-class>kr.or.ddit.controller.join.LoginCheckServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+   		<servlet-name>loginCheck</servlet-name> 
+   		<url-pattern>/join/loginCheck</url-pattern>
+    </servlet-mapping>	
+	
+	
+	<servlet>
+   		<servlet-name>memberList</servlet-name> 
+   		<servlet-class>kr.or.ddit.controller.member.MemberListServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+   		<servlet-name>memberList</servlet-name> 
+   		<url-pattern>/member/memberList</url-pattern>
+    </servlet-mapping>	
+	
+	
+	<servlet>
+   		<servlet-name>memberView</servlet-name> 
+		<servlet-class>kr.or.ddit.controller.member.MemberViewServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+   		<servlet-name>memberView</servlet-name> 
+   		<url-pattern>/member/memberView</url-pattern>
+    </servlet-mapping>	
+	
+	
+	<servlet>
+   		<servlet-name>updateMemberInfo</servlet-name> 
+		<servlet-class>kr.or.ddit.controller.member.UpdateMemberServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+   		<servlet-name>updateMemberInfo</servlet-name> 
+   		<url-pattern>/member/updateMemberInfo</url-pattern>
+    </servlet-mapping>	
+	
+	
+</web-app>
+
+
+
+
+
+
+
+
+
