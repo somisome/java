@@ -38,8 +38,7 @@ public class IMemberDaoImpl implements IMemberDao {
 
 	@Override
 	public String insertMemberInfo(MemberVO memberInfo) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		return (String) client.insert("member.insertMemberInfo", memberInfo);
 	}
 
 	@Override
@@ -51,8 +50,7 @@ public class IMemberDaoImpl implements IMemberDao {
 
 	@Override
 	public void updateMemberInfo(MemberVO memberInfo) throws SQLException {
-		// TODO Auto-generated method stub
-
+		client.update("member.updateMemberInfo", memberInfo);
 	}
 
 }

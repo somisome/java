@@ -90,6 +90,15 @@
    		<servlet-name>updateMemberInfo</servlet-name> 
    		<url-pattern>/member/updateMemberInfo</url-pattern>
     </servlet-mapping>	
+    
+	<servlet>
+   		<servlet-name>memberForm</servlet-name> 
+		<servlet-class>kr.or.ddit.controller.member.MemberFormServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+   		<servlet-name>memberForm</servlet-name> 
+   		<url-pattern>/member/memberForm</url-pattern>
+    </servlet-mapping>	
 	
 	
 </web-app>

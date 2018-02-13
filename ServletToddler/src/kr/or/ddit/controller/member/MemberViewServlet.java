@@ -33,7 +33,8 @@ public class MemberViewServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		
-		
+		// - HTML Tag에 disabled='disabled' 설정 시 해당 값이 랜더링되어 출력은 되지만 값은 서버로 미전송.
+		// - HTML Tag에 type='hidden'설정 시 해당값이 미출력되지만 값은 서버로 전송.
 		out.println("<!DOCTYPE html>                             "); 
 		out.println("<html>                                      "); 
 		out.println("<head>                                      "); 
@@ -41,7 +42,10 @@ public class MemberViewServlet extends HttpServlet {
 		out.println("<title>Insert title here</title>            "); 
 		out.println("</head>                                     "); 
 		out.println("<body>                                      "); 
-		out.println("<form action='ServletToddler/member/updateMemberInfo' name='updateMemberForm' method='POST'>"); 
+		out.println("<form action='/ServletToddler/member/updateMemberInfo' name='updateMemberForm' method='POST'>"); 
+		
+		out.println("<input type='hidden' name='mem_id' value='"+memberInfo.getMem_id()+"'/>");
+		
 		out.println("			<table>                                                                          "); 
 		out.println("	<tr>                                                                                     "); 
 		out.println("		<td>아이디</td>                                                                      "); 

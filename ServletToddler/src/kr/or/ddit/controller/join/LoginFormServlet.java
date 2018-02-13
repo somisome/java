@@ -50,13 +50,29 @@ public class LoginFormServlet extends HttpServlet {
 		out.println("<title>Insert title here</title>                                                    ");
 		out.println(" <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>      ");
 		
+		out.println("<script type='text/javascript' src='/ServletToddler/js/validation.js'></script>  ");
+		
 		out.println("<script type='text/javascript'>");
 		
 		out.println("$(function(){");
 		out.println("     if('"+message+"'!='null'){");
 		out.println("      alert('"+message+"');                          ");
-		
 		out.println("}");
+		out.println("$('form[name=loginForm]').submit(function(){                                    ");       
+		out.println("	if(!$('input[name=mem_id]').val().validationID()){                   ");
+		out.println("		alert('아이디는 알파벳 소문자로 시작된 숫자 3개 조합으로 입력해주세요.');            ");
+		out.println("		return false;                                                            ");
+		out.println("	}                                                                            ");
+		out.println("	if(!$('input[name=mem_pass]').val().validationPWD()){                ");
+		out.println("		alert('패스워드는 알파벳 소문자와 숫자로 조합되어 최소4, 최대10개 글자로 입력해주세요.');");
+		out.println("		return false;                                                            ");
+		out.println("	}                                                                            ");
+		out.println("	return true;                                                                 ");
+		out.println("});                                                                             ");
+		
+		
+		
+		
 		out.println("})");
 		out.println("</script>                  ");
 		
@@ -74,7 +90,10 @@ public class LoginFormServlet extends HttpServlet {
 		out.println("			</tr>                                                                    ");
 		out.println("		</table>                                                                     ");
 		out.println("		<input type='submit' value='로그인' />                                       ");
-		out.println("		<input type='button' value='회원가입' />                                       ");
+		
+		out.println("		<input type='button' value='회원가입' onclick='javascript:location.href=\"/ServletToddler/member/memberForm\";'/>                                       ");
+		
+		
 		out.println("	</form>                                                                          ");
 		out.println("	                                                                                 ");
 		out.println("</body>                                                                             ");

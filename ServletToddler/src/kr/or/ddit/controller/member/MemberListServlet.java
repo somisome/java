@@ -56,17 +56,6 @@ public class MemberListServlet extends HttpServlet {
 		out.println("<head>                                                                              ");
 		out.println("<meta charset='UTF-8'>                                                              ");
 		out.println("<title>Insert title here</title>                                                    ");
-		out.println(" <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>      ");
-		out.println("<script type='text/javascript'>");
-		out.println("</script>                  ");
-		
-		
-		out.println("<style>                          ");
-		out.println("td{                              ");
-		out.println("	border: solid 2px black;     ");
-		out.println("}                                ");
-        out.println("                                 ");
-		out.println("</style>                         ");
 		
 		
 		

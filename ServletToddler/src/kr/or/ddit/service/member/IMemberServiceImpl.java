@@ -54,8 +54,13 @@ public class IMemberServiceImpl implements IMemberService {
 
 	@Override
 	public String insertMemberInfo(MemberVO memberInfo) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = null;
+		try {
+			result= dao.insertMemberInfo(memberInfo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
@@ -66,8 +71,11 @@ public class IMemberServiceImpl implements IMemberService {
 
 	@Override
 	public void updateMemberInfo(MemberVO memberInfo) {
-		// TODO Auto-generated method stub
-
+		try {
+			dao.updateMemberInfo(memberInfo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 
