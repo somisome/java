@@ -91,7 +91,10 @@ public class LoginFormServlet extends HttpServlet {
 		out.println("		</table>                                                                     ");
 		out.println("		<input type='submit' value='로그인' />                                       ");
 		
-		out.println("		<input type='button' value='회원가입' onclick='javascript:location.href=\"/ServletToddler/member/memberForm\";'/>                                       ");
+		out.println("		<input type='button' value='회원가입' onclick='javascript:location.href=\"/ServletToddler/member/memberForm\";'/>  ");
+		
+		
+		
 		
 		
 		out.println("	</form>                                                                          ");

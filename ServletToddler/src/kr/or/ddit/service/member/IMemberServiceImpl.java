@@ -54,19 +54,22 @@ public class IMemberServiceImpl implements IMemberService {
 
 	@Override
 	public String insertMemberInfo(MemberVO memberInfo) {
-		String result = null;
+		String returnValue = null;
 		try {
-			result= dao.insertMemberInfo(memberInfo);
+			returnValue= dao.insertMemberInfo(memberInfo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return returnValue;
 	}
 
 	@Override
 	public void deleteMemberInfo(Map<String, String> params) {
-		// TODO Auto-generated method stub
-
+		try {
+			dao.deleteMemberInfo(params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

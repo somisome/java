@@ -36,8 +36,32 @@ String.prototype.validationREGNO=function(){
 	}
 };
 
+//"111-111".validationZIPCODE()
+String.prototype.validationZIPCODE=function(){
+	return /^\d{3}-\d{3}$/.test(this);
+};
 
+//"02-111-1111" or "042-1111-1111"
+String.prototype.validationHOMETEL=function(){
+	return /^0\d{1,2}-\d{3,4}-\d{4}$/.test(this);
+};
 
+//"test@naver.com" or "test@yahoo.co.kr"
+String.prototype.validationMAIL=function(){
+	// \w : [0-9a-z]
+	// . : 키보드로 입력가능한 모든 캐릭터셋 중에 한글자(를 의미)
+	// \ : 정규식 패턴 의미있느 기호를 일반기호로 제외
+	return /^\w+@[a-z]+(\.[a-z]+){1,2}$/.test(this);
+};
+//"02-111-1111" or "042-1111-1111"
+String.prototype.validationCOMTEL=function(){
+	return /^0\d{1,2}-\d{3,4}-\d{4}$/.test(this);
+};
+//   //or 는 | :
+// '010'|'011'|'016'|'017'|'018'|'019' + '-1111-1111' or '-111-1111' 
+String.prototype.validationHP=function(){
+	return /^01(0|1|6|7|8|9)-\d{3,4}-\d{4}$/.test(this);
+};
 
 
 

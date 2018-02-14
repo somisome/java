@@ -40,7 +40,12 @@ public class MemberViewServlet extends HttpServlet {
 		out.println("<head>                                      "); 
 		out.println("<meta charset='UTF-8'>                      "); 
 		out.println("<title>Insert title here</title>            "); 
+		
+		out.println(" <script type='text/javascript' src='http://code.jquery.com/jquery-latest.js'></script>      ");
+		
 		out.println("</head>                                     "); 
+		
+		
 		out.println("<body>                                      "); 
 		out.println("<form action='/ServletToddler/member/updateMemberInfo' name='updateMemberForm' method='POST'>"); 
 		
@@ -96,7 +101,7 @@ public class MemberViewServlet extends HttpServlet {
 		out.println("				<tr>                                                                          "); 
 		out.println("					<td colspan='2'>                                                  "); 
 		out.println("						<input type='submit' value='회원정보수정' />                         "); 
-		out.println("						<input type='button' value='회원탈퇴' />                                "); 
+		out.println("						<input id='del' type='button' value='회원탈퇴'  onclick='javascript:location.href=\"/ServletToddler/member/deleteMemberInfo?mem_id="+memberInfo.getMem_id()+"\";' />                                "); 
 		out.println("					</td>                                                                    "); 
 		out.println("				</tr>                                                                      "); 
 		out.println("				                                                                           "); 

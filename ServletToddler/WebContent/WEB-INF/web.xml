@@ -100,6 +100,25 @@
    		<url-pattern>/member/memberForm</url-pattern>
     </servlet-mapping>	
 	
+	<servlet>
+   		<servlet-name>insertMember</servlet-name> 
+		<servlet-class>kr.or.ddit.controller.member.InsertMemberServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+   		<servlet-name>insertMember</servlet-name> 
+   		<url-pattern>/member/insertMemberInfo</url-pattern>
+    </servlet-mapping>	
+    
+
+	<servlet>
+   		<servlet-name>deleteMember</servlet-name> 
+		<servlet-class>kr.or.ddit.controller.member.DeleteMemberServlet</servlet-class>
+	</servlet>
+    <servlet-mapping>
+   		<servlet-name>deleteMember</servlet-name> 
+   		<url-pattern>/member/deleteMemberInfo</url-pattern>
+    </servlet-mapping>	 
+	
 	
 </web-app>
 

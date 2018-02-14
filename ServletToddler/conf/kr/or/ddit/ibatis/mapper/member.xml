@@ -29,6 +29,7 @@
 	
 	<select id="memberList" resultClass="memberVO">
 		<include refid="selectAllMember"/>
+		WHERE MEM_DELETE='n'
 	</select>
 	
 	<update id="updateMemberInfo" parameterClass="memberVO">
@@ -46,10 +47,19 @@
 	
 	<insert id="insertMemberInfo" parameterClass="memberVO">
   		INSERT INTO MEMBER 
-  		(MEM_ID, MEM_PASS, MEM_NAME, MEM_REGNO1, MEM_REGNO2, MEM_ZIP, MEM_ADD1, MEM_ADD2, MEM_HOMETEL, MEM_COMTEL, MEM_HP, MEM_JOB, MEM_LIKE) 
+  		(MEM_ID, MEM_PASS, MEM_NAME, MEM_REGNO1, MEM_REGNO2, MEM_ZIP, MEM_ADD1, MEM_ADD2, MEM_HOMETEL, MEM_COMTEL, MEM_HP, MEM_MAIL, MEM_JOB, MEM_LIKE) 
   		VALUES 
-  		(#mem_id#,#mem_pass#,#mem_name#,#mem_regno1#,#mem_regno2#,#mem_zip#,#mem_add1#,#mem_add2#,#mem_hometel#,#mem_comtel#,#mem_hp#,#mem_job#,#mem_like#)
+  		(#mem_id#,#mem_pass#,#mem_name#,#mem_regno1#,#mem_regno2#,#mem_zip#,#mem_add1#,#mem_add2#,#mem_hometel#,#mem_comtel#,#mem_hp#,#mem_mail#,#mem_job#,#mem_like#)
 	</insert>
+	
+	
+	<update id="deleteMemberInfo" parameterClass="map">
+		UPDATE MEMBER 
+			SET MEM_DELETE='y'
+			WHERE MEM_ID=#mem_id#
+	</update>
+	
+	
 	
 	
 	

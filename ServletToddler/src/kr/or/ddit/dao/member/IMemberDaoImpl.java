@@ -44,8 +44,7 @@ public class IMemberDaoImpl implements IMemberDao {
 	@Override
 	public void deleteMemberInfo(Map<String, String> params)
 			throws SQLException {
-		// TODO Auto-generated method stub
-
+		client.update("member.deleteMemberInfo", params);
 	}
 
 	@Override

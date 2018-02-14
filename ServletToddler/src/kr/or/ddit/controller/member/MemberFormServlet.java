@@ -76,23 +76,53 @@ public class MemberFormServlet extends HttpServlet {
 		out.println("		alert('아이디는 알파벳 소문자로 시작된 숫자 3개 조합으로 입력해주세요.');            ");
 		out.println("		return false;                                                            ");
 		out.println("	}                                                                            ");
+		
 		out.println("	if(!$('input[name=mem_pass]').val().validationPWD()){                ");
 		out.println("		alert('패스워드는 알파벳 소문자와 숫자로 조합되어 최소4, 최대10개 글자로 입력해주세요.');");
 		out.println("		return false;                                                            ");
 		out.println("	}                                                                            ");
+
 		out.println("	if(!$('input[name=mem_name]').val().validationNM()){                ");
 		out.println("		alert('이름은 최소2, 최대4자 한글로 입력해주세요.');");
 		out.println("		return false;                                                            ");
 		out.println("	}                                                                            ");
 		
-		out.println("	if(!  ( $('input[name=mem_regno1]').val()+'-'+$('input[name=mem_regno2]').val() ).validationREGNO()      ){   ");
-		out.println("		alert('주민번호가 유효하지 않습니다.');            ");
+		out.println("	var regon = $('input[name=mem_regno1]').val()+'-'+$('input[name=mem_regno2]').val()         ");
+		out.println("	if(!regno.validationREGNO()){                ");
+		out.println("		alert('올바른 주민등록 번호를 입력해주세요');");
 		out.println("		return false;                                                            ");
 		out.println("	}                                                                            ");
 		
+		out.println("	if(!$('input[name=mem_zip]').val().validationZIPCODE()){                ");
+		out.println("		alert('우편번호를 바르게 입력해주세요.');");
+		out.println("		return false;                                                            ");
+		out.println("	}                                                                            ");
+		
+		out.println("	if(!$('input[name=mem_hometel]').val().validationHOMETEL()){                ");
+		out.println("		alert('집전화를 바르게 입력해주세요.');");
+		out.println("		return false;                                                            ");
+		out.println("	}                                                                            ");
+		
+		out.println("	if(!$('input[name=mem_comtel]').val().validationCOMTEL()){                ");
+		out.println("		alert('회사 전화번호를 바르게 입력해주세요.');");
+		out.println("		return false;                                                            ");
+		out.println("	}                                                                            ");
+		
+		out.println("	if(!$('input[name=mem_hp]').val().validationHP()){                ");
+		out.println("		alert('휴대폰 번호를 바르게 입력해주세요.');");
+		out.println("		return false;                                                            ");
+		out.println("	}                                                                            ");
+		
+		
+		out.println("	if(!$('input[name=mem_mail]').val().validationMAIL()){                ");
+		out.println("		alert('메일 주소를 바르게 입력해주세요.');");
+		out.println("		return false;                                                            ");
+		out.println("	}                                                                            ");
+		
+		
+		
 		out.println("	return true;                                                                 ");
 		out.println("});                                                                             ");
-		
 		out.println("})");
 		
 		out.println("</script>                  ");
@@ -105,7 +135,7 @@ public class MemberFormServlet extends HttpServlet {
 		
 		out.println("</head>                                     "); 
 		out.println("<body>                                      "); 
-		out.println("<form action='/ServletToddler/member/memberForm' name='memberForm' method='POST'>"); 
+		out.println("<form action='/ServletToddler/member/insertMemberInfo' name='memberForm' method='POST'>"); 
 		
 		out.println("			<table>                                                                          "); 
 		out.println("	<tr>                                                                                     "); 
@@ -125,11 +155,24 @@ public class MemberFormServlet extends HttpServlet {
 		out.println("		<td>                                                                                 "); 
 		out.println("			<input type='text' name='mem_regno1' />-    "); 
 		out.println("			<input type='text' name='mem_regno2' />     "); 
-		
-		
-		
 		out.println("		</td>                                                                                "); 
 		out.println("	</tr>                                                                                    "); 
+		
+		out.println("	<tr>                                                                                     "); 
+		out.println("		<td>메일</td>                                                                    "); 
+		out.println("		<td>                                                                                 "); 
+		out.println("			<input type='text' name='mem_mail' />    "); 
+		out.println("		</td>                                                                                "); 
+		out.println("	</tr>                                                                                    "); 
+
+		out.println("	<tr>                                                                                     "); 
+		out.println("		<td>우편번호</td>                                                                    "); 
+		out.println("		<td>                                                                                 "); 
+		out.println("			<input type='text' name='mem_zip' />    "); 
+		out.println("		</td>                                                                                "); 
+		out.println("	</tr>                                                                                    "); 
+		
+		
 		out.println("	<tr>                                                                                     "); 
 		out.println("		<td>주소</td>                                                                        "); 
 		out.println("		<td>                                                                                 "); 
@@ -149,6 +192,7 @@ public class MemberFormServlet extends HttpServlet {
 		out.println("		<td>휴대폰</td>                                                                      "); 
 		out.println("		<td><input type='text' name='mem_hp'  /></td>         "); 
 		out.println("	</tr>                                                                                    "); 
+		
 		out.println("	<tr>                                                                                     "); 
 		out.println("		<td>직업</td>                                                                        "); 
 		out.println("			<td><input type='text' name='mem_job'/></td>   "); 
