@@ -17,11 +17,33 @@ import kr.or.ddit.vo.MemberVO;
 // URL: http://localhost/ServletToddler/join/loginCheck
 //http://localhost/ServletToddler/join/loginCheck?mem_id=123123&mem_pass=456456
 // 서블릿패스: join/loginCheck?mem_id=123123&mem_pass=456456
+/**
+ * @Class Name : LoginCheckServlet.java
+ * @Description : 로그인 아이디, 패스워드 체크
+ * @Modification Information
+ * @author 윤소미
+ * @since  2018.02.19.
+ * @version 1.0
+ * @see javax.servlet.http.HttpServlet
+ * <pre>
+ * << 개정이력(Modification Information) >>
+ *    수정일    	    수정자          수정내용
+ *    -------      -------     -------------------
+ *    2018.02.19.  윤소미          최초작성
+ * Copyright (c) 2018 by DDIT  All right reserved
+ * </pre>
+ */
 public class LoginCheckServlet extends HttpServlet {
 
 	
-	
-	
+	/**
+	 * 취득한 아이디와 패스워드가 DB에 존재하는지 검증
+	 * @param javax.servlet.http.HttpServletRequest
+	 * @param javax.servlet.http.HttpServletResponse
+	 * @return 
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

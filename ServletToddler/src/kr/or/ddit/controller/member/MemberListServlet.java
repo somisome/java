@@ -35,10 +35,34 @@ import kr.or.ddit.vo.MemberVO;
 	//			브라우저 주소창 직접 URL입력
 	// 	POST: 	<form method ="POST"/>
 	//			ajax(type:post)
+/**
+ * @Class Name :MemberListServlet.java
+ * @Description : 회원(회원정보) 리스트 출력
+ * @Modification Information
+ * @author 윤소미
+ * @since  2018.02.19.
+ * @version 1.0
+ * @see javax.servlet.http.HttpServlet
+ * <pre>
+ * << 개정이력(Modification Information) >>
+ *    수정일    	    수정자          수정내용
+ *    -------      -------     -------------------
+ *    2018.02.19.  윤소미          최초작성
+ * Copyright (c) 2018 by DDIT  All right reserved
+ * </pre>
+ */
 public class MemberListServlet extends HttpServlet {
 
 	//브라우저가 요청시 전송방식(GET or POST)과는 상관없이 콜백되는 메서드.
 	
+	/**
+	 * DB상 존재하는 회원의 정보 리스트를 테이블로 출력
+	 * @param javax.servlet.http.HttpServletRequest
+	 * @param javax.servlet.http.HttpServletResponse
+	 * @return 
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

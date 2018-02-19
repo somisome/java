@@ -16,9 +16,30 @@ import org.apache.commons.beanutils.BeanUtils;
 import kr.or.ddit.service.member.IMemberService;
 import kr.or.ddit.service.member.IMemberServiceImpl;
 import kr.or.ddit.vo.MemberVO;
-
+/**
+ * @Class Name :MemberFormServlet.java
+ * @Description : 회원가입 양식
+ * @Modification Information
+ * @author 윤소미
+ * @since  2018.02.19.
+ * @version 1.0
+ * @see javax.servlet.http.HttpServlet
+ * <pre>
+ * << 개정이력(Modification Information) >>
+ *    수정일    	    수정자          수정내용
+ *    -------      -------     -------------------
+ *    2018.02.19.  윤소미          최초작성
+ * Copyright (c) 2018 by DDIT  All right reserved
+ * </pre>
+ */
 public class MemberFormServlet extends HttpServlet {
-	
+	/**
+	 * 회원가입을 위한 회원정보의 입력 및 양식검증
+	 * @param javax.servlet.http.HttpServletRequest
+	 * @param javax.servlet.http.HttpServletResponse
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

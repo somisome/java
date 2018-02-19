@@ -14,10 +14,33 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.service.member.IMemberService;
 import kr.or.ddit.service.member.IMemberServiceImpl;
 import kr.or.ddit.vo.MemberVO;
-
+/**
+ * @Class Name : MemberViewServlet.java
+ * @Description : 
+ * @Modification Information
+ * @author 윤소미
+ * @since  2018.02.19.
+ * @version 1.0
+ * @see javax.servlet.http.HttpServlet
+ * <pre>
+ * << 개정이력(Modification Information) >>
+ *    수정일    	    수정자          수정내용
+ *    -------      -------     -------------------
+ *    2018.02.19.  윤소미          최초작성
+ * Copyright (c) 2018 by DDIT  All right reserved
+ * </pre>
+ */
 public class MemberViewServlet extends HttpServlet {
 	//http://localhost/ServletToddler/member/memberView?mem_id=a001
 	@Override
+	/**
+	 *
+	 * @param javax.servlet.http.HttpServletRequest
+	 * @param javax.servlet.http.HttpServletResponse
+	 * @return 
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String mem_id= request.getParameter("mem_id");

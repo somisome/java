@@ -15,11 +15,33 @@ import org.apache.commons.beanutils.BeanUtils;
 import kr.or.ddit.service.member.IMemberService;
 import kr.or.ddit.service.member.IMemberServiceImpl;
 import kr.or.ddit.vo.MemberVO;
-
+/**
+ * @Class Name :InsertMemberServlet .java
+ * @Description : 회원 추가
+ * @Modification Information
+ * @author 윤소미
+ * @since  2018.02.19.
+ * @version 1.0
+ * @see javax.servlet.http.HttpServlet
+ * <pre>
+ * << 개정이력(Modification Information) >>
+ *    수정일    	    수정자          수정내용
+ *    -------      -------     -------------------
+ *    2018.02.19.  윤소미          최초작성
+ * Copyright (c) 2018 by DDIT  All right reserved
+ * </pre>
+ */
 public class InsertMemberServlet extends HttpServlet {
 	
 	
 	@Override
+	/**
+	 * 추가할 회원의 정보 취득 및 전송
+	 * @param javax.servlet.http.HttpServletRequest
+	 * @param javax.servlet.http.HttpServletResponse
+	 * @throws javax.servlet.ServletException
+	 * @throws java.io.IOException
+	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		

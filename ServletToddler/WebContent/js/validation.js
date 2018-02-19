@@ -1,3 +1,13 @@
+/**
+ * 입력값 검증
+ * 버전 : 1.0
+ * << 개정이력(Modification Information) >>
+ * 수정일       수정자          수정내용   
+ * =======      =======     ===================== 
+ * 2018.02.19.  윤소미       최초작성   
+ * Copyright (c) 2018 by DDIT  All right reserved  
+ */
+ 
 //"a001".validationID();
 String.prototype.validationID = function(){
 	//"a001" 전달 == this

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!-- iBatis 환경 설정                        -->
+<!-- << 개정이력(Modification Information) >>            -->
+<!--  수정일       수정자          수정내용              -->
+<!--  =======      =======     =====================     -->
+<!--  2018.02.19.  윤소미       최초작성                 -->
+<!--  2018.02.19.  윤소미       member.xml 매퍼 경로변경                 -->
+<!-- Copyright (c) 2018 by DDIT  All right reserved      -->
 <!DOCTYPE sqlMapConfig      
     PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
     "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
