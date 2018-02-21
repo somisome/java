@@ -4,14 +4,14 @@ package kr.or.ddit.vo;
  * @Description : 회원정보 각 항목 변수와 getter,setter 정의된 VO
  * @Modification Information
  * @author 윤소미
- * @since  2018.02.19.
+ * @since  2018.02.21.
  * @version 1.0
  * @see 
  * <pre>
  * << 개정이력(Modification Information) >>
  *    수정일    	    수정자          수정내용
  *    -------      -------     -------------------
- *    2018.02.19.  윤소미          최초작성
+ *    2018.02.21.  윤소미          최초작성
  * Copyright (c) 2018 by DDIT  All right reserved
  * </pre>
  */

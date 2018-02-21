@@ -12,14 +12,14 @@ import com.ibatis.sqlmap.client.SqlMapClientBuilder;
  * @Description : SqlMapConfig.xml을 읽어와 client 정의
  * @Modification Information
  * @author 윤소미
- * @since  2018.02.19.
+ * @since  2018.02.21.
  * @version 1.0
  * @see 
  * <pre>
  * << 개정이력(Modification Information) >>
  *    수정일    	    수정자          수정내용
  *    -------      -------     -------------------
- *    2018.02.19.  윤소미          최초작성
+ *    2018.02.21.  윤소미          최초작성
  * Copyright (c) 2018 by DDIT  All right reserved
  * </pre>
  */

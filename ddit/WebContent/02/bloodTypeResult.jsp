@@ -16,13 +16,13 @@
 		//String name = request.getParameter("name");
 		String name = URLEncoder.encode(request.getParameter("name"),"UTF-8");
 		if(blood.equals("A")){
-			response.sendRedirect("/ddit/02/view/a.jsp?blood=A&name="+name+"");					
+			response.sendRedirect("view/a.jsp?blood=A&name="+name+"");					
 		}else if(blood.equals("B")){
-			response.sendRedirect("/ddit/02/view/b.jsp?blood=B&name="+name+"");					
+			response.sendRedirect("view/b.jsp?blood=B&name="+name+"");					
 		}else if(blood.equals("AB")){
-			response.sendRedirect("/ddit/02/view/ab.jsp?blood=AB&name="+name+"");					
+			response.sendRedirect("view/ab.jsp?blood=AB&name="+name+"");					
 		}else if(blood.equals("O")){
-			response.sendRedirect("/ddit/02/view/o.jsp?blood=O&name="+name+"");					
+			response.sendRedirect("view/o.jsp?blood=O&name="+name+"");					
 		}
 	%>
 	

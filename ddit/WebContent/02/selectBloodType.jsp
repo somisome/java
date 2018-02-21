@@ -12,7 +12,7 @@ response.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	<form action="/ddit/02/bloodTypeResult.jsp" name="bloodForm">
-	<input type=text name="name">
+	이름: <input type=text name="name"><br>
 	<select name="blood" id="">
 		<option value="A">A</option>
 		<option value="B">B</option>

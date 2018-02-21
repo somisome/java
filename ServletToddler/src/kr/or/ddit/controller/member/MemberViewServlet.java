@@ -16,7 +16,7 @@ import kr.or.ddit.service.member.IMemberServiceImpl;
 import kr.or.ddit.vo.MemberVO;
 /**
  * @Class Name : MemberViewServlet.java
- * @Description : 
+ * @Description : 선택된 회원의 정보 출력
  * @Modification Information
  * @author 윤소미
  * @since  2018.02.19.
@@ -34,10 +34,10 @@ public class MemberViewServlet extends HttpServlet {
 	//http://localhost/ServletToddler/member/memberView?mem_id=a001
 	@Override
 	/**
-	 *
+	 *전달받은 mem_id를 이용하여 해당 회원의 정보 출력
 	 * @param javax.servlet.http.HttpServletRequest
 	 * @param javax.servlet.http.HttpServletResponse
-	 * @return 
+	 * @return void
 	 * @throws javax.servlet.ServletException
 	 * @throws java.io.IOException
 	 */
