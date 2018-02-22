@@ -1,3 +1,17 @@
+<%--==============================================================
+ * 브라우저 요청과 응답구조, 헤더 정보
+ * @author 윤소미
+ * @since  2018.02.20.
+ * @version 1.0
+ * @see
+ * <pre>
+ * << 개정이력(Modification Information) >>
+ *    수정일       수정자          수정내용
+ *    -------      -------     -------------------
+ *    2018.02.20.  윤소미      최초작성
+ * Copyright (c) 2018 by DDIT  All right reserved
+ * </pre>
+===============================================================--%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

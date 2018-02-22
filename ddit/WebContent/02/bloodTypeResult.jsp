@@ -1,3 +1,17 @@
+<%--==============================================================
+ * 혈액형, 이름 받은 후 해당 혈액형페이지로 리다이렉트
+ * @author 윤소미
+ * @since  2018.02.20.
+ * @version 1.0
+ * @see
+ * <pre>
+ * << 개정이력(Modification Information) >>
+ *    수정일       수정자          수정내용
+ *    -------      -------     -------------------
+ *    2018.02.20.  윤소미      최초작성
+ * Copyright (c) 2018 by DDIT  All right reserved
+ * </pre>
+===============================================================--%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

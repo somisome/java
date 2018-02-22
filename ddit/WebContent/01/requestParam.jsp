@@ -1,5 +1,5 @@
 <%--==============================================================
- * JSP
+ * JSP로 form 만들고 POST방식으로 파라메터 전송
  * @author 윤소미
  * @since  2018.02.20.
  * @version 1.0
@@ -9,7 +9,7 @@
  *    수정일       수정자          수정내용
  *    -------      -------     -------------------
  *    2018.02.20.  윤소미      최초작성
- * Copyright (c) 2016 by DDIT  All right reserved
+ * Copyright (c) 2018 by DDIT  All right reserved
  * </pre>
 ===============================================================--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
