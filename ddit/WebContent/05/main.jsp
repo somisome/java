@@ -21,6 +21,7 @@
 	//			/05/memberList.jsp
 	String contentPage = request.getParameter("contentPage");
 	if(contentPage==null){
+		
 		contentPage="/05/memberList.jsp";
 	}
 %>
@@ -67,6 +68,7 @@
 				<jsp:include page="<%=contentPage %>" />
 <%-- 				<jsp:include page="memberList.jsp" /> --%>
 <%-- 				<jsp:include page="/05/memberList.jsp" /> --%>
+<%-- 				<jsp:include page="05/memberView.jsp?mem_id=a001" /> --%>
 <%-- 				<jsp:include page="memberView.jsp" /> --%>
 <%-- 				<jsp:include page="memberForm.jsp" /> --%>
 			</div>

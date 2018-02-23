@@ -9,6 +9,7 @@
  *    수정일       수정자          수정내용
  *    -------      -------     -------------------
  *    2018.02.22.  윤소미      최초작성
+ *    2018.02.23.  윤소미      클릭이벤트(memberView.jsp로 이동) 추가
  * Copyright (c) 2018 by DDIT  All right reserved
  * </pre>
 ===============================================================--%>
@@ -30,7 +31,7 @@
 </head>
 <body>
 <div id="list">
-	<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" style="width: 100%;">
+	<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" style="width: 100%;" id="memberListTbl">
 		<thead>
 			<tr>
 				<th class="mdl-data-table__cell--non-numeric">아이디</th>
@@ -66,6 +67,47 @@
 	</form>
 </div>
 </body>
+<!--
+	jquery  코드 힌트 창 활성화 
+	1. http://code.google.com/a/eclipselabs.org/p/jquerywtp/downloads/list 
+	    다운로드 jqueryWTP1.20foEN.jar
+	2. cmd -> java -jar jqueryWTP1.20foEN.jar 실행
+			C:\Users\Administrator>d:
+			D:\>D_Other
+			D:\>cd D_Other
+			D:\D_Other>java -jar jqueryWTP1.20foEN.jar
+	3. 실행창에서 JarFile :[Browse] -> 사용중인 이클립스 -> plugins -> org.eclipse.wst.jsdt.core_1.3.1.v201401291437.jar 선택
+			D:/B_Util/1.설치 및 압축파일/eclipse_kepler/plugins/org.eclipse.wst.jsdt.core_1.3.1.v201401291437.jar
+	4. Output Dir : [Browse] -> jquery 코드 힌트 플러그인이 추가된 jar파일 작성 위치 선택(D:/)
+	5. 신규 작성된 jar파일을 사용중인 이클립스의 plugins 폴더에 덮어쓰기
+	6. 이클립스종료
+	7. 워크스페이스 -> .metadate -> plugins -> org.eclipse.wst.jsdt.core 삭제
+	8. 이클립스 실행
+	
+	
+	
+	D:\B_Util\1.설치 및 압축파일\eclipse_kepler\plugins
+에 D:/에 생긴 파일 덮어쓰기
+
+D:\workspace(web)\.metadata\.plugins에서
+org.eclipse.wst.jsdt.core삭제
+	
+-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		
+		$('#memberListTbl tr:gt(0)').click(function(){
+			var idx = $(this).index();
+			var mem_id = $(this).find('td:eq(0)').text();
+<%-- 			location.href='<%=request.getContextPath()%>/05/main.jsp?contentPage=/05/memberView.jsp?mem_id='+mem_id; --%>
+			$(location).attr('href','<%=request.getContextPath()%>/05/main.jsp?contentPage=/05/memberView.jsp?mem_id='+mem_id);
+		});
+		
+	})
+</script>
+
 </html>
 
 

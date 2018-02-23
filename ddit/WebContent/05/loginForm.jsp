@@ -88,7 +88,7 @@
 									<td><input type="password" name="mem_pass" class="box" tabindex="3" height="18" /></td>
 								</tr>
 								<tr>
-									<td colspan="3" align="right"><a href="#">회원가입을 원하세요??</a></td>
+									<td colspan="3" align="right"><a href="<%=request.getContextPath()%>/05/main.jsp?contentPage=/05/memberForm.jsp">회원가입을 원하세요??</a></td>
 <!-- 									클릭하면 memberForm.jsp로... -->
 								</tr>
 							</table>
