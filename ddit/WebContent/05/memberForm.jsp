@@ -215,15 +215,17 @@ td {text-align: left; }
 </table>
 </form>
 </body>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/validation.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$('form[name=memberForm]').submit(function(){
-			var regno = $('input[name=regno1]').val()+'-'+$('input[name=regno2]').val();
-			if(!regno.val().validationREGNO()){
-				return stopSubmit('올바른 주민등록번호를 입력해주세요.');
-			}
+// 			var regno = $('input[name=regno1]').val()+'-'+$('input[name=regno2]').val();
+// 			if(!regno.validationREGNO()){
+// 				return stopSubmit('올바른 주민등록번호를 입력해주세요.');
+// 			}
+			
 			if(!$('input[name=mem_id]').val().validationID()){
 				return stopSubmit('아이디를 바르게 입력해주세요.');
 			}
@@ -269,7 +271,6 @@ td {text-align: left; }
 				return stopSubmit('우편번호를 바르게 입력해주세요.');
 			}
 			return true;
- 
 		});
 	});
 	

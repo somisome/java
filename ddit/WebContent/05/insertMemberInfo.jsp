@@ -12,5 +12,6 @@
 	IMemberService service = IMemberServiceImpl.getInstance();
 	service.insertMemberInfo(memberInfo);
 	
+	
 	response.sendRedirect(request.getContextPath()+"/05/main.jsp");
 %>
