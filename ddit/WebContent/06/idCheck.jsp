@@ -15,14 +15,12 @@
 	
 	IMemberService service=IMemberServiceImpl.getInstance();
 	MemberVO memberInfo = service.getMemberInfo(params);
-	
-	List<MemberVO> memberList = service.getMemberList();
 
 	Map<String,String> resultSet=new HashMap<String,String>();
-	if(memberInfo==null){
-		resultSet.put("flag", "true");
-	}else{
-		resultSet.put("flag", "false");
+	if(memberInfo==null){//중복아이디 없음
+		resultSet.put("flag", "사용이 가능한 아이디 입니다.");
+	}else{//중복아이디 있음
+		resultSet.put("flag", "중복되는 아이디 입니다.");
 	}
 	
 	ObjectMapper mapper = new ObjectMapper();

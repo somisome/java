@@ -96,11 +96,11 @@ $(function(){
 		}
 		$('input[name=mem_hp]').val(hp);
 		
-		var zip =$('input[name=mem_zip1]').val()+'-'+$('input[name=mem_zip2]');
-		if(!zip.validationZIPCODE()){
-			return err('형식에 맞는 우편번호를 입력하세요');
-		}
-		$('input[name=mem_zip]').val(zip);
+// 		var zip =$('input[name=mem_zip1]').val()+'-'+$('input[name=mem_zip2]');
+// 		if(!zip.validationZIPCODE()){
+// 			return err('형식에 맞는 우편번호를 입력하세요');
+// 		}
+// 		$('input[name=mem_zip]').val(zip);
 	
 		
 // 		var comtel="";
