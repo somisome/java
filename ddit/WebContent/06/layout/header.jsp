@@ -5,6 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function logout(){
+	var msg = encodeURIComponent('로그아웃...!!!');
+	location.href='<%=request.getContextPath()%>/06/loginForm.jsp?msg='+msg;
+}
+
+</script>
 </head>
 <body>
 	<div class="android-header mdl-layout__header mdl-layout__header--waterfall">
@@ -45,23 +52,9 @@
 				<li class="mdl-menu__item" id="myhome">마이홈</li>
 				<li disabled class="mdl-menu__item" id="message">쪽지보기</li>
 				<li disabled class="mdl-menu__item" id="schedule">스케줄관리</li>
-				<li class="mdl-menu__item" id="logout" onclick="javascript:logOut();">로그아웃</li>
+				<li onclick="javascript:logout();" class="mdl-menu__item" id="logout">로그아웃</li>
 			</ul>
 		</div>
 	</div>
 </body>
-<script type="text/javascript">
-function logOut(){
-	//javascript 인코딩/디코딩 함수
-	//		escape()  / unescape()	: 유니코드 형식으로 인코딩 또는 디코딩
-	//									URL 표현시 활용되는 기호(:,/,?  etc.. ) 를 포함
-	//		encodeURI()/decodeURI()	: 유니코드 형식으로 인코딩 또는 디코딩
-	//									URL 표현시 활용되는 기호(:,/,?  etc.. ) 를 미포함	
-	//		encodeURIComponent() / decodeURIComponent() : 유니코드 형식으로 인코딩 또는 디코딩
-	//														URL을 포함하지 않는 쿼리스트링 또는 파라메터가 대상
-	var msg = encodeURIComponent('로그아웃 되었습니다.');
-	location.href='<%=request.getContextPath()%>/05/loginForm.jsp?message='+msg;
-}
-
-</script>
 </html>
