@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- prod테이블 sqlMap 및 쿼리 정의                  -->
+<!-- << 개정이력(Modification Information) >>            -->
+<!--  수정일       수정자          수정내용              -->
+<!--  =======      =======     =====================     -->
+<!--  2018.02.27.  윤소미       최초작성                 -->
+<!-- Copyright (c) 2018 by DDIT  All right reserved      -->
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="prod">
+	<typeAlias alias="prodVO" type="kr.or.ddit.vo.ProdVO"/>
+	<typeAlias alias="lprodVO" type="kr.or.ddit.vo.LprodVO"/>
+	<typeAlias alias="buyerVO" type="kr.or.ddit.vo.BuyerVO"/>
+	
+	<sql id="selectAllProd">
+		SELECT *
+	 		FROM PROD
+	</sql>
+	
+	<select id="prodList" resultClass="prodVO">
+		<include refid="selectAllProd"/>
+	</select>
+	
+	<select id="prodInfo" parameterClass = "map" resultClass="prodVO">
+		<include refid="selectAllProd"/>
+		WHERE PROD_ID = #prod_id#
+	</select>
+	
+	<update id="updateProdInfo" parameterClass="prodVO">
+		UPDATE PROD
+			SET 
+				PROD_COST=#prod_cost#,                        
+				PROD_PRICE=#prod_price#,                       
+				PROD_SALE=#prod_sale#,  
+				PROD_OUTLINE=#prod_outline#,                     
+				PROD_DETAIL=#prod_detail#,   
+				PROD_QTYIN=#prod_qtyin#,
+				PROD_TOTALSTOCK=#prod_totalstock#,  
+				PROD_PROPERSTOCK=#prod_properstock#,  
+				PROD_INSDATE=#prod_insdate# 
+			WHERE PROD_ID=#prod_id#
+	</update>
+	
+	<insert id="insertProdInfo" parameterClass="prodVO">
+		INSERT INTO PROD	
+		(PROD_ID,PROD_NAME,PROD_LGU,PROD_BUYER,PROD_COST,PROD_PRICE,PROD_SALE,PROD_OUTLINE,PROD_DETAIL,PROD_QTYIN ,PROD_TOTALSTOCK,PROD_PROPERSTOCK,PROD_INSDATE) 
+		VALUES
+		(#prod_id#,#prod_name#,#prod_lgu#,#prod_buyer#,#prod_cost#,#prod_price#,#prod_sale#,#prod_outline#,#prod_detail#,#prod_qtyin#,#prod_totalstock#,#prod_properstock#,#prod_insdate#)
+	</insert>
+	
+	<update id="deleteProdInfo" parameterClass="map">
+		UPDATE PROD
+			SET PROD_DELETE='y'
+			WHERE PROD_ID=#prod_id#
+	</update>
+<!-- 
+	Map params = new HashMap<String, String>();
+	params.put(mem_id, "a001");
+	params.put(mem_pass, "asdfasdf")	
+	
+	bean			 			클래스 변수 setter/getter
+	VO(Value Object) 			클래스 변수 setter/getter  수정가능
+	DTO(Data Transfer Object) 	클래스 변수 setter/getter  통신 자원(수정불가)
+ -->
+<!-- 	 	<dynamic> -->
+<!-- 			<isNotEmpty property="mem_pass"> -->
+<!-- 		 		AND MEM_PASS = #mem_pass# -->
+<!-- 			</isNotEmpty> -->
+<!-- 		</dynamic> -->
+
+<!-- resultClass="java.util.HashMap" -->
+	 
+</sqlMap>
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+
+
+
+
+

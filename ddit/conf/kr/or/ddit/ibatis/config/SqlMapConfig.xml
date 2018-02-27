@@ -33,6 +33,7 @@
 	</dataSource> 
 	</transactionManager>
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/member.xml"/>
+	<sqlMap resource="kr/or/ddit/ibatis/mapper/prod.xml"/>
 </sqlMapConfig>
 
 

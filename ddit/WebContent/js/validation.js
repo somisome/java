@@ -73,7 +73,14 @@ String.prototype.validationHP=function(){
 	return /^01(0|1|6|7|8|9)-\d{3,4}-\d{4}$/.test(this);
 };
 
+//"P123456789".validationProdId
+String.prototype.validationProdId=function(){
+	return /^P[0-9]{9}$/.test(this);
+};
 
+//String.prototype.validationProdLgu=function(){
+//	return /^P\d{3}$/.test(this);
+//};
 
 
 /*
