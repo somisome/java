@@ -34,6 +34,7 @@
 	</transactionManager>
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/member.xml"/>
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/prod.xml"/>
+	<sqlMap resource="kr/or/ddit/ibatis/mapper/buyer.xml"/>
 </sqlMapConfig>
 
 

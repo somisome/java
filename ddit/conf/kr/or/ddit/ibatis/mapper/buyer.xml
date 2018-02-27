@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- buyer테이블 sqlMap 및 쿼리 정의                  -->
+<!-- << 개정이력(Modification Information) >>            -->
+<!--  수정일       수정자          수정내용              -->
+<!--  =======      =======     =====================     -->
+<!--  2018.02.27.  윤소미       최초작성                 -->
+<!-- Copyright (c) 2018 by DDIT  All right reserved      -->
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="buyer">
+	<typeAlias alias="prodVO" type="kr.or.ddit.vo.ProdVO"/>
+	<typeAlias alias="lprodVO" type="kr.or.ddit.vo.LprodVO"/>
+	<typeAlias alias="buyerVO" type="kr.or.ddit.vo.BuyerVO"/>
+	
+	<sql id="selectAllBuyer">
+		SELECT *
+	 		FROM BUYER
+	</sql>
+	
+	<select id="buyerList" resultClass="buyerVO">
+		<include refid="selectAllBuyer"/>
+	</select>
+	
+	 
+</sqlMap>
+
+	
+
+	
+
+	
+
+	
+
+	
+	
+	
+	
+	
+	
+
+
+
+
+

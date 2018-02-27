@@ -53,6 +53,22 @@ function isOkID(){
 	
 };
 
+function isOkBuyer(){
+	$.ajax({
+		type:'POST',
+		dataType:'json',
+		data:{prod_buyer:$('input[name=prod_buyer]').val()},
+		url:'<%=request.getContextPath()%>/07/prodBuyerCheck.jsp',
+		error:function(result){
+				alert(result.message);
+			},	
+		success:function(result){
+  			alert(result.flag);
+			}
+	});
+	
+	
+};
 
 </script>
 
@@ -78,7 +94,7 @@ td {text-align: left; }
 				상품코드 신규 등록시 기존의 상품코드와의 중복검사 로직을 ajax로 구현.
 			 -->
 			 
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="search_prod_id" type="button" ><a href="javascript:isOkID();">상품코드중복검사</a></button>
+			<a href="javascript:isOkID();"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="search_prod_id" type="button" >상품코드중복검사</button></a>
 		</td>
 	</tr>
 	<tr>
@@ -115,7 +131,7 @@ td {text-align: left; }
 			<!-- 
 				거래처 등록시 모달리스 팝업을 활용하여 기존의 거래처명으로 거래처 코드 검색을 ajax로 구현.
 			 -->
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="search_buyer_id" type="button">거래처검색</button>	
+			<a href="javascript:isOkBuyer();"><button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="search_buyer_id" type="button">거래처검색</button></a>	
 		</td>
 	</tr>
 	
