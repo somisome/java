@@ -47,6 +47,16 @@ $(function(){
 		$(this).append('<input type="hidden" name="prod_id" value="<%=prodInfo.getProd_id()%>"></input>');
 	});		
 	
+	//상품삭제
+	$('#btn2').on('click',function(){
+		var $delForm = $('<form action="/ddit/07/deleteProd.jsp" method="post"></form>');
+		var $id = $('<input type="hidden" name="prod_id" value="<%=prod_id%>"/>');
+		$delForm.append($id);
+		$(document.body).append($delForm);
+		$delForm.submit();
+	});
+	
+	
 	//목록
 	$('#btn3').on('click',function(){
 		$(location).attr('href','<%=request.getContextPath()%>/07/main.jsp');
@@ -190,7 +200,7 @@ td {text-align: left; }
 	<tr>
 		<td class="btnGroup" colspan="2" >
 			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn1" type="submit">상품정보수정</button>
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn2" type="button">취소</button>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn2" type="button">상품삭제</button>
 			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn3" type="button">목록</button>
 		</td>
 	</tr>

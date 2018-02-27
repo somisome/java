@@ -20,6 +20,7 @@
 	
 	<select id="prodList" resultClass="prodVO">
 		<include refid="selectAllProd"/>
+			WHERE PROD_DELETE='n'
 	</select>
 	
 	<select id="prodInfo" parameterClass = "map" resultClass="prodVO">
