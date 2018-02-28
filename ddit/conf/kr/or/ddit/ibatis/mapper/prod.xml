@@ -13,6 +13,7 @@
 	<typeAlias alias="lprodVO" type="kr.or.ddit.vo.LprodVO"/>
 	<typeAlias alias="buyerVO" type="kr.or.ddit.vo.BuyerVO"/>
 	
+	
 	<sql id="selectAllProd">
 		SELECT *
 	 		FROM PROD
@@ -28,6 +29,23 @@
 		WHERE PROD_ID = #prod_id#
 	</select>
 	
+	<select id="prodInfoMap" parameterClass = "map" resultClass="java.util.HashMap">
+		SELECT * FROM PROD P INNER JOIN LPROD LP ON(P.PROD_LGU=LP.LPROD_GU)
+		WHERE PROD_ID = #prod_id#
+	</select>
+	
+	<select id="prodLguInfo" resultClass="java.lang.String">
+		SELECT DISTINCT PROD_LGU FROM PROD ORDER BY 1
+	</select>
+	
+	<select id="prodBuyerInfo" resultClass="java.lang.String">
+		SELECT DISTINCT PROD_BUYER FROM PROD ORDER BY 1
+	</select>
+	
+	
+	
+	
+	
 	<update id="updateProdInfo" parameterClass="prodVO">
 		UPDATE PROD
 			SET 
@@ -42,6 +60,9 @@
 				PROD_INSDATE=#prod_insdate# 
 			WHERE PROD_ID=#prod_id#
 	</update>
+	
+	
+	
 	
 	<insert id="insertProdInfo" parameterClass="prodVO">
 		INSERT INTO PROD	

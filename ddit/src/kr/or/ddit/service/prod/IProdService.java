@@ -1,6 +1,7 @@
 package kr.or.ddit.service.prod;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,4 +13,7 @@ public interface IProdService {
 	public String insertProdInfo(ProdVO prodInfo) throws SQLException;
 	public void deleteProdInfo(Map<String, String> params) throws SQLException;
 	public void updateProdInfo(ProdVO prodInfo) throws SQLException;
+	public HashMap<String, Object> prodInfoMap(Map<String,String> params) throws SQLException;
+	public List<String> prodLguInfo() throws SQLException;
+	public List<String> prodBuyerInfo() throws SQLException;
 }

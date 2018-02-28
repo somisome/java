@@ -75,8 +75,19 @@ String.prototype.validationHP=function(){
 
 //"P123456789".validationProdId
 String.prototype.validationProdId=function(){
-	return /^P[0-9]{9}$/.test(this);
+	return /^P\d{9}$/.test(this);
 };
+
+
+String.prototype.validationProdBuyer= function(){
+	return /^P\d{5}$/.test(this);
+};
+
+String.prototype.validationProdLgu= function(){
+	return /^P\d{3}$/.test(this);
+};
+
+
 
 //String.prototype.validationProdLgu=function(){
 //	return /^P\d{3}$/.test(this);
@@ -109,4 +120,6 @@ String.prototype.validationProdId=function(){
   */
 
 
-
+//validationProdId
+//validationProdLgu
+//validationProdBuyer

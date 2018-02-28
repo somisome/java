@@ -1,6 +1,7 @@
 package kr.or.ddit.dao.prod;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,5 +48,22 @@ public class IProdDaoImpl implements IProdDao {
 	public void updateProdInfo(ProdVO prodInfo) throws SQLException {
 		client.update("prod.updateProdInfo", prodInfo);
 	}
+	
+	@Override
+	public HashMap<String, Object> prodInfoMap(Map<String, String> params)
+			throws SQLException {
+		return (HashMap<String, Object>) client.queryForObject("prod.prodInfoMap", params);
+	}
+	@Override
+	public List<String> prodLguInfo() throws SQLException {
+//		return client.queryForList("prod.prodLguInfo");
+		return client.queryForList("lprod.lprodGuInfo");
+	}
+	@Override
+	public List<String> prodBuyerInfo() throws SQLException {
+//		return client.queryForList("prod.prodBuyerInfo");
+		return client.queryForList("buyer.buyerIdInfo");
+	}
 
+	
 }

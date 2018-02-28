@@ -11,7 +11,7 @@
 	params.put("prod_id",prod_id);
 	IProdService service = IProdServiceImpl.getInstance();
 	ProdVO prodInfo = service.getProdInfo(params);
-
+	Map prodInfoMap = service.prodInfoMap(params);
 %>        
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -27,7 +27,8 @@ $(function(){
 	
 	$('input[name=prod_id]').val('<%=prodInfo.getProd_id()%>');
 	$('input[name=prod_name]').val('<%=prodInfo.getProd_name()%>');
-	$('input[name=prod_lgu]').val('<%=prodInfo.getProd_lgu()%>');
+<%-- 	$('input[name=prod_lgu]').val('<%=prodInfo.getProd_lgu()%>'); --%>
+	$('input[name=prod_lgu]').val('<%=prodInfoMap.get("LPROD_NM")%>');
 	$('input[name=prod_buyer]').val('<%=prodInfo.getProd_buyer()%>');
 	$('input[name=prod_cost]').val('<%=prodInfo.getProd_cost()%>');
 	$('input[name=prod_price]').val('<%=prodInfo.getProd_price()%>');            

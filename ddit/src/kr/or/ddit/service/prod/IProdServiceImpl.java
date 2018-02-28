@@ -1,6 +1,7 @@
 package kr.or.ddit.service.prod;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,5 +48,19 @@ public class IProdServiceImpl implements IProdService {
 	public void updateProdInfo(ProdVO prodInfo) throws SQLException {
 		dao.updateProdInfo(prodInfo);
 	}
+	@Override
+	public HashMap<String, Object> prodInfoMap(Map<String, String> params)
+			throws SQLException {
+		return dao.prodInfoMap(params);
+	}
+	@Override
+	public List<String> prodLguInfo() throws SQLException {
+		return dao.prodLguInfo();
+	}
+	@Override
+	public List<String> prodBuyerInfo() throws SQLException {
+		return dao.prodBuyerInfo();
+	}
+
 
 }

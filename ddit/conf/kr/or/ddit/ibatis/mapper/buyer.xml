@@ -22,6 +22,10 @@
 		<include refid="selectAllBuyer"/>
 	</select>
 	
+	<select id="buyerIdInfo" resultClass="java.lang.String">
+		SELECT DISTINCT BUYER_ID FROM BUYER ORDER BY 1
+	</select>
+	
 	 
 </sqlMap>
 

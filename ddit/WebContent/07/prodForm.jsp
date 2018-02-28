@@ -1,5 +1,13 @@
+<%@page import="kr.or.ddit.service.lprod.ILprodServiceImpl"%>
+<%@page import="kr.or.ddit.service.lprod.ILprodService"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	ILprodService service = ILprodServiceImpl.getInstance();
+	List<String> list = service.lprodGuInfo();
+%>        
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,11 +20,6 @@
 $(function(){
 	
 	$('form[name=buyerForm]').submit(function(){
-				
-// 		if(!$('input[name=prod_id]').val().validationProdId()){
-// 			return err('대문자P와 9개의 숫자로 이루어진 상품코드를 입력하세요. (예: P123456789)');
-// 		}
-
 		return true;
 	});
 		
@@ -33,11 +36,14 @@ function err(msg){
 	return false;
 }
 
+// validationProdId
+// validationProdLgu
+// validationProdBuyer
 function isOkID(){
 	
-// 	if(!$('input[name=prod_id]').val().validationProdId()){
-// 		return err('대문자P와 9개의 숫자로 이루어진 상품코드를 입력하세요. (예: P123456789)');
-// 	}
+	if(!$('input[name=prod_id]').val().validationProdId()){
+		return err('대문자P와 9개의 숫자로 이루어진 상품코드를 입력하세요. (예: P101010001)');
+	}
 	$.ajax({
 		type:'POST',
 		dataType:'json',
@@ -54,6 +60,9 @@ function isOkID(){
 };
 
 function isOkBuyer(){
+	if(!$('input[name=prod_buyer]').val().validationProdBuyer()){
+		return err('대문자P와 5개의 숫자로 이루어진 상품코드를 입력하세요. (예: P10101)');
+	}
 	$.ajax({
 		type:'POST',
 		dataType:'json',
@@ -66,8 +75,6 @@ function isOkBuyer(){
   			alert(result.flag);
 			}
 	});
-	
-	
 };
 
 </script>
@@ -115,8 +122,17 @@ td {text-align: left; }
 				 -->
 				<select class="browser-default" name="prod_lgu" id="prod_lgu">
 <!-- 					<option value="" disabled selected>상품분류코드</option> -->
-					<option value="P302">P302</option>
-					<option value="P301">P301</option>
+					<% 
+					for(String lgu : list){
+					%>
+					<option value="<%=lgu %>">
+					
+					<%=lgu %>
+					
+					</option>
+					<% 
+					}
+					%>
 				</select>
 			</div>
 		</td>

@@ -10,22 +10,21 @@
 <%
 
 	String prod_buyer = request.getParameter("prod_buyer");
-	Map<String,String> params = new HashMap<String,String>();
-	params.put("prod_buyer",prod_buyer);
 	IProdService service = IProdServiceImpl.getInstance();
+	List<String> list = service.prodBuyerInfo();
 	
-	
-	ProdVO prodInfo = service.getProdInfo(params);
-
-	
-	
-	
+	boolean res=false;
+	for(String buyer : list){
+		if(buyer.equals(prod_buyer)){
+			res=true;
+		}
+	}
 	
 	Map<String,String> resultSet=new HashMap<String,String>();
-	if(prodInfo==null){
+	if(res==true){
 		resultSet.put("flag", "사용이 가능한 거래처코드 입니다.");
 	}else{
-		resultSet.put("flag", "중복되는 거래처코드 입니다.");
+		resultSet.put("flag", "존재하지 않는 거래처코드 입니다.");
 	}
 	
 	ObjectMapper mapper = new ObjectMapper();
