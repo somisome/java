@@ -1,10 +1,67 @@
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.service.buyer.IBuyerServiceImpl"%>
+<%@page import="kr.or.ddit.service.buyer.IBuyerService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	IBuyerService service = IBuyerServiceImpl.getInstance();
+	List<String> lguList = service.getBuyerLguInfo();
+
+%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/validation.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	$('form[name=buyerForm]').submit(function(){
+		return true;
+	});
+		
+	
+	$('#btn3').on('click',function(){
+		$(location).attr('href','<%=request.getContextPath()%>/08/main.jsp');
+	});
+	
+	
+});
+
+function err(msg){
+	alert(msg);
+	return false;
+}
+
+
+
+function isOkBuyer(){
+	if(!$('input[name=buyer_id]').val().validationProdBuyer()){
+		return err('대문자P와 5개의 숫자로 이루어진 거래처코드를 입력하세요. (예: P10101)');
+	}
+	$.ajax({
+		type:'POST',
+		dataType:'json',
+		data:{buyer_id:$('input[name=buyer_id]').val()},
+		url:'<%=request.getContextPath()%>/08/buyerIdCheck.jsp',
+		error:function(result){
+				alert(result.message);
+			},	
+		success:function(result){
+  			alert(result.flag);
+			}
+	});
+};
+
+</script>
+
+
+
+
 </head>
 <style>
 .fieldName {text-align: center; background-color: #f4f4f4;}
@@ -13,7 +70,7 @@
 td {text-align: left; }
 </style>
 <body>
-<form name="buyerForm" method="post">
+<form name="buyerForm" method="post" action="<%=request.getContextPath()%>/08/insertBuyer.jsp">
 <table width="600" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="fieldName" width="100px" height="25">거래처코드</td>
@@ -21,7 +78,7 @@ td {text-align: left; }
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 				<input class="mdl-textfield__input" type="text" id="buyer_id" name="buyer_id">
 				<label class="mdl-textfield__label" for="buyer_id">거래처코드</label>
-				<button style="margin-left: 400px; width: 200px;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="search_buyer_id" type="button">거래처코드중복검사</button>
+				<a href="javascript:isOkBuyer();"><button style="margin-left: 400px; width: 200px;" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="search_buyer_id" type="button">거래처코드중복검사</button></a>
 			</div>
 		</td>
 	</tr>
@@ -42,7 +99,20 @@ td {text-align: left; }
 				     구성되도록 함.
 				 -->
 				<select class="browser-default" name="buyer_lgu" id="buyer_lgu">
-					<option value="" disabled selected>상품분류코드</option>
+					
+					<% 
+					for(String lgu : lguList){
+					%>
+					<option value="<%=lgu %>">
+					
+					<%=lgu %>
+					
+					</option>
+					<% 
+					}
+					%>
+					
+					
 				</select>
 			</div>
 		</td>
@@ -124,8 +194,8 @@ td {text-align: left; }
 	
 	<tr>
 		<td class="btnGroup" colspan="2" >
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn1" type="button">거래처등록</button>
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn2" type="button">취소</button>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn1" type="submit">거래처등록</button>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn2" type="reset">취소</button>
 			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn3" type="button">목록</button>
 		</td>
 	</tr>

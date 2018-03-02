@@ -2,6 +2,14 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
+<script type="text/javascript">
+function logout(){
+	var msg = encodeURIComponent('로그아웃 되었습니다.');
+	location.href='<%=request.getContextPath()%>/08/loginForm.jsp?msg='+msg;
+}
+</script>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -45,7 +53,7 @@
 				<li class="mdl-menu__item" id="myhome">마이홈</li>
 				<li disabled class="mdl-menu__item" id="message">쪽지보기</li>
 				<li disabled class="mdl-menu__item" id="schedule">스케줄관리</li>
-				<li class="mdl-menu__item" id="logout">로그아웃</li>
+				<li class="mdl-menu__item" onclick="javascript:logout();" id="logout">로그아웃</li>
 			</ul>
 		</div>
 	</div>

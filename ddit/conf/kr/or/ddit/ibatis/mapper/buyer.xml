@@ -14,18 +14,57 @@
 	<typeAlias alias="buyerVO" type="kr.or.ddit.vo.BuyerVO"/>
 	
 	<sql id="selectAllBuyer">
-		SELECT *
-	 		FROM BUYER
+		SELECT * FROM BUYER
 	</sql>
 	
 	<select id="buyerList" resultClass="buyerVO">
 		<include refid="selectAllBuyer"/>
+		WHERE BUYER_DELETE='n'
 	</select>
 	
 	<select id="buyerIdInfo" resultClass="java.lang.String">
 		SELECT DISTINCT BUYER_ID FROM BUYER ORDER BY 1
 	</select>
 	
+	<select id="buyerLguInfo" resultClass="java.lang.String">
+		SELECT DISTINCT BUYER_LGU FROM BUYER ORDER BY 1
+	</select>
+	 
+	 
+	 <select id="buyerInfo" parameterClass = "map" resultClass="buyerVO">
+		<include refid="selectAllBuyer"/>
+		WHERE BUYER_ID = #buyer_id#
+	</select>
+	
+	<update id="updateBuyerInfo" parameterClass="buyerVO">
+		UPDATE BUYER 
+		SET BUYER_NAME=#buyer_name#,
+			BUYER_CHARGER=#buyer_charger#,
+			BUYER_BANK=#buyer_bank#,
+			BUYER_ADD1=#buyer_add1#,
+			BUYER_ADD2=#buyer_add2#,
+			BUYER_COMTEL=#buyer_comtel#,
+			BUYER_FAX=#buyer_fax#,
+			BUYER_MAIL=#buyer_mail# 
+		WHERE BUYER_ID=#buyer_id#
+	</update>
+
+	<insert id="insertBuyerInfo" parameterClass="buyerVO">
+		INSERT INTO BUYER
+			(BUYER_ID,BUYER_NAME,BUYER_LGU,BUYER_BANK,BUYER_BANKNO,BUYER_BANKNAME,BUYER_ZIP,BUYER_ADD1,BUYER_ADD2,BUYER_COMTEL,BUYER_FAX,BUYER_MAIL,BUYER_CHARGER,BUYER_TELEXT,BUYER_DELETE)
+		VALUES
+			(#buyer_id#,#buyer_name#,#buyer_lgu#,#buyer_bank#,#buyer_bankno#,#buyer_bankname#,#buyer_zip#,#buyer_add1#,#buyer_add2#,#buyer_comtel#,#buyer_fax#,#buyer_mail#,#buyer_charger#,#buyer_telext#,'n')
+	</insert>
+
+	<update id="deleteBuyerInfo" parameterClass="map">
+		UPDATE BUYER
+		SET 
+			BUYER_DELETE='y'
+		WHERE 
+			BUYER_ID=#buyer_id#
+	</update>
+	 
+	 
 	 
 </sqlMap>
 

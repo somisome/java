@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<% 
+	String contentPart=request.getParameter("contentPart");
+	if(contentPart==null){
+		contentPart="/08/buyerList.jsp";
+	}
+%>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,7 +32,7 @@
 				<jsp:include page="./layout/left.jsp" />
 			</div>
 			<div id="content" style="height: 650px; width: 100%; overflow: auto;">
-				<jsp:include page="buyerForm.jsp" />
+				<jsp:include page="<%=contentPart%>" />
 			</div>
 		</div>
 		<div>

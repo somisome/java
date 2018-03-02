@@ -1,10 +1,76 @@
+<%@page import="kr.or.ddit.vo.BuyerVO"%>
+<%@page import="kr.or.ddit.service.buyer.IBuyerServiceImpl"%>
+<%@page import="kr.or.ddit.service.buyer.IBuyerService"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% 
+	String buyer_id=request.getParameter("buyer_id");
+	Map<String,String> params=new HashMap<String,String>();
+	params.put("buyer_id",buyer_id);
+	IBuyerService service = IBuyerServiceImpl.getInstance();
+	BuyerVO buyerInfo = service.getBuyerInfo(params);
+	
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src='<%=request.getContextPath()%>/js/validation.js'></script>
+<script type="text/javascript">
+$(function(){
+	
+// 	buyer_id
+// 	buyer_name
+// 	buyer_charger
+// 	buyer_bank
+// 	buyer_add1
+// 	buyer_add2
+// 	buyer_comtel
+// 	buyer_fax
+// 	buyer_mail
+	
+	
+	$('input[name=buyer_id     ]').val('<%=buyerInfo.getBuyer_id() %>');
+	$('input[name=buyer_name   ]').val('<%=buyerInfo.getBuyer_name() %>');
+	$('input[name=buyer_charger]').val('<%=buyerInfo.getBuyer_charger() %>');
+	$('input[name=buyer_bank   ]').val('<%=buyerInfo.getBuyer_bank() %>');
+	$('input[name=buyer_add1   ]').val('<%=buyerInfo.getBuyer_add1() %>');
+	$('input[name=buyer_add2   ]').val('<%=buyerInfo.getBuyer_add2() %>');
+	$('input[name=buyer_comtel ]').val('<%=buyerInfo.getBuyer_comtel() %>');
+	$('input[name=buyer_fax    ]').val('<%=buyerInfo.getBuyer_fax() %>');
+	$('input[name=buyer_mail   ]').val('<%=buyerInfo.getBuyer_mail() %>');
+	
+	
+	//buyer - update
+	$('form[name=buyerForm]').submit(function(){
+		$(this).append('<input type="hidden" name="buyer_id" value="<%=buyer_id %>"></input>');
+	});		
+	
+	//buyer_delete 'n'->'y'
+	$('#btn2').on('click',function(){
+		var $delForm = $('<form action="/ddit/08/deleteBuyer.jsp" method="post"></form>');
+		var $id = $('<input type="hidden" name="buyer_id" value="<%=buyerInfo.getBuyer_id() %>"/>');
+		$delForm.append($id);
+		$(document.body).append($delForm);
+		$delForm.submit();
+	});
+	
+	
+	//목록
+	$('#btn3').on('click',function(){
+		$(location).attr('href','<%=request.getContextPath()%>/08/main.jsp');
+	});
+});		
+</script>
+
+
+
+
 </head>
 <style>
 .fieldName {text-align: center; background-color: #f4f4f4;}
@@ -12,8 +78,9 @@
 .btnGroup { text-align: right; }
 td {text-align: left; }
 </style>
+
 <body>
-<form name="buyerForm" method="post">
+<form name="buyerForm" method="post"  action="<%=request.getContextPath()%>/08/updateBuyer.jsp" >
 <table width="600" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td class="fieldName" width="100px" height="25">거래처코드</td>
@@ -110,8 +177,8 @@ td {text-align: left; }
 	
 	<tr>
 		<td class="btnGroup" colspan="2" >
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn1" type="button">거래처등록</button>
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn2" type="button">취소</button>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn1" type="submit">거래처정보수정</button>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn2" type="button">거래처 삭제</button>
 			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="btn3" type="button">목록</button>
 		</td>
 	</tr>

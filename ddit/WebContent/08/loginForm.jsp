@@ -6,6 +6,39 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/admin.css" type="text/css">
 <title>회원관리 관리자 로그인</title>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/validation.js"></script>
+<script>
+$(function(){
+	$('.loginBtn').on('click',function(){
+		if(!$('input[name=mem_id]').val().validationID()){
+			alert("양식에 맞지 않는 아이디입니다.");
+			return;
+		}
+		if(!$('input[name=mem_pass]').val().validationPWD()){
+			alert("양식에 맞지 않는 패스워드입니다.");
+			return;
+		}
+		var $subForm = $('<form method="POST" action="/ddit/08/idpwCheck.jsp"></form>');
+		var $id = $('<input type="hidden" name="mem_id" value="'+$('input[name=mem_id]').val()+'"/>');
+		var $pass = $('<input type="hidden" name="mem_pass" value="'+$('input[name=mem_pass]').val()+'"/>');
+		
+		$subForm.append($id);
+		$subForm.append($pass);
+		$(document.body).append($subForm);
+		$subForm.submit();
+	});
+	
+	if('<%=request.getParameter("msg")%>'!='null'){
+		alert('<%=request.getParameter("msg")%>');
+	}
+	
+});
+</script>
+
+
+
 </head>
 <body>
 	<table width="770" border="0" align="center" cellpadding="0"

@@ -15,6 +15,7 @@ public class BuyerVO {
 	private String buyer_mail;
 	private String buyer_charger;
 	private String buyer_telext;
+	private String buyer_delete;
 	public String getBuyer_id() {
 		return buyer_id;
 	}
@@ -98,6 +99,12 @@ public class BuyerVO {
 	}
 	public void setBuyer_telext(String buyer_telext) {
 		this.buyer_telext = buyer_telext;
+	}
+	public String getBuyer_delete() {
+		return buyer_delete;
+	}
+	public void setBuyer_delete(String buyer_delete) {
+		this.buyer_delete = buyer_delete;
 	}
 	
 	
