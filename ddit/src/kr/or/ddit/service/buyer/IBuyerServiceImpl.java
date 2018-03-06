@@ -33,6 +33,21 @@ public class IBuyerServiceImpl implements IBuyerService {
 	public List<BuyerVO> getBuyerList() throws SQLException {
 		return dao.getBuyerList();
 	}
+	
+	
+	@Override
+	public List<BuyerVO> getBuyerList(Map<String, String> params) throws SQLException {
+		List<BuyerVO> buyerList = null;
+		try {
+			buyerList = dao.getBuyerList(params);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return buyerList;
+	}
+	
+	
+	
 
 	@Override
 	public String insertBuyerInfo(BuyerVO buyerInfo) throws SQLException {

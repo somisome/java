@@ -37,7 +37,10 @@
 		String message = URLEncoder.encode("회원이 아닙니다","UTF-8");
 		response.sendRedirect(request.getContextPath()+"/05/loginForm.jsp?message="+message);
 	}else{
+		session.setAttribute("LOGIN_MEMBERINFO", memberInfo);
 		response.sendRedirect(request.getContextPath()+"/05/main.jsp");
+		
+		
 	}
 	
 %>    

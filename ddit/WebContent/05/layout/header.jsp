@@ -50,6 +50,7 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
 function logOut(){
 	//javascript 인코딩/디코딩 함수
@@ -59,8 +60,9 @@ function logOut(){
 	//									URL 표현시 활용되는 기호(:,/,?  etc.. ) 를 미포함	
 	//		encodeURIComponent() / decodeURIComponent() : 유니코드 형식으로 인코딩 또는 디코딩
 	//														URL을 포함하지 않는 쿼리스트링 또는 파라메터가 대상
-	var msg = encodeURIComponent('로그아웃 되었습니다.');
-	location.href='<%=request.getContextPath()%>/05/loginForm.jsp?message='+msg;
+// 	var msg = encodeURIComponent('로그아웃 되었습니다.');
+<%-- 	location.href='<%=request.getContextPath()%>/05/loginForm.jsp?message='+msg; --%>
+	$(location).attr('href','<%=request.getContextPath()%>/05/logout.jsp');
 }
 
 </script>

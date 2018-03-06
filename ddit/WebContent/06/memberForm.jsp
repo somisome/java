@@ -62,6 +62,16 @@ $(function(){
 		$(location).attr('href','<%=request.getContextPath()%>/06/main.jsp');
 	});
 	
+	//우편번호 검색
+	$('#zipcodeBtn').click(function(){
+		var url = '<%=request.getContextPath()%>/06/zipcodeSearch.jsp';
+		var opts = 'toolber=no,location=no,directories=no,status=no' +
+					'menubar=no,scrollbars=no,resizable=no,copyhistory=no' +
+					'width=375,height=400';
+		window.open(url, '우편번호검색', opts);
+	});
+	
+	
 	
 });
 
@@ -232,7 +242,7 @@ td {text-align: left; }
 			<input type="hidden" name="mem_zip" />
 			<input type="text" name="mem_zip1" id="mem_zip1" size="3" value="" /> - 
 			<input type="text" name="mem_zip2" id="mem_zip2" size="3" value="" />
-			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" type="button">우편번호검색</button><br>
+			<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" type="button" id="zipcodeBtn">우편번호검색</button><br>
 			<input type="text" name="mem_add1" id="mem_add1" value="" />
 			<input type="text" name="mem_add2" id="mem_add2" value="" />
 		</td>

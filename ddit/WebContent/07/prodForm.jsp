@@ -29,6 +29,16 @@ $(function(){
 	});
 	
 	
+	//거래처검색
+	$('#search_buyer_id').click(function(){
+		var url = '<%=request.getContextPath()%>/07/buyerSearch.jsp';
+		var opts = 'toolber=no,location=no,directories=no,status=no' +
+					'menubar=no,scrollbars=no,resizable=no,copyhistory=no' +
+					'width=375,height=400';
+		window.open(url, '거래처검색', opts);
+	});
+	
+	
 });
 
 function err(msg){

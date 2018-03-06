@@ -9,6 +9,7 @@
  *    수정일       수정자          수정내용
  *    -------      -------     -------------------
  *    2018.02.22.  윤소미      최초작성
+ *    2018.03.06.  윤소미      체크박스추가(쿠키)
  * Copyright (c) 2018 by DDIT  All right reserved
  * </pre>
 ===============================================================--%>
@@ -23,14 +24,27 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <!-- <script type="text/javascript" src="/ddit/js/validation.js"></script> -->
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/validation.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/cookieControl.js"></script>
 <script>
 	$(function(){
 		//자바스크립트 내에 익스프레션 선언할때는 "" 또는 ''으로 익스크페션을 랩핑해야 함.
 		if('<%=request.getParameter("message") %>'!='null'){
 			alert('<%=request.getParameter("message") %>');
 		}
+		cookieId = Get_Cookie('mem_id');
+		if(cookieId!=null){
+			$('input[name=mem_id]').val(cookieId);
+			$('input[name=saveCookie]').prop('checked',true);
+		}
 		
 		$('.loginBtn').click(function(){
+			if($('input[name=saveCookie]').is(':checked')){
+				Set_Cookie('mem_id',$('input[name=mem_id]').val()); 
+			}
+			if(!$('input[name=saveCookie]').is(':checked')){
+				Delete_Cookie('mem_id'); 
+			}
+			
 			if(!$('input[name=mem_id]').val().validationID()){
 				alert("아이디를 바르게 입력해주세요.");
 				return;
@@ -43,7 +57,6 @@
 			location.href='/ddit/05/loginCheck.jsp?mem_id='+$('input[name=mem_id]').val()+'&mem)pass='+$('input[name=mem_pass]').val();//get방식
 			location.replace('/ddit/05/loginCheck.jsp');//get방식
 			*/
-			
 			var $frm = $('<form method="POST" action="/ddit/05/loginCheck.jsp"></form>');
 			var $iptID = $('<input type="hidden" name="mem_id" value="'+$('input[name=mem_id]').val()+'"/>');
 			var $iptPWD = $('<input type="hidden" name="mem_pass value="'+$('input[name=mem_pass]').val()+'"/>');
@@ -54,6 +67,8 @@
 			$(document.body).append($frm);
 			
 			$frm.submit();
+			
+			
 		});
 	});
 </script>
@@ -88,7 +103,10 @@
 									<td><input type="password" name="mem_pass" class="box" tabindex="3" height="18" /></td>
 								</tr>
 								<tr>
-									<td colspan="3" align="right"><a href="<%=request.getContextPath()%>/05/main.jsp?contentPage=/05/memberForm.jsp">회원가입을 원하세요??</a></td>
+									<td colspan="3" align="right">
+<!-- 									input[type=checkbox nanme=saveCookie] -->
+										아이디저장: <input type="checkbox" name="saveCookie" /><br>			
+									<a href="<%=request.getContextPath()%>/05/main.jsp?contentPage=/05/memberForm.jsp">회원가입을 원하세요??</a></td>
 <!-- 									클릭하면 memberForm.jsp로... -->
 								</tr>
 							</table>

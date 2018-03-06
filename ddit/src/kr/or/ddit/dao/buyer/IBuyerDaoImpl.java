@@ -58,5 +58,10 @@ public class IBuyerDaoImpl implements IBuyerDao {
 	public List<String> getBuyerLguInfo() throws SQLException {
 		return client.queryForList("buyer.buyerLguInfo");
 	}
+	@Override
+	public List<BuyerVO> getBuyerList(Map<String, String> params)
+			throws SQLException {
+		return client.queryForList("buyer.buyerListByName", params);
+	}
 
 }

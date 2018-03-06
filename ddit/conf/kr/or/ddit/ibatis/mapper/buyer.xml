@@ -17,6 +17,13 @@
 		SELECT * FROM BUYER
 	</sql>
 	
+	<select id="buyerListByName" parameterClass="map" resultClass="buyerVO">
+		SELECT *
+		FROM BUYER
+		WHERE BUYER_NAME LIKE '%'|| #buyer_name# ||'%'
+	</select>
+	
+	
 	<select id="buyerList" resultClass="buyerVO">
 		<include refid="selectAllBuyer"/>
 		WHERE BUYER_DELETE='n'

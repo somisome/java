@@ -15,4 +15,5 @@ public interface IBuyerService {
 	
 	public List<String> getBuyerIdInfo() throws SQLException;
 	public List<String> getBuyerLguInfo() throws SQLException;
+	public List<BuyerVO> getBuyerList(Map<String, String> params) throws SQLException;
 }

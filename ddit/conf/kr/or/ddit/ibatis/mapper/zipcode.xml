@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- DB쿼리문                        -->
+<!-- << 개정이력(Modification Information) >>            -->
+<!--  수정일       수정자          수정내용              -->
+<!--  =======      =======     =====================     -->
+<!--  2018.03.06.  윤소미      최초작성                 -->
+<!-- Copyright (c) 2018 by DDIT  All right reserved      -->
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="zipcode">
+	<typeAlias alias="zipcodeVO" type="kr.or.ddit.vo.ZipcodeVO"/>
+	
+	<select id="zipcodeList" parameterClass="map" resultClass="zipcodeVO">
+		SELECT *
+		FROM ZIPTB
+		WHERE DONG LIKE '%'|| #dong# ||'%'
+	</select>
+</sqlMap>
