@@ -26,8 +26,8 @@
       <a class="navbar-brand" href="#"><img id="gsj" src="../images/gsjLogo1.png"></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
+      <li class="login"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li class="user"><a href="#"><span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
     </ul>
   </div>
 </nav>   

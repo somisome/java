@@ -3,17 +3,17 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script src="../js/jquery-3.3.1.js"></script>
+<!-- 	<script src="../js/jquery-3.3.1.js"></script> -->
 	<script>
 		$(function(){
 			
-			$('a').on('click',function(event){
+			$('a.aa').on('click',function(event){
 			    event.preventDefault();
 			    at = $(this).attr('href');
 			    
-			    $('#no').slideUp(1000,'swing',function(){
-					$('#no').attr('src',at);
-				    $('#no').slideDown();
+			    $('img#book').slideUp(1000,'swing',function(){
+					$('img#book').attr('src',at);
+				    $('img#book').slideDown();
 			    	}
 			    );
 			});
@@ -45,12 +45,12 @@
 </head>
 <body>
 	<ul>
-		<li><a href="../images/jQuery.jpg">jQuery 교재</a></li>
-		<li><a href="../images/JSP2_1.jpg">JSP 교재</a></li>
-		<li><a href="../images/UML.jpg">UML 교재</a></li>
+		<li><a class="aa" href="../images/jQuery.jpg">jQuery 교재</a></li>
+		<li><a class="aa" href="../images/JSP2_1.jpg">JSP 교재</a></li>
+		<li><a class="aa" href="../images/UML.jpg">UML 교재</a></li>
 	</ul>
 	<br><hr><br>
-	<img id='no' src="../images/noImage.png">
+	<img id='book' src="../images/noImage.png">
 	
 	
 	<br><br><hr><br><br>

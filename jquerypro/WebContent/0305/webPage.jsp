@@ -73,14 +73,44 @@
 		$('.sidenav').on('click','.lgi',function(){
 			txtsub = $(this).text();
 			$('.text-left h3').text(txtsub);
+			proc();
 		});
 			
 		$('.dropdown-menu li a').click(function(){
 			txtsub = $(this).text();
 			$('.text-left h3').text(txtsub);
+			proc();
 		});	
 			
-		
+		function proc(){
+			if(txtsub == "공지사항" ){
+				//buyer실행				
+			}else if(txtsub=="자유게시판"){
+				// lprod_prod 실행
+			}else if(txtsub=="QnA게시판"){
+				// 북리스트실행
+				url="${pageContext.request.contextPath}/0222/test_booklist.html";
+				$('.text-left #contentresult').load(url);
+			}else if(txtsub=="이달의업데이트"){
+				
+			}else if(txtsub=="지난이벤트"){
+				//할인율실행
+			}else if(txtsub=="당첨자"){
+				
+			}else if(txtsub=="HTML"){
+				
+			}else if(txtsub=="CSS"){
+				
+			}else if(txtsub=="JavaScript"){
+			
+			}else if(txtsub=="정보수정"){
+			
+			}else if(txtsub=="장바구니"){
+				
+			}else if(txtsub=="메일함"){
+				
+			}			
+		};
 		
 		
 		
