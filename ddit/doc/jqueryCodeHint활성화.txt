@@ -1,0 +1,32 @@
+jquery code hint 활성화.
+1. Help -> Eclipse Marketplace -> find : [ jsdt ] 검색
+   ExtJS JSDT Integration 인스톨
+   
+2. http://code.google.com/a/eclipselabs.org/p/jquerywtp/downloads/list
+      jqueryWTP1.20foEN.jar 다운로드
+      
+   2.1 cmd -> d:\>java -jar jqueryWTP1.20foEN.jar 
+   2.2 활성화 된 윈도우 창
+         Jar File [Browse] -> 이클립스 설치 폴더 -> plugins ->
+            org.eclipse.wst.jsdt.core_1.1.102.v201111090634.jar 선택
+         Output Dir [Browse] -> javascript, jquery 코드 힌트 컨텐츠를
+                                포함하는 jar 파일 생성 디렉토리 선택
+                             -> [Generate] -> [확인]
+   2.3 jar 파일 생성 디렉토리 이동 -> 파일 생성 확인
+   2.4 신규 생성된 jar 파일을 이클립스 설치 폴더 -> plugins -> 덮어쓰기
+   2.5 이클립스 종료   
+   2.6 워크스페이스 폴더 -> .metadata -> .plugins -> 
+         org.eclipse.wst.jsdt.core 폴더 삭제
+   2.7 이클립스 시작
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+           

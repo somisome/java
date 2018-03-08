@@ -1,0 +1,3 @@
+java.lang.OutOfMemoryError: PermGen space 발생
+
+Window -> Preferences -> Java -> Installed JREs -> 사용중인 jdk 선택 -> [Edit] -> default VM Arguments : -XX:PermSize=2048M

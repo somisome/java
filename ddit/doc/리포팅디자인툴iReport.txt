@@ -1,0 +1,226 @@
+iReport
+1. 정의 : Jaspersoft Corporation에서 개발한 JasperReports 라이브러리를 기초로 자바로 
+          작성된 Visual Reporting 기능이 강화된 리포팅 전용 툴.
+          참고 - http://dedup.me/blog/?page_id=68
+   1.1 Report Designer를통해 작성된 리포트 포맷은 jrxml 확장자로 저장.
+       * jrxml 파일은 iReport의 JasperReport 클래스를통해 바이너리 데이타로 저장되며, 
+           바이너리 데이타를 jasper 파일(템플릿)이라 함.
+   1.2 jasper 파일의 생명주기
+       1.2.1 design  : 산출물 - *.jrxml로 저장
+                             디자인 상태.
+       1.2.2 compile : 산출물 - *.jasper로 저장
+                       iReport의 japer 템플릿 파일을 활용한 런타임 상태.
+                       (디자인에 최종 데이터가 추가되어 최종 활용 가능한 상태)
+       1.2.3 file    : 산출물 - *.jrprint로 저장
+                       jasper 파일 대상으로 다양한 포맷으로 export 처리.
+   1.3 Report Designer에의해 작성된 Design(jrxml) 템플릿에 전달될 데이타
+       1.3.1 파라메터 전달 : JasperPrint 클래스 활용
+       1.3.2 DB 파라메터 전달 : JDBC컨넥션 활용
+   1.4 출력 포맷 : PDF, Html, XLS, CSV
+   1.5 리포팅 산출물과 서비스 과정
+       1.5.1 Jaspersoft Studio를 활용한 jrxml 파일 작성 - 개발PC
+       1.5.2 실행
+             a) JasperReport Server를 활용한 웹 서비스를
+             b) java code를 활용한 다양한 종류의 문서 출력
+2. 설치
+   2.1 StandAlone 리포팅 디자이너 툴 설치
+       iReport-Designer for JasperReports 다운로드
+       http://community.jaspersoft.com/project/ireport-designer
+       iReport-5.5.1.zip
+       2.1.1 iReport-5.5.1.zip 압축 해제
+       2.1.2 해당 폴더 내 bin 폴더의 ireport.exe 실행.
+   
+   2.2 eclipse 기반의 iReport 설치
+       2.2.1 가이드
+             http://community.jaspersoft.com/documentation/tibco-jaspersoft-studio-user-guide/v610/getting-started-jaspersoft-studio
+       2.2.2 [Help] -> [Install New Software] -> [Add] ->
+             Name : jasper studio
+             Location : http://sourceforge.net/projects/jasperstudio/files/updatesite/5.5.2/
+       2.2.3 [Open Perspective] -> Report Design 확인 및 선택과 활용
+       2.2.4 컴파일 오류 대응
+             * 이클립스를통한 리포트 디자인 산출물(jrxml)의 컴파일을통한 산출물(jasper) 변환시 인코딩 에러가 발생되므로
+               자바 컴파일러 인코딩 옵션 설정 필요.
+             a) iReportStandalone 프로젝트의 kr.or.ddit.utils.CustomJRJavacCompiler 참조
+    
+   2.3 JasperReports 라이브러리 
+       참고 : http://jasperreports.sourceforge.net/api/index.html
+       2.3.1 개별 라이브러리 다운로드
+             http://community.jaspersoft.com/project/jasperreports-library
+             jasperreports-5.5.2-project.zip 다운로드
+       2.3.2 라이브러리 import
+             1) 압축해제 폴더\dist  jasperreports-5.5.2.jar
+                                    jasperreports-fonts-5.5.2.jar
+                                    jasperreports-javaflow-5.5.2.jar
+             2) 압축해제 폴더\lib   commons-beanutils-1.8.0.jar
+                                    commons-collections-3.2.1.jar
+                                    commons-digester-2.1.jar
+                                    commons-javaflow-20060411.jar
+                                    commons-logging-1.1.1.jar
+                                    groovy-all-2.0.1.jar
+                                    log4j-1.2.15.jar
+                                    dom4j-1.6.1.jar
+       
+3. 기초 지식
+   * jasperreports-5.5.2-project.zip 내 JasperReports-Ultimate-Guide-3.pdf 참조
+   3.1 Report Design 
+   	   3.1.1 표현식($접근타입{} 선언)
+	       1) 디자인 템플릿 내에서의 복잡한 계산식, 텍스트 처리 등은 java, javascript를
+	          활용한 표현식을 활용.
+	       2) 표현식 타입(Java)
+			  Boolean : 참,거짓의 값을 표현하는 타입.
+			  Byte    : 바이트를 표현하는 타입.
+			  Short   : short integer를 표현하는 타입.
+			  Integer : integer number를 표현하는 타입.
+			  Long    : long integer number를 표현하는 타입.
+			  Float   : 소숫점을 포함한 수를 표현하는 타입.
+			  Double  : 실수를 표현하는 타입.
+		  	  String  : 문자를 표현하는 타입.
+		 	  Date    : 날짜나 시간을 표현하는 타입.
+		 	  Object  : 일반적인 자바 오브젝트.    
+              * javascript의 경우 타입 선언 불필요. 
+	       3) 연산(사칙연산, 논리 연산, 비교 연산)
+			  +  : 더하기 또는 문자열 결합
+			  -  : 빼기
+			  /  : 나누기
+			  %  : 나머지
+			  || : OR
+			  && : AND
+			  == : EQUAL.
+			  != : NOT EQUAL
+			  !  : NOT
+              >  : greater then
+              >= : greater then equal
+              <  : less then
+              <= : less then equal
+             
+              * ++ 활용 불가
+	       4) 디자인 템플릿 내 선언된 변수 또는 오브젝트 참조
+	          * 표현식 종단에 ;은 사용하지 않음.
+			  $F{mem_id}       : mem_id로 선언된 필드 참조.
+			  $V{mem_id}       : mem_id로 선언된 변수 참조.
+			  $P{mem_id}       : mem_id로 디자인 템플릿에 전달되는 파라메터 참조.
+			  $P!{mem_id}      : 디자인 템플릿 내 DB 파라메터 활용을위한 SQL에서 사용되며, 
+			                     파라메터가 값으로써 처리되지 않을 경우로서 Prepared statement에 
+			                     전달하기위한 값.
+			  $R{resource_key} : 문자의 로컬라이징을 위한 특별 문법.
+              표현식 내 java String Class API 활용 : 반환타입이 존재하고, 배열 또는 컬렉션을 반환하지않는 API만 활용.
+                                                     * 모든 반환값은 객체로 랩핑됨.
+                                                     * 기본 데이타 타입 불가. 
+                                                        5+5  : new Integer(5+5)
+                                                        true : new Boolean(true) 
+             
+              ex) 1) $F{mem_regno1} + "-" + $F{mem_regno2}
+                     => 111111-1111111
+                  2) "test".length()                       => 4
+				   	 "test".substring(0, 3)                => "tes"
+				 	 "test".startWith("A")                 => false
+					 "test".substring(1, 2).startWith("e") => true                 
+	       5) 조건식
+	          삼항연산자 활용.
+	       6) 특정 클래스의 public static 메서드 활용 가능
+	          1) 클래스명.메서드명(표현식 파라메터 전달값)
+   3.2 디자인 템플릿 구조
+       3.2.1 템플릿은 페이지 단위로 구성 됨.
+       3.2.2 페이지 구성
+             1) 페이지는 총 9개의 밴드로 구성되며, 재정의 가능.
+             2) 밴드는 페이지에서 활용할수있는 가로 영역을 100% 활용.
+             3) 밴드의 세로 영역은 출력할 데이타의 수에따라 자동 증가됨.
+             4) 타이틀 밴드      : 해당 페이지의 타이틀 출력 영역으로 최초 페이지에만 작성하며, 모든 페이지에서 반복 출력.
+             5) 페이지 헤더 밴드 : 해당 페이지의 헤더 출력 영역으로 모든 페이지의 상단에 반복적으로 출력.
+                                   페이지 헤더 밴드가 작성된 페이지에서는 타이틀 밴드와 섬머리 밴드 출력이 생략됨. 
+             6) 컬럼 해더 밴드   : 반복 출력되는 디테일 밴드를 포함하는 컨텐츠의 헤더로 모든 페이지의 디테일 밴드의 상단에
+                                   출력.
+                                   <table><thead>영역
+             7) 디테일 밴드      : 해당 페이지의 컨텐츠 영역으로 반복적으로 출력.
+                                   <tr>영역
+             8) 컬럼 푸터 밴드   : 반복 출력되는 디테일 밴드를 포함하는 컨텐츠의 푸터로 모든 페이지의 디테일 밴드의 하단에
+                                   출력.
+             9) 페이지 푸터 밴드 : 해당 페이지의 헤더 출력 영역으로 페이지 헤더 밴드가 정의된 모든 페이지의 하단에 
+                                   반복적으로 출력.
+             10) 라스트 페이지 푸터 밴드 : 최종 페이지의 페이지 푸터 밴드 영역에 출력될 컨텐츠 구성.
+             11) sum 밴드        : 구성된 몇몇 필드들의 총 합 출력.
+             12) 백그라운드 밴드 : 워터마크 출력. 
+
+4.이클립스 기반 iReport 활용
+  **** 버그가 존재함으로 비추천
+  4.1 Report Design 퍼스펙티브 활성화
+  4.2 Report Design 퍼스펙티브
+      Repository Explorer -> Data Adapters 선택 및 오른쪽 마우스 버튼 -> Create Data Adapter
+      -> Database JDBC Connection 선택 및 [Next] -> 
+      -> Name : 임의값 입력
+             [Driver Class] 탭
+                [Add] 버튼 클릭 : 오라클 설치 폴더\jdbc\lib\ojdbc6.jar 선택
+         ->  [Database Location] 탭
+		         JDBC Driver : oracle.jdbc.driver.OracleDriver
+		         JDBC Url    : jdbc:oracle:thin:@localhost:1521:XE
+		         Username    : 계정 아이디
+		         Password    : 계정 패스워드
+             [Test] 버튼 클릭으로 테스트 실시.
+  
+  4.3 iReport 프로젝트 작성
+      4.3.1 Java Project 생성
+      4.3.2 라이브러리 import
+            jasperreports-5.5.2.jar
+            jasperreports-fonts-5.5.2.jar
+            jasperreports-functions-5.5.2.jar
+            jasperreports-javaflow-5.5.2.jar
+            commons-beanutils-1.8.0.jar
+            commons-collections-3.2.1.jar
+            commons-digester-2.1.jar
+            commons-logging--1.1.1jar
+            commons-javaflow-20060411.jar
+            dom4j-1.6.1.jar
+            groovy-all-2.0.1.jar
+            log4j-1.2.15.jar
+      4.3.3 class path : report 추가
+      4.3.4 report 패스에서 jasper report 작성
+            1) 작성시 Blank A4 선택
+            2) 파일명 : Blank_A4.jrxml
+      4.3.5 생성된 jasper report 파일이jrxml 확장자로 생성되며, 에디터에 편집 화면 출력
+            1) 출력된 편집 화면 개별 밴드 선택시 Properties 뷰를 활용한 편집.
+
+5. iReport Designer 활용.
+   * 디자인 작업 완료 후 저장시 jrxml 확장자 파일이 생성되며, 에디터 상단의 Preview를 통해 디자인 결과물이 출력되고,
+     [Preview] 풀다운 메뉴에 설정된 Viewer로 출력 및 jrxml 파일이 컴파일된 jasper 확장자 파일이 Viewr 결과물과 함께
+     생성됨.
+   
+   5.1 환경설정
+       5.1.1 [Tools] -> [Options] -> [General 탭] -> Units : Default Unit cm로 변경
+                                                  -> [Report Default 탭] -> Language : Java로 변경
+                                                  -> [Compatibility 탭] -> JasperReports 버전 선택
+                                     [Viewer 탭] -> Report Viewer는 각 항목별 실행 파일 설정
+       5.1.2 한글깨짐
+             1) iReport Designer 디자인 에디터 한글깨짐
+				한글입력을 요하는 엘리먼트 선택 -> properties 뷰 -> font name 속성을 한글 폰트로
+				변경                
+             
+             2) PDF 한글깨짐 방지
+                2.1) http://prdownloads.sourceforge.net/itextpdf/iTextAsian.jar
+                     iTextAsian.jar 다운로드
+                2.2) [Tools] -> [Options] -> [ClassPath 탭] -> [Add JAR] -> iTextAsian.jar 추가
+                2.3) pdf의 출력 데이터가 한글일 경우 바꾸고자하는 Static Text 엘리먼트 외 Text Field 등의 모든 엘리먼트 
+                     선택 후 Properties의 하단부 설정 변경
+                     Pdf font name is .... : HYGOThic-Medium 선택
+                     Pdf Embedded : 체크
+                     Pdf Encoding : UniKS-UCS2-H로 선택
+             
+       5.1.3 Oracle Database Connection 연결
+             1) [상단 Window] -> [services] -> [Services] 뷰 출력 -> [Drivers] 메뉴 선택 및 오른쪽 마우스 클릭
+                -> [New Driver] -> Driver File : [Add] -> ojdbc6.jar 파일 선택
+                                   Driver Class : oralce.jdbc.driver.OracleDriver 선택
+                                   Name : 임의 입력
+                -> [OK]
+             2) [Drivers] 메뉴에 신규 추가된 메뉴 선택 및 오른쪽 마우스 클릭 -> [Connect Using...] 선택 
+                -> [Basic setting] 탭 -> Data Input Mode : Direct URL Entry 선택
+                                         User Name : 아이디
+                                         Password  : 패스워드
+                                         JDBC URL  : jdbc:oracle:thin:@localhost:1521:XE 입력
+                -> [OK] -> [Advanced] 탭 -> Select schema에서 해당 스키마 선택 -> [OK]
+             3) 입력된 JDBC URL로 [Services] 뷰에 신규 추가 확인
+       5.1.4 상단 아이콘 [Report DataSource] 선택 -> [New] -> [Database JDBC connection] 선택
+             -> Name        : 임의 입력
+                JDBC Driver : Oracle 드라이버 선택
+                JDBC URL    : 편집
+                Username    : 아이디
+                Password    : 패스워드
+             -> [Test] -> [Save]

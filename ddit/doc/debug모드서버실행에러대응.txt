@@ -1,0 +1,11 @@
+'Starting Tomcat v7.0 Server at localhost' has encountered a problem.
+Server Tomcat v7.0 Server at localhost failed to start.
+
+에러 대응
+D:\egov_WorkSpace(spring)\.metadata\.plugins\org.eclipse.core.resources\.snap 파일 삭제
+
+또는
+
+hosts 파일에서 127.0.0.1  localhost 주석 품
+
+

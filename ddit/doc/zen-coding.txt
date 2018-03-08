@@ -1,0 +1,21 @@
+Zen-Coding
+1. 정의
+   CSS Selector 방식으로 빠른 코딩과 HTML, XML, XSL 등의 다른 구조의 코드 유형을 편집하기 쉽게 해 주기 위한 
+   플러그인의 집합.
+   현재는 에밋(Emmet)으로 불리고 있음.
+   
+2. 이클립스에서의 젠 코딩 설치
+   2.1 [Help] -> [Eclipse Marketplace] -> find (zen 입력) -> Emmet (ex-Zen Coding) Eclipse plugin 설치
+       -> 이클립스 재시작
+       or
+       [웹기반어플리케이션] -> [JSP] -> [이클립스루나Emmet설치] -> [emmet] -> features와 plugins 폴더를 현재 활용하고있는
+                                                                                                   이클립스 폴더의 features와 plugins에 덮어쓰기
+   2.2 [Window] -> [Preference] -> Emmet 메뉴 추가 확인 
+   2.3 상단 풀다운 메뉴에 [Emmet] 추가 확인.
+   2.4 Ctrl+D 라인 삭제 충돌 처리
+       [Window] -> [Preference] -> [General] -> [Keys] -> delete line 검색 선택 후 [When 셀렉트 박스]의 값을
+       in Windows로 변경 -> [Apply]
+
+3. 젠 코딩 기본 문법
+   * https://code.google.com/p/zen-coding/wiki/ZenHTMLSelectorsEn 참조
+   * 젠 코딩의 원코드 변환 :  ctrl+e (Expand Abbrevitation)

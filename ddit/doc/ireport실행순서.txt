@@ -1,0 +1,167 @@
+* 제공되는 jrxml 파일 내 query 존재시, 해당 jrxml 파일 생성시 생성 마법사의 Step 3. Query에 해당
+  Query가 포함되었으며, Connections/Data Source에 오라클 대상의 Database DataSource가 선택된것임. 
+* 리포트에서 활용되는 DB 컨넥션 베이스의 Dataset은 Main Dataset과 Sub Dataset으로 분리됨.
+
+1. jrxml 파일이 컴파일된 jasper 파일의 코드를 이용한 컴파일
+   DefaultTableModel을 Datasource로 활용(헤더와 지정된 헤더의 맵핑)
+   interface JRDataSource을 구현한 사용자 정의 DataSource의 활용(헤더와 지정된 헤더의 맵핑)
+   jasper 파일의 Jasper View를 활용한 출력
+   
+   (resource) kr.or.ddit.report.zero1 : TestMain
+              kr.or.ddit.report.zero1.res : CustomDataSource
+              zero1 : first.jrxml
+                      first.jasper
+
+2. Collection Type DataSource의 활용
+   iBatis
+   (resource) kr.or.ddit.report.zero2 : TestMain
+              zero2 : memberListDesign.jrxml
+                      memberListDesign.jasper
+
+3. List 엘리먼트의 활용
+    * 디자인 파일 생성 마법사의 Query step의 Connections/Data Source에서 접속 대상의
+      데이타베이스 컨넥션 선택
+	3.1 Frame 엘리먼트를 디자인 에디터의 Detail 밴드에 추가
+	3.2 추가된 Frame내 List 엘리먼트 배치
+	3.3 디자인 에디터의 [Report query] 아이콘 선택 -> 쿼리 작성 -> [OK]
+	3.4 [Report Inspector]에 dataset1 추가 확인 
+	3.5 dataset1 선택 -> properties -> dataset 이름 변경 가능.
+	3.6 dataset 선택 -> Edit query -> 쿼리 작성 -> [OK]
+	3.7 list 엘리먼트 선택 및 오른쪽 마우스 버튼 클릭 -> [Edit list datasource] 선택 ->
+	    -> dataset명 변경시 sub dataset에서 해당 dataset 선택
+	    -> connection / Datasource Expression의 [Use connection expression] 선택 -> [OK]
+	3.8 [Report Inspector]의 dataset 하위 Fields 메뉴에서 출력대상 Field(컬럼명)를 드래그하여 리스트에 추가. 
+	3.9 [Preview] 선택
+	3.10 Detail 밴드에 선언된 List가 정도 이상 반복 출력되므로, 
+         Detail 밴드 선택 후 properties 뷰의 PRINT WHEN EXPRESSION 속성에 $V{REPORT_COUNT} == 1 입력
+   (resource) kr.or.ddit.report.zero3 : TestMain
+              zero3 : useListElement.jrxml
+                      useListElement.jasper
+                      
+4. Table 엘리먼트의 활용
+    * 디자인 파일 생성 마법사의 Query step의 Connections/Data Source에서 접속 대상의
+      데이타베이스 컨넥션 선택 
+	4.1 디자인 에디터의 Detail 밴드에 Table 엘리먼트 추가
+	4.2 추가시 테이블 위저드 출력됨
+	    [New DataSet] 클릭 -> Dataset Name 입력                                      
+	                          Create new dataset from a connection or datasource 선택
+	    -> [Next] -> 쿼리 작성 -> [Next] -> 활용대상 Filed 선택 -> [Next] -> 
+	    -> 쿼리 질의 대상 테이블의 기본키를 Group1으로 설정 -> [Finish]
+	4.3 테이블 위저드 첫화면 -> [Next] -> Use alternated detail rows background 체크
+	                                      Add Table Header 체크해제
+	                                      Add Table Footer 체크해제
+	    -> [Finish]
+    4.4 디자인 에디터 하단에 생성된 table 탭이 출력됨.
+    4.5 작성된 Table 엘리먼트 삭제 후 상기 4.1부터 재실행시 보다 간편한 편집이 가능.
+    4.6 생성된 테이블 엘리먼트의 컬럼 삭제는 Report Inspector의 Column Header 하단의 컬럼 선택 후 삭제.
+    (resource) kr.or.ddit.report.zero4 : TestMain
+              zero4 : useTableElement.jrxml
+                      useTableElement.jasper
+    
+5. CrossTab(Cross Table) 엘리먼트의 활용
+    * 디자인 파일 생성 마법사의 Query step의 Connections/Data Source에서 접속 대상의
+      데이타베이스 컨넥션 선택 
+	5.1 디자인 에디터의 Summery 밴드에 CrossTab 엘리먼트 추가
+	5.2 추가시 테이블 위저드 출력됨
+	5.3 [Step 1. Dataset : Main report dataset] -> [Next] ->
+	    [Step 2. Rows    : (테이블의 좌측 행 출력설정)            ] -> [Next] ->
+	                      Row Group 1
+	                          Group    : Dataset의 특정 Field 지정
+	                          Group By : Dataset의 특정 Field 지정
+	                      Row Group 2(필요시 지정)
+	                          Group    : Dataset의 특정 Field 지정
+	                          Group By : Dataset의 특정 Field 지정
+	    [Step 3. Columns : (테이블의 좌측 열 출력설정)            ] -> [Next] ->
+	                      Column Group 1
+	                             Group    : Dataset의 특정 Field 지정
+	                             Group By : Dataset의 특정 Field 지정
+	                      Column Group 2(필요시 지정)
+	                             Group    : Dataset의 특정 Field 지정
+	                             Group By : Dataset의 특정 Field 지정
+	    [Step 4. Measure : (출력 데이타)                          ] -> [Next] ->
+	                      Measure : 데이타 출력 기저 특정 Field 지정
+	                      Function : 지정
+	    [Step 5. Layout  : (스타일 정의)                          ] -> [Finish]
+	                      Color Scheme 
+	5.4 디자인 에디터 하단에 생성된 Crosstab 탭이 출력됨.
+    5.5 생성된 테이블 엘리먼트의 컬럼 삭제는 Report Inspector 편집	                           
+	(resource) kr.or.ddit.report.zero5 : TestMain
+              zero5 : useCrossTabElement.jrxml
+                      useCrossTabElement.jasper
+                      
+6. Chart 엘리먼트를 활용한 DashBoard                           
+	* 디자인 파일 생성 마법사의 Query step의 Connections/Data Source에서 [Empty datasource] 선택
+	* [Report Inspector]의 프로젝트 명 선택 -> 오른쪽 마우스 클릭 -> [Add Dataset] 선택으로
+	  개별 차트에 활용될 Dataset을 미리 정의.
+	  (각 Dataset은 Query를 포함하며, 해당 Query는 차트 출력에 필요로하는 데이타로 활용됨.) 
+	* 정의된 Dataset은 작성된 Chart의 Sub dataset으로 선택되어지며, [Connection/Datasource exp]의
+	  [Use connection Expression]이 선택됨.
+	6.1 title 밴드 외 모든 밴드 삭제,
+	6.2 title 밴드 선택 및 마우스 오른쪽 버튼 클릭으로 [Maximize Band Height] 선택
+	6.3 Frame 엘리먼트를 디자인 에디터의 title 밴드에 추가
+	6.4 추가된 Frame내 chart 엘리먼트 배치
+	    * chart 엘리먼트 배치시 출력될 차트 종류를 선택 가능.
+	    6.4.1 Bar Chart 선택
+	    6.4.2 Category Chart Wizard
+	           [Step 1. Dataset : Main report dataset] -> [Next] ->
+	           [Step 2. Series  : Series 생성 : "구매횟수" 입력] -> [Next] ->
+	           [Step 3. Categories and Values : Categories - X축 Axis을 구성할 Field 선택] -> [Finish]
+	                                                         Field의 컬럼명 MEM_NAME 선택 
+	                                            Values     - Y축 Axis을 구성할 Field 선택
+	                                                         Field의 컬럼명 CNT 선택 
+	    6.4.3 작성된 Bar Chart 선택 -> [마우스 오른쪽 마우스 클릭] -> [Chart Data] ->
+	          [Filter expression 추가 아이콘 클릭] -> Field의 컬럼명 선택 후 비교연산자를 활용하여
+	                                                  출력 데이타 수 제한 가능.
+	    6.4.4 Frame 내 Chart 선택 -> properties 뷰의 [orientation 속성]의 Vertical 또는 Horizontal 설정으로
+	                                 방향 변경	                 
+	(resource) kr.or.ddit.report.zero6 : TestMain
+              zero5 : useChartDashboard.jrxml
+                      useChartDashboard.jasper
+    * 라이브러리 추가 : jfreechart-1-0-12.jar
+                        jcommon-1-0-15.jar
+                        
+7. export pdf
+   * 디자인 파일 생성 마법사의 Query step의 Connections/Data Source에서 [Empty datasource] 선택
+	7.1 Main DataSet의 활용.     
+	(resource) kr.or.ddit.report.zero7 : TestMain
+               zero5 : exportPDF.jrxml
+                       exportPDF.jasper
+    * 라이브러리 추가 : iText-2.1.7.js2.jar
+                        iTextAsian.jar
+8. export html
+   상기 7항의 exportPDF.jrxml 파일을 exportHtml.jrxml로 jaspersoft iReport Designer를 활용해
+   [다른 이름으로 저장]하여 활용
+    (resource) kr.or.ddit.report.zero8 : TestMain
+               zero5 : exportHtml.jrxml
+                       exportHtml.jasper
+    * 라이브러리 추가 : jackson-annotations-2.1.4.jar
+                        jackson-core-2.1.4.jar
+                        jackson-databind-2.1.4.jar
+9. export excel
+   상기 7항의 exportPDF.jrxml 파일을 exportExcel.jrxml로 jaspersoft iReport Designer를 활용해
+   [다른 이름으로 저장]하여 활용
+   * Current Date 엘리먼트의 Text Field Expression의 속성값 : new java.util.Date()를
+                                                              new SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date())로
+                                                              변경
+     Text Field 엘리먼트의 출력 패턴 변경 Pattern 속성값 :  #,##0(천단위 자릿수 표현)
+                                                            (원달러 기호 출력 미스)                                                        
+    (resource) kr.or.ddit.report.zero9 : TestMain
+               zero5 : exportExcel.jrxml
+                       exportExcel.jasper
+    * 라이브러리 추가 : poi-3.7-20101029.jar
+10. export pptx
+    상기 7항의 exportPDF.jrxml 파일을 exportPPTX.jrxml로 jaspersoft iReport Designer를 활용해
+    [다른 이름으로 저장]하여 활용
+    (resource) kr.or.ddit.report.zero10 : TestMain
+               zero5 : exportPPTX.jrxml
+                       exportPPTX.jasper
+    * 라이브러리 추가 : 
+      
+      
+      
+      
+      
+      
+      
+      
+      

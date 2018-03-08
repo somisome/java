@@ -1,0 +1,8 @@
+JSP를 이용한 리포팅 서비스
+1. 서비스 대상의 jrxml 파일의 컴파일 산출물 jasper 파일 작성
+2. WEB-INF/reports/에 jrxml파일, jasper 파일 위치
+3. 해당 jasper 파일의 출력 코드 jsp에서 구성
+
+ex) WEB-INF/reports/jasper 파일 배치
+    service/reporingService.jsp
+    

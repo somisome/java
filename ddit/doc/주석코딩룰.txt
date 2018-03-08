@@ -1,0 +1,74 @@
+JAVA 클래스
+/**
+ * Class Name : GradRetrieveController.java
+ * Description : 수료생 관리의 이직이력 관리 및 역량강화 교육 지도방안 조회/등록
+ * Modification Information
+ * @author 전인호
+ * @since  2016.04.07.
+ * @version 1.0
+ * @see
+ * <pre>
+ * [[ 개정이력(Modification Information) ]]
+ *    수정일       수정자          수정내용
+ *    -------      -------     -------------------
+ *    2016.04.07.  전인호      최초작성
+ * Copyright (c) 2016 by DDIT  All right reserved
+ * </pre>
+ */
+
+메서드
+/**
+ * 수료생 관리 메인
+ * @param
+ * @return 
+ * @throws 
+ */
+
+XML
+<!-- 수료생 관리 tiles definition                           -->
+<!-- << 개정이력(Modification Information) >>              -->
+<!--  수정일       수정자          수정내용                                      -->
+<!--  =======      =======     =====================     -->
+<!--  2016.04.07.  전인호       최초작성                                    -->
+<!-- Copyright (c) 2016 by DDIT  All right reserved      -->
+
+
+JSP
+<%--==============================================================
+ * 수료생 관리 left 메뉴구성
+ * @author 전인호
+ * @since  2016.04.07.
+ * @version 1.0
+ * @see
+ * <pre>
+ * << 개정이력(Modification Information) >>
+ *    수정일       수정자          수정내용
+ *    -------      -------     -------------------
+ *    2016.04.07.  전인호      최초작성
+ * Copyright (c) 2016 by DDIT  All right reserved
+ * </pre>
+===============================================================--%>
+
+javascript
+/**
+ * 자바스크립트 공통 코드
+ * 메세지 알럿
+ * 메세지 모달
+ * 박스 열림/닫힘
+ * 버전 : 1.0
+ * << 개정이력(Modification Information) >>
+ * 수정일       수정자          수정내용   
+ * =======      =======     ===================== 
+ * 2016.04.09.  전인호       최초작성   
+ * Copyright (c) 2016 by DDIT  All right reserved  
+ */
+ 
+ properties 
+#####################################################
+# 메세지 표준
+# << 개정이력(Modification Information) >>
+# 수정일      수정자      수정내용   
+# =======     =======     ===================== 
+# 2016.04.01. 전인호      최초작성   
+# Copyright (c) 2016 by DDIT  All right reserved  
+#####################################################

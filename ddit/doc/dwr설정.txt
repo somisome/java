@@ -1,0 +1,48 @@
+1. JSP Dwr 개발 환경
+   * javascript와 원격지 서버의 자바 클래스의 함수와의 ajax 기반 통신을위한 환경
+   * String 기반 json 데이터 송,수신 처리를 위해 송,수신시
+       자바빈 객체 맵핑을 지원
+
+   1) Dynamic Web Project 생성 : DirectWebRemotingOnJSP
+   
+   2) dwr.jar download (Version 3.0.RC2) import
+      --  http://directwebremoting.org/dwr/index.html
+      * dwr.jar와 의존성 있는 commons-logging.??.jar import
+   
+   3) web.xml내 설정
+        특정 uri 요청시 DwrServlet 요청 처리 설정
+
+   4) /WEB-INF/dwr.xml 작성
+      서버의 클래스와 javascript에서 해당 서버의 클래스의 함수를 호출하기위한 설정 및
+      서버의 클래스내 함수 호출에따라 반환되는 객체(기본타입, 빈, 컬렉션)와의
+     json data 패턴의 맵핑 설정 수행
+    
+     <!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" 
+	     "http://getahead.org/dwr/dwr20.dtd">
+      dwr.jar의 버젼과 dwr.xml내 DOCTYPE 버젼이 상이할때 SAXPhaser 관련 에러가 발생됨.
+
+   5) http://{domain}/{contextPath}/dwr/index.html 호출을 통해
+      이후 맵핑 처리를 위해 javascript 단에서 선언되어 dwr 엔진에의해
+      자동 생성된 js 파일을 import한다.
+
+   6) javscript 프로그래밍작업
+
+   7) CSRF(Cross Site Request Forgery: 사용자 인증을 악의적인 코드로 가로채 크래킹함) 
+      attack에의한 session error 발생시 조치(아파치톰캣 7.0에서 발생)
+      (1) dwr.xml에 설정
+	  <init-param>
+ 		<param-name>crossDomainSessionSecurity</param-name>
+ 		<param-value>false</param-value>
+ 	  </init-param>
+      (2) 아파치 톰캣 /conf/context.xml 내 <context useHttpOnly="false"> 설정
+           
+   8) dwr.xml 내 javascript의 요청을 처리할 클래스와 빈 증가시 설정 후
+      http://{domain}/{contextPath}/dwr/index.html를 호출을 통해
+      import할 javascript 파일을 import한다.
+      
+   9) dwr은 요청에따라 response를 직접 제어(ex-response.sendRedirect())할때 에러가 발생됨.
+   
+   10) 한개 페이지에 engine.js가 중복 선언되었을때 이상증상 발생되므로, <jsp:include> 활용시와
+       <jsp:include> 이후의 dwr 활용 시점( window.ready or window.load or document.ready) 등에
+         주의
+       

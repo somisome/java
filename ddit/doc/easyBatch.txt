@@ -1,0 +1,153 @@
+EasyBatch
+
+* 자바를 통해 다양한 일괄처리 환경을 쉽게 구현할수있는 프레임워크로서, CSV(Comma Separated Value) 또는
+  Text 파일 등의 파일 읽기, 필터링, DataSource를 대상으로한 분석 및 검증, 입력 데이타 대상의 단순히 반복적이거나 
+  또는 메인 어플리케이션의 실행과 별도로 실행되어야 할 비니지스 로직의 실행을위한 경량화된 일괄처리 API.
+	
+  http://www.easybatch.org/
+  http://www.easybatch.org/v5.0.0/api/  
+  http://www.easybatch.org/v5.0.0/#_introduction
+   
+* EasyBatch 프레임웍을통한 일괄 처리의 대상 : Data Reading, Data Parsing, Data Filtering,
+                                              Data Mapping, Error Logging, Data Validation,
+                                              Batch Reporting
+* 특징
+  1. 실행 간 최소한의 메모리 활용
+  2. POJO 기반의 관점 지향 프로그래밍 환경
+  3. 병렬 실행 환경
+  4. JMX(Java Management Extension)을 활용한 Batch 실행 환경 Monitoring
+  5. 모듈화된 아키텍처 제공
+
+1. 설치
+   1.1 maven
+        <dependency>
+            <groupId>org.easybatch</groupId>
+            <artifactId>easybatch-spring</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.supercsv</groupId>
+            <artifactId>super-csv</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+		        
+2. 테스트 데이터 작성
+   2.1 csv
+       
+       2.1.1 특정 테이블의 컬럼명을 대상으로 csv 형식의 문자열 작성 쿼리
+		       SQL> set linesize 500
+		       SQL> SELECT REGEXP_REPLACE(A.val, ',', q'$','$') val
+		              FROM (SELECT XMLAGG(XMLELEMENT(node, lower(COLUMN_NAME), '||,||') 
+		                                  ORDER BY COLUMN_ID).extract('//text()').getstringval() val
+		                    FROM USER_TAB_COLUMNS
+		                    WHERE TABLE_NAME='MEMBER'
+		                    GROUP BY TABLE_NAME) A;       
+       2.1.2 상기 2.1.1의 결과를 SELECT 쿼리의 조회 컬럼에 붙여넣기 및 종단의 
+		       SQL> set echo off
+		       SQL> set heading off
+		       SQL> set linesize 500
+		       SQL> spool d:\member.csv
+		       SQL> SELECT mem_id||','||mem_pass||','||mem_name||','||mem_regno1||','||mem_regno2||','||
+		                   mem_bir||','||mem_zip||','||mem_add1||','||mem_add2||','||mem_hometel||','||
+		                   mem_comtel||','||mem_hp||','||mem_mail||','||mem_job||','||mem_like||','||
+		                   mem_memorial||','||mem_memorialday||','||mem_mileage||','||mem_delete            (삭제 ||','||)
+		              FROM MEMBER;
+		       SQL> spool off
+       
+       또는 
+              SqlDeveloper 대상 테이블 선택 -> 익스포트 -> DDL익스포트 체크 해제
+                                                           데이터 익스포트 체크 -> 형식 csv 선택
+                                                                                   헤더 체크
+                                                                                   행 터미네이터 [Windows <CR><LF>] 선택
+                                                                                   왼쪽/오른쪽 둘러싸기 [없음] 선택
+                                                                                   인코딩 UTF-8 선택
+                                                                                   다른이름으로 저장 [단일파일] 선택
+                                                                                   파일 [저장 경로/파일명.csv] 수정
+                                                        -> 다음 -> 다음 -> 완료
+       
+              *** , 구분자가 생략된 csv 데이타 생성 가능성이 있으므로 검토 후 활용.
+       
+   2.2 xml(SqlDeveloper에서 실행)
+			       SELECT regexp_replace((SELECT  XMLROOT(XMLELEMENT("MEMBERS",
+					                                       XMLAGG(XMLELEMENT("MEMBER", XMLATTRIBUTES(MEM_ID),
+					                                                                   XMLFOREST(MEM_PASS,
+					                                                                             MEM_NAME,
+					                                                                             MEM_REGNO1,
+					                                                                             MEM_REGNO2)))),
+			                                      version '1.0" encoding="UTF-8').getClobVal() xmldata
+			                               FROM MEMBER), '^"|"$', '') data
+			  	    FROM DUAL;
+   
+           또는 
+
+			SqlDeveloper 대상 테이블 선택 -> 익스포트 -> DDL익스포트 체크 해제
+                                                           데이터 익스포트 체크 -> 형식 xml 선택
+                                                                                   행 터미네이터 [Windows <CR><LF>] 선택
+                                                                                   다른이름으로 저장 [단일파일] 선택
+                                                                                   인코딩 UTF-8 선택
+                                                                                   파일 [저장 경로/파일명.csv] 수정
+                                                        -> 다음 -> 다음 -> 완료   
+
+
+ElasticSearch(루신을 기초로한 오픈소스 검색엔진)
+
+1. 정의 : elasticsearch는 Shay Banon이 Lucene을 바탕으로 개발한 분산 검색엔진.
+          설치와 서버 확장이 매우 편리.
+          분산 시스템이기 때문에 검색 대상 용량이 증가했을 때 대응하기가 무척 수월.
+          NoSQL을 통해 Json 형식의 데이터 모델을 활용함.
+          multi-tenancy(단일 서버내 다수의 인덱스를 구성하고, 다수의 인덱스를 대상으로 쿼리 질의 가능) 지원.
+          다양한 플러그인(프로토콜 변경, 모니터링 기능 등)을 지원.
+        
+        
+    1.1 용어 비교
+                             관계형 데이터베이스와 elasticsearch 용어 비교 
+                  관계형 데이터베이스                                    elasticsearch
+              Database                                                     Index
+                                                                           Shard
+                                                                           (세분화되어 데이타가 분산되며, 백업을통해 복구가능한 소Index)
+                                                                           Replica
+                                                                           (Shard가 깨졌을때를 대비해 복구를위해 Shard가 복사되는 Index)
+              Table                                                        Type
+              Row                                                          Document
+              Column                                                       Field
+              Schema                                                       Mapping
+              Index                                                        Everything is indexed
+              SQL                                                          Query DSL
+ 
+    1.2 가이드
+        http://www.elasticsearch.org/guide/
+        
+    1.3 자바 API 
+        http://www.elasticsearch.org/guide/en/elasticsearch/client/java-api/current/index.html
+        
+    1.4 javascript API
+        http://www.elasticsearch.org/guide/en/elasticsearch/client/javascript-api/current/index.html         
+   
+
+2. 설치
+   2.1 엘라스틱서치 다운로드 및 설치 
+       http://www.elasticsearch.org/ 에서 elasticsearch-1.3.3.zip download 및 압축 해제
+       D:\압축해제폴더\bin\elasticsearch.bat 실행으로 install
+       D:\압축해제폴더\lib\ 폴더의 라이브러리를 프로젝트에 import
+       
+       API
+       https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/index_.html
+   
+   2.2 Apache Tika 라이브러리 import
+       Apache Tika(컨텐츠 분석 툴킷)
+          - 다양한 문서(csv, xml, ppt, pdf, text, doc, excel 등) 및 이미지에 존재하는 메타데이터 및 
+            컨텐츠 등 추출가능한 파서 제공
+          - 한글(hwp) 미지원
+          - Structure : Tika-Core, Tika-Parsers, Tika-Bundle, Tika-App
+          - http://tika.apache.org/download.html 에서 tika-app-1.6.jar 다운로드 및 
+                   import
+
+   한글 형태소 분석기를 플러그인으로 설치
+   
+3. 참조
+   설치 및 사용기 : http://mimul.com/pebble/default/2012/02/23/1329988075236.html
+   로그검색시스템 : http://helloworld.naver.com/helloworld/273788
+   한글형태소분석기 : http://jjeong.tistory.com/711
+   형태소 분석기로 웹 문서를 파싱 후 단어 추출 : http://naggingmachine.tistory.com/823
+	
+        

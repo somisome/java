@@ -1,0 +1,178 @@
+1. java 설치
+   1) http://www.oracle.com -> download 메뉴 클릭 ->
+      java se 클릭 -> jdk-7u21-windows-i586.exe download
+      download folder : d:\programming\java\
+   2) download folder 이동 jdk-7u21-windows-i586.exe 실행
+   3) java install folder : d:\program\java\jdk-7u21-버젼
+      인스톨 중에 jre 설치
+                  jre 설치폴더 : d:\program\java\jre
+   4) 시작 -> 컴퓨터 오른쪽마우스 클릭 후 속성 -> 고급시스템 설정 ->
+      환경변수 클릭 -> 시스템변수 -> 새로만들기 클릭 ->
+         변수이름 : JAVA_HOME
+         변수값 : d:\program\java\jdk-7u21-버젼 (;은 넣지마세요)
+      시스템 변수에 작성된 path를 선택 -> 편집 클릭 -> 
+         변수이름 : path
+         변수값 : 가장 마지막에 ;%JAVA_HOME%\bin; 추가 
+   5) 콘솔 창 열고 java -version
+      정상적으로 설치되면   
+       java version "1.7.21_버젼"
+       Java(TM) SE Runtime Environment (build 1.6.0_32-b05)
+       Java HotSpot(TM) 32-Bit Server VM (build 20.7-b02, mixed mode)
+      비정상이면 에러 출력
+
+2. 이클립스 다운로드
+   1) 다운로드 주소 : http://eclipse.org
+      eclipse-jee-indigo-SR2-win32.zip 대상으로 다운로드 
+      download folder : d:\programming\eclipse\
+   2) 이클립스 다운로드 폴더가서 eclipse-jee-indigo-SR2-win32.zip 압축해제
+      해동된 폴더(eclipse)는 
+      d:\program\eclipse3.7\ 해동되도록 함.
+   3) 이클립스 해동된 폴더에 eclipse.ini 파일 열어요
+      -Xms40m      =>   -Xms1024m   (설치된 메모리사이즈에 비례해서 증가)
+      -Xmx256m          -Xmx1024m
+   4) eclipse.exe 클릭 이클립스 실행
+
+
+      
+3. 오라클 설치
+   1) download : http://www.oracle.com
+      Oracle Database Express Edition 11g Release 2 for Windows x32 다운로드
+      download folder : d:\programming\oracle\
+   2) 다운로드 받은 OracleXE112_Win32.zip 압축해제
+   3) 해제된 폴더내에 DISK1 폴더내에 setup.exe 파일 실행
+   4) install folder : d:\program\oraclexe
+   5) 관리자계정 패스워드 : java
+   6) 오라클이 설치되면 윈도우 service에 등록
+      컴퓨터 부팅되면 자동으로 오라클 서버가 실행
+      컴퓨터 다운되면 자동으로 오라클 서버가 중지
+   7) 키보드 윈도우키 + r 실행 창 활성화
+      services.msc 입력 후 엔터
+      서비스 창에서 컴퓨터 OracleServiceXE를 선택하고 마우스 오른쪽버튼 클릭
+      중지 선택
+      서비스 창에서 컴퓨터 OracleXETNSListener를 선택하고 마우스 오른쪽버튼 클릭
+      중지 선택
+      서비스 창에서 컴퓨터 OracleServiceXE를 선택하고 마우스 오른쪽버튼 클릭
+      속성 선택 -> 시작유형을 자동에서 수동으로 변경 -> 확인
+      서비스 창에서 컴퓨터 OracleXETNSListener를 선택하고 마우스 오른쪽버튼 클릭
+      속성 선택 -> 시작유형을 자동에서 수동으로 변경 -> 확인
+   8) 오라클 데이타베이스 서버 실행시
+      콘솔창에서 startdb
+   9) 오라클 데이타베이스 서버 중지시
+      콘솔창에서 stopdb
+
+4. 아파치 톰캣 : 아파치 - 웹서버
+                 톰갯   - 웹어플리케이션
+   1) http://tomcat.apache.org
+      tomcat 7.0.zip
+   2) download folder : d:\programming\tomcat\
+   3) 설치는 다운로드 받은 파일을 압축을 풀어서
+      d:\program\tomcat\ 설치
+   4) 설치된 아파치 톰캣 서버의 http 프로토콜의 port 설정이 8080이니까
+      80으로 변경하기위해서 d:\program\tomcat\apache tomcat7.0\conf\server.xml
+      열고 <Connector port="8080" => 80을  변경하고 저장
+   5) 윈도우키+r 눌러서 실행창 띠우고 cmd 입력하고 
+      (1) d: 엔터
+      (2) cd program
+      (3) cd tomcat
+      (4) cd apache tomcat 7.0
+      (5) cd bin
+      (6) startup.bat 실행
+      (7) 에러가 있으면 않되요.
+      
+5. window home basic 버젼 사용자의 관리자 모드 활성화
+   1) 명령프롬프트를 관리자 권한으로 실행
+   2) net user administrator /active:yes
+   3) 로그오프 후 administrator로 로그인
+
+
+6. 유저생성
+   1) 윈도우키+r 실행창에 cmd 입력후 startdb로 서버실행
+   2) sqlplus system/java
+   3) create user toddler identified by java
+      grant connect, resource to toddler
+  
+      or
+      
+      grant connect, resource to toddler identified by java;
+
+   4) connect toddler/java
+   5) start D:\교재\Oracle\TableConstructQuery.sql
+
+7. 이클립스 구동
+   구동시 타겟팅될 폴더(워크스페이스는) d:\workspace(jsp)
+   로 구동
+   1) 메뉴 window -> preference -> 검색창에 enc라고 입력
+       -> 모든 항목을 UTF-8로 변경 설정
+
+8. Dynamic Web Proejct를 작성
+   Project name : dditToddler
+
+9. WebContent 폴더 하위에 01 폴더 작성 후 jspStructure.jsp
+
+10. server view에 작성된 프로젝트를 Add and Remove 메뉴 활용
+    서버에 포함
+
+11. Debug as(벌레)로 서버실행
+
+12. 이클립스는 실제 서버를 빌려서 Project Explorer에 Sever 프로젝트를
+    생성해서 활용하죠
+    이클립스는 작성된 프로젝트를 배포하는 장소를 따로 가지고 있어요.
+    D:\WorkSpace(JSP)\.metadata\.plugins\org.eclipse.wst.server.core\tmp0
+    \wtpwebapps
+
+13. http://localhost/dditToddler/01/jspStructure.jsp 요청시
+    해당 jsp 파일은 톰캣이라는 웹 어플리케이션 서버가
+    (JSP 컨테이너 or 서블릿컨테이너) java파일로 변경하고
+    class 파일로 컴파일해서 힙 메모리상에 상주되면서 동작.
+
+
+14.|----------------------- url -------------------------------------|
+                           |-------------------- uri -------------------------|
+                                                                       |----- query string----|   
+    http://localhost/dditToddler/01/getResult1.jsp?mem_id=값&mem_pass=값
+    method 전송방식 get일때와 post일때 고려해야할점 :
+                           1) 지극히 타인에게 노출되어서는 않되는 정보는
+                              post 전송방식을 선택합니다.
+                           2) 만약, post 전송방식으로 전송시 reflash될때의
+                              처리를 요합니다.
+                           3) 타인에게 노출이되어도 무난한 정보는 
+                              get방식을 고려합니다.
+    method 전송방식 post : 1) 전달값이 브라우져의 주소창에 출력되지않아요
+                           2) 값은 요청시 생성되는 request 내장객체의
+                              header에 포함되어서 전송되고, 데이타전송패턴은
+                              get방식과 동일(mem_id=값&mem_pass=값)
+                           3) 문자열과 바이너리 코드를 모두 전송할수 있어요.
+                           4) 전송 데이타의 최대사이즈는 무한대에요.
+    method 전송방식 get :  1) 전달값이 브라우져의 주소창에 출력됩니다.
+                           2) 값은 주소차에 문자열 형태로 전송됩니다. 
+                              ?mem_id=값&mem_pass=값
+                           3) 문자열만 전송할수있어요.
+
+15. http://localhost/dditToddler/01/methodGetNPost.jsp 호출
+    
+                              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

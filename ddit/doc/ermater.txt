@@ -1,0 +1,8 @@
+eclipse plug in ER-Master
+1. 이클립스 실행
+2. Help - Install New Software
+3. Add 
+   - Name : ERMaster
+   - Location : http://ermaster.sourceforge.net/update-site
+                
+4. 설치

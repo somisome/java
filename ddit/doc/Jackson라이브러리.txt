@@ -1,0 +1,12 @@
+Jackson json 라이브러리
+1. 다운로드
+   http://wiki.fasterxml.com/JacksonDownload
+      jackson-core-asl-1.9.13.jar
+      jackson-mapper-asl-1.9.13.jar
+   
+   WEB-INF/lib import
+   
+2. 활용
+   Map,Array, VO -> json 형식의 문자열로 치환
+   json 형식의 문자열 -> Map,Array, VO 치환
+   

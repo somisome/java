@@ -1,0 +1,26 @@
+eclipse 내 jquery 코드힌트 윈도우 활용 환경
+
+1. Help -> Eclipse MarketPlace -> jsdt로 검색 -> ExtJS JSDT Integration 선택 및 인스톨
+
+또는
+
+1. http://code.google.com/a/eclipselabs.org/p/jquerywtp/downloads/list
+     jqueryWTP1.20foEN.jar download
+
+2. cmd -> download path -> java -jar jqueryWTP1.20foEN.jar 실행
+
+3. 실행 창에 윗쪽 [Browse] 버튼 클릭
+   D:\program\eclipse\plugins\org.eclipse.wst.jsdt.core_1.3.200.v201409111605.jar
+   선택
+   
+4. 실행 창에 아래쪽 [Browse] 버튼 클릭
+   D:\program\library\ 선택
+   
+5. 실행 창에 [Generate] 버튼 클릭
+
+6. D:\program\library\org.eclipse.wst.jsdt.core_1.3.200.v201409111605.jar를
+   D:\program\eclipse\plugins\ 덮어쓰기
+   
+7. D:\workspace(jsp)\.metadata\.plugins\org.eclipse.wst.jsdt.core  폴더 삭제
+
+8. 이클립스 재실행

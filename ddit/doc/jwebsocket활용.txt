@@ -1,0 +1,18 @@
+jWebSocket 설치 및 활용
+1. jWebSocketServer-1.0.zip 압축 해제.
+
+2. 환경변수 등록
+   JWEBSOCKET_HOME :  jWebSocketServer-1.0.zip 압축 해제 폴더
+   
+3. JWebSocketService를 위한 서드파티 서버프로젝트(dynamic web project) 작성시 %JWEBSOCKET_HOME%\libs 폴더의 라이브러리를
+   서드파티 서버프로젝트의 WEB=INF/lib에 import
+   * import 시 javax.servlet-3.1.1.jar 배제...
+   
+4. 서드파티 서버프로젝트에서 JwebSocket 서비스 제공 시 리스터 베이스로 설정 및 서비스
+
+5. 클라이언트(브라우저)의 JwebSocket 서비스 접근시 js 자원 활용
+   jWebSocket.js
+   wordchk_search.js
+   cookieControl.js
+
+* 상기 3, 4항은 제공되는 JWebSocketService 다이나믹 웹 프로젝트를 참고함. 

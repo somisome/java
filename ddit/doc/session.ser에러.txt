@@ -1,0 +1,4 @@
+ 1. 톰캣설치 폴더/conf/context.xml의 <Context> 내 
+        <Manager className="org.apache.catalina.session.PersistentManager" saveOnRestart="false"/>
+
+ 2. 톰캣의 Work Directory 에서 "SESSIONS.ser" 파일을 찾아서 삭제하고 재실행

@@ -1,0 +1,13 @@
+JNDI(Java Naming and Directory Interface)
+* Java 언어를 활용해서 로컬 또는 원격지 서버내 설정된
+  이름 명명규칙을 통해 DataSource에 접근.
+ 
+* WebLogic : java Web Application Server
+             JNDI - RMI(Remote Method Invocation)를 통한 DataSource 취득용
+                     일반 레거시 서버 apache Tomcat의 DataSource 취득용
+
+*          웹서비스 : apache + WebLogic
+*          CS(Client/Server) : WebLogic(Server)
+
+* jndi를 통한 DataSource 설정은 DBCP를 기반으로 설정.
+ 

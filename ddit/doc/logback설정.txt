@@ -1,0 +1,24 @@
+﻿logback 로깅 활용 목적
+  log4j 아키텍처 기반으로 성능 개선(log4j 대비 10배의 속도 향상)과 최적화된 
+  메모리 점유율(이타적인 메모리 관리를 하는 log4j 대비 최소)과 로깅 설정파일
+  수정시 Auto Reloading을 지원하며, 다양한 조건에따른 로깅 처리 여부를 Filter를
+  통해 제어가 가능하며, 자체 스케줄링 설정을 통해 누적된 로깅 데이타 삭제가 
+  가능하다. 또한, 누적된 로깅 데이타 파일의 압축 기능을 활용할 수 있으며, 동적인 
+  빌드 환경을 제공한다. 
+		     
+  주요 컴포넌트 : 1) logback-core    - logback 핵심 컴포넌트(appender, layout, ..)
+                  2) logback-classic - slf4j와의 연동 컴포넌트
+                  3) logback-access  - web 전용의 HTTP Request Debugging 컴포넌트  
+	     
+  설정 : 1) Spring-WebMvc의 Commons-logging 의존성 제외
+         2) log4j dependency 삭제
+         3) slf4j-api, logback-classic, jcl-over-slf4j dependency 추가
+         4) src/main/resources의 log4j.xml 파일 삭제
+         5) src/main/resources에 logback.xml 파일 작성
+            default 클래스 패스에 위치
+         6) logback.xml 파일의 작성 위치와 이름 변경 설정
+             6.1) logback-ext-spring dependency 추가
+             6.2) web.xml 리스너 추가
+		                    
+   log4j.properties파일의 logback.xml 변환 : 
+         1) http://logback.qos.ch/translator/ 활용

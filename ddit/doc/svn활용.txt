@@ -1,0 +1,77 @@
+SVN 설치
+  Help -> Install New Software -> Add ->
+    svn client
+    http://subclipse.tigris.org/update_1.10.x
+
+SVN 활용
+1. 최초 프로젝트의 SVN 서버 Commit
+   로컬에 존재하는 프로젝트를 최초 SVN 서버에 업로드
+   대상 프로젝트 선택 -> 오른쪽 마우스 클릭 메뉴에 Team ->
+   Share Project 선택 -> SVN 선택 ->
+   URL 선택 -> Finish -> Synchronize뷰 ->
+   프로젝트 선택 -> 오른쪽 마우스 클릭 메뉴 ->
+   commit
+
+2. SVN 서버와 현재 접속되어 동기화되어있는 로컬 프로젝트의
+   접속 해제 및 삭제
+    대상 프로젝트 선택 -> 오른쪽 마우스 클릭 메뉴에 Team ->
+    -> Disconnect
+
+3. SVN 서버에 업로드된 프로젝트 최초 로컬로 다운로드
+   SVN Repositories -> 다운로드 대상 프로젝트 선택 ->
+   오른쪽 마우스 클릭 메뉴 -> Check Out
+   
+4. 작업 완료된 개별 파일 SVN 서버 업데이트
+   4.1 업로드 대상 파일 선택 -> 오른쪽 마우스 클릭 메뉴 ->
+       Team -> commit
+       
+   4.2 로컬에 프로젝트 전체 또는 특정 팩키지 단위로 SVN 서버와
+       동기화 수행
+       업로드 대상 [프로젝트 전체|팩키지|폴더] 선택 -> 
+       오른쪽 마우스 클릭 메뉴 -> Team -> 
+      Synchronize With Repository ->
+      Synchronize View의 내용
+          1) SVN 서버로 Commit할 파일
+          2) SVN 서버에서 로컬로 다운로드할 파일
+          3) 특정 파일이 SVN 서버내에 버젼이 3
+               로컬에서 commit할 파일의 버젼이 2인경우
+               충돌상태의 파일
+                  
+5. SVN 서버로부터 개별 파일 다운로드 처리
+   5.1 [프로젝트 전체|팩키지|폴더] 선택 -> 
+        오른쪽 마우스 클릭 메뉴 -> Team -> 
+       Synchronize With Repository ->
+       Synchronize View -> 다운로드할 파일|폴더 선택
+       -> update 메뉴 선택 
+       
+6. 버젼 충돌
+   [프로젝트 전체|팩키지|폴더] 선택 -> 
+    오른쪽 마우스 클릭 메뉴 -> Team -> 
+    Synchronize With Repository ->
+    Synchronize View -> 출동 파일 출력 메뉴 선택
+    -> 충돌 
+         (1)-> 충돌 파일 더블클릭 -> 오른쪽(로컬)|왼쪽(서버) ->머지작업-> 저장후 -> 해당파일 선택 -> Mask as Merged -> commit 대상 파일로 변경 
+         (2)-> Mask as Merged -> Commit 대상 파일로 변경
+         
+7. 강제로  SVN 서버내에 존재하는 대상 파일을 로컬로
+   update
+   [프로젝트 전체|팩키지|폴더] 선택 -> 
+    오른쪽 마우스 클릭 메뉴 -> Team -> 
+    Synchronize With Repository ->
+    Synchronize View -> 대상 파일 선택 ->
+    오른쪽 마우스 버튼 메뉴 -> override and update
+    
+8. SVN 서버에 Commit한 History는 관리
+   Team -> Show History(svn 관련 정보)
+           Show local Histroy(이클립스 관련 정보)
+        
+    
+       
+9. SVN 유저 변경
+   9.1 첫번째 방법
+        C:\Documents and Settings\본인컴퓨터이름\AppData\Roaming\Subversion 에 가서 
+        하위 파일들을 지우고 이클립스를 재시작.
+
+   9.2 두번째 방법
+       통째로 받은 eclipse\configuration\org.eclipse.core.runtime 폴더를 보면 .keyring이라는 파일을 삭제후 이클립스 재시작.
+   

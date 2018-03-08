@@ -1,0 +1,22 @@
+JasperReports Server
+* http://community.jaspersoft.com/project/jasperreports-server
+
+1. 정의
+   JasperReports 서버는 독립 실행형 및 임베디드 리포팅 서버로서, 디자인된 리포트를 웹 또는 모바일 어플리케이션에 
+   포함할 수 있으며, 리포트 출력을위해 제공되는 데이타의 변경시 변경된 데이타를 기초로 해당 리포트에 실시간 반영된
+   출력 환경을 제공함.
+   브라우저, 모바일 장치, 프린터, 다양한 파일 포맷의 이메일 송신 등의 환경을 제공하며, 보안과 공유환경을 제공함.
+
+2. 운영 환경
+   2.1 Jasper Report Design 툴의 산출물 jrxml 파일대상의 웹서비스를위한 JasperReports Library 제공.
+   2.2 주요 보안 이슈 적용 대상에 JasperReports 서버 제공 보안 기능 적용.
+   2.3 jrxml 파일 레포지토리와 스케줄링 환경 제공.
+   2.4 리포팅관련 웹 서비스 외 기타 웹 서비스와의 통합 환경 제공
+
+3. 설치
+   * Community Edition 활용
+   3.1 다운로드
+       http://community.jaspersoft.com/download
+          jasperreports-server-cp-5.5.0a-windows-x64-installer.exe 
+          
+   3.2 
