@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- freeboard 테이블 쿼리 정의                  -->
+<!-- << 개정이력(Modification Information) >>            -->
+<!--  수정일       수정자          수정내용              -->
+<!--  =======      =======     =====================     -->
+<!--  2018.03.09.  윤소미       최초작성                 -->
+<!-- Copyright (c) 2018 by DDIT  All right reserved      -->
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="freeboard">
+	<typeAlias alias="freeboardVO" type="kr.or.ddit.vo.FreeboardVO"/>
+	
+	
+	<select id="freeboardInfo" parameterClass="map" resultClass="freeboardVO">
+		SELECT * FROM FREEBOARD WHERE BO_NO = '1'	
+	</select>
+	
+	<select id="freeboardList"  resultClass="freeboardVO">
+		SELECT * FROM FREEBOARD WHERE BO_STATUS = 'y'
+	</select>
+	
+	<insert id="insertFreeboardInfo" parameterClass="freeboardVO">
+<!-- 		INSERT INTO FREEBOARD -->
+<!-- 		() -->
+<!-- 		VALUES -->
+<!-- 		() -->
+	</insert>
+	
+	<update id="updateFreeboardInfo" parameterClass="freeboardVO">
+<!-- 			UPDATE FREEBOARD -->
+<!-- 			SET MEM_PASS=#mem_pass#, -->
+<!-- 			WHERE  -->
+	</update>
+	
+	<update id="deleteFreeboardInfo" parameterClass="map">
+<!-- 			UPDATE FREEBOARD -->
+<!-- 			SET  -->
+<!-- 			WHERE  -->
+	</update>
+	
+	
+</sqlMap>
+
+
+
+
+

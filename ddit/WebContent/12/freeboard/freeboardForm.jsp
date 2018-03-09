@@ -25,38 +25,40 @@ $(function(){
     // 에디터 제거
     // $('#bo_content').summernote('destroy');
     
-	BootstrapDialog.show({
-	    title: '알럿창',
-	    message: '알럿창으로 활용하세요!'
-	});
+// 	BootstrapDialog.show({
+// 	    title: '알럿창',
+// 	    message: '알럿창으로 활용하세요!'
+// 	});
 	
-	BootstrapDialog.show({
-        message: '컨펌 다이얼로그로 활용하세요!',
-        buttons: [{
-            label: 'Button 1'
-        }, {
-            label: 'Button 2',
-            cssClass: 'btn-primary',
-            action: function(){
-                alert('Hi Orange!');
-            }
-        }, {
-            icon: 'glyphicon glyphicon-ban-circle',
-            label: 'Button 3',
-            cssClass: 'btn-warning'
-        }, {
-            label: 'Close',
-            action: function(dialogItself){
-                dialogItself.close();
-            }
-        }]
-    });
+// 	BootstrapDialog.show({
+//         message: '컨펌 다이얼로그로 활용하세요!',
+//         buttons: [{
+//             label: 'Button 1'
+//         }, {
+//             label: 'Button 2',
+//             cssClass: 'btn-primary',
+//             action: function(){
+//                 alert('Hi Orange!');
+//             }
+//         }, {
+//             icon: 'glyphicon glyphicon-ban-circle',
+//             label: 'Button 3',
+//             cssClass: 'btn-warning'
+//         }, {
+//             label: 'Close',
+//             action: function(dialogItself){
+//                 dialogItself.close();
+//             }
+//         }]
+//     });
 
 });
 </script>
 </head>
 <body>
 <form class="form-horizontal" role="form" action="" method="post">
+	<input type="hidden" name="bo_writer" value="${LOGIN_MEMBERINFO.mem_id }"/>
+	<input type="hidden" name="bo_ip" value="${pageContext.request.remoteAddr}"/>
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="bo_title">제목:</label>
 		<div class="col-sm-10">
@@ -103,9 +105,24 @@ $(function(){
 		<div class="col-sm-offset-2 col-sm-10">
 			<button type="submit" class="btn btn-info" style="float: right">등록</button>
 			<button type="button" class="btn btn-danger" style="float: right">취소</button>
-			<button type="button" class="btn btn-primary" style="float: right">목록</button>
+			<button type="button" class="btn btn-primary" style="float: right" id="freeboardListBtn">목록</button>
 		</div>
 	</div>
 </form>
 </body>
+<script type="text/javascript">
+	$(function(){
+		
+		$('#freeboardListBtn').click(function(){
+			$(location).attr('href','${pageContext.request.contextPath}/12/main.jsp');
+		});
+		
+		
+		
+		
+		
+		
+	});
+</script>
+
 </html>

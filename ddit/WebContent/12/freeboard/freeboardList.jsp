@@ -1,5 +1,18 @@
+<%@page import="kr.or.ddit.vo.FreeboardVO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.or.ddit.service.freeboard.IFreeboardServiceImpl"%>
+<%@page import="kr.or.ddit.service.freeboard.IFreeboardService"%>
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% 
+	IFreeboardService service = IFreeboardServiceImpl.getInstance();
+	List<FreeboardVO> freeboardList = service.getFreeboardList();
+	//pageContext.setAttribute("freeboardList",freeboardList);
+%>
+<c:set var="freeboardList" value="<%=freeboardList %>"></c:set>
+	
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +20,7 @@
 <title>자유게시글 목록</title>
 </head>
 <body>
+
 <div id="freeboardList_content">
 	<div class="panel panel-blue">
     	<div class="panel-heading">게시판 목록</div>
@@ -21,27 +35,29 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>1</td>
-					<td>테스트1</td>
-					<td>홍길동</td>
-					<td>2016-01-01</td>
-					<td>2</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>테스트2</td>
-					<td>홍길동</td>
-					<td>2016-01-01</td>
-					<td>2</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>테스트3</td>
-					<td>홍길동</td>
-					<td>2016-01-01</td>
-					<td>2</td>
-				</tr>
+				
+				<c:if test="${empty freeboardList} ">
+					<tr align="center">
+						<td colspan="5">
+							<font color="red">
+								등록된 게시글이 없습니다.							
+							</font>
+						</td>
+					</tr>
+				</c:if>
+				
+				<c:if test="${!empty freeboardList} ">
+					<c:forEach items="${freeboardList }" var="freeboardInfo">
+						<tr>
+							<td>${freeboardInfo.bo_no}</td>
+							<td>${freeboardInfo.bo_title}</td>
+							<td>${freeboardInfo.bo_nickname}</td>
+							<td> ${fn:substringBefore(freeboardInfo.bo_reg_date,' ') } </td>
+							<td>${freeboardInfo.bo_hit}</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+
 			</tbody>
 		</table>
 	</div>
@@ -57,8 +73,28 @@
 			<option value="WRITER">작성자</option>
 		</select>
 	    <button type="submit" class="btn btn-primary form-control">검색</button>
-	    <button type="button" class="btn btn-info form-control">게시글 등록</button>
+	    <button type="button" class="btn btn-info form-control" id="registFreeboard">게시글 등록</button>
 </form>
 </div>	
 </body>
+
+<script type="text/javascript">
+	$(function(){
+		$('#registFreeboard').click(function(){
+			if(eval('${empty LOGIN_MEMBERINFO}')){
+				BootstrapDialog.show({
+				    title: '경고',
+				    message: '로그인 후 게시글 등록이 가능합니다.'
+				});
+				return;
+			}
+			$(location).attr('href','${pageContext.request.contextPath}/12/main.jsp?contentPage=/12/freeboard/freeboardForm.jsp');
+			
+			
+		});
+		
+		
+	});
+</script>
+
 </html>
