@@ -12,7 +12,13 @@
 	//pageContext.setAttribute("freeboardList",freeboardList);
 %>
 <c:set var="freeboardList" value="<%=freeboardList %>"></c:set>
-	
+<c:url var="main" value="/12/main.jsp">
+	<c:param name="contentPage" value="/12/freeboard/freeboardForm.jsp"></c:param>
+</c:url>
+<%-- <c:url var="freeboardView" value="/12/main.jsp"> --%>
+<%-- 	<c:param name="contentPage" value="/12/freeboard/freeboardView.jsp?bo_no="></c:param> --%>
+<%-- </c:url>	 --%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +30,7 @@
 <div id="freeboardList_content">
 	<div class="panel panel-blue">
     	<div class="panel-heading">게시판 목록</div>
-		<table class="table table-bordered table-hover">
+		<table class="table table-bordered table-hover" id="freeboardListTbl">
 			<thead>
 				<tr>
 					<th scope="col" width="5%">No</th>
@@ -36,7 +42,7 @@
 			</thead>
 			<tbody>
 				
-				<c:if test="${empty freeboardList} ">
+				<c:if test="${empty freeboardList}">
 					<tr align="center">
 						<td colspan="5">
 							<font color="red">
@@ -46,13 +52,13 @@
 					</tr>
 				</c:if>
 				
-				<c:if test="${!empty freeboardList} ">
-					<c:forEach items="${freeboardList }" var="freeboardInfo">
+				<c:if test="${!empty freeboardList}">
+					<c:forEach items="${freeboardList}" var="freeboardInfo">
 						<tr>
-							<td>${freeboardInfo.bo_no}</td>
+							<td><input type="hidden" value="${freeboardInfo.bo_no}" />	 ${freeboardInfo.rnum}</td>
 							<td>${freeboardInfo.bo_title}</td>
 							<td>${freeboardInfo.bo_nickname}</td>
-							<td> ${fn:substringBefore(freeboardInfo.bo_reg_date,' ') } </td>
+							<td>${fn:substringBefore(freeboardInfo.bo_reg_date,' ') } </td>
 							<td>${freeboardInfo.bo_hit}</td>
 						</tr>
 					</c:forEach>
@@ -79,6 +85,7 @@
 </body>
 
 <script type="text/javascript">
+
 	$(function(){
 		$('#registFreeboard').click(function(){
 			if(eval('${empty LOGIN_MEMBERINFO}')){
@@ -88,11 +95,14 @@
 				});
 				return;
 			}
-			$(location).attr('href','${pageContext.request.contextPath}/12/main.jsp?contentPage=/12/freeboard/freeboardForm.jsp');
-			
-			
+			$(location).attr('href','${main}');
 		});
 		
+		$('#freeboardListTbl tr:gt(0)').click(function(){
+// 			$(this).find('td:eq(0)').find('input')	
+			var bo_no = $(this).find('td:eq(0) input').val();	
+			$(location).attr('href','${pageContext.request.contextPath}/12/main.jsp?contentPage=/12/freeboard/freeboardView.jsp?bo_no='+bo_no);
+		});
 		
 	});
 </script>

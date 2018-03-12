@@ -1,6 +1,12 @@
+<%@page import="kr.or.ddit.utils.CryptoGenerator"%>
+<%@page import="java.util.Map"%>
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% 
+	Map<String,String> publicKeyMap = CryptoGenerator.getGeneratorKey(session);
+%>    
+<c:set var="publicKeyMap" value="<%=publicKeyMap%>"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,6 +146,10 @@
 <script src="${pageContext.request.contextPath}/script/responsive-tabs.js"></script>
 <script src="${pageContext.request.contextPath}/script/zabuto_calendar.min.js"></script>
 <script src="${pageContext.request.contextPath}/script/main.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jsbn.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/rsa.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/prng4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/rng.js"></script>
 <!-- summernote 에디터 js 파일 시작 -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.1/summernote.js"></script>
 <!-- summernote 에디터 js 파일 끝 -->
@@ -163,9 +173,19 @@
 				    message: '패스워드를 바르게 입력해주세요'
 				});
 			}
+			
+			var modulus = '${publicKeyMap["publicKeyModulus"]}';
+			var exponent = '${publicKeyMap["publicKeyExponent"]}';
+			
+			var rsaObj = new RSAKey();
+			rsaObj.setPublic(modulus, exponent);
+			
+			var encryptID = rsaObj.encrypt($('input[name=mem_id]').val());
+			var encryptPWD = rsaObj.encrypt($('input[name=mem_pass]').val());
+			
 			$frm = $('<form method="post" action="${pageContext.request.contextPath}/12/loginCheck.jsp"></form>');
-			$frm.append('<input type="hidden" name="mem_id" value="'+$('input[name=mem_id]').val()+'"/>');
-			$frm.append('<input type="hidden" name="mem_pass" value="'+$('input[name=mem_pass]').val()+'"/>');
+			$frm.append('<input type="hidden" name="mem_id" value="'+encryptID+'"/>');
+			$frm.append('<input type="hidden" name="mem_pass" value="'+encryptPWD+'"/>');
 			$(document.body).append($frm);
 			$frm.submit();
 		});	

@@ -13,8 +13,15 @@
  * Copyright (c) 2018 by DDIT  All right reserved
  * </pre>
 ===============================================================--%>
+<%@page import="java.util.Map"%>
+<%@page import="kr.or.ddit.utils.CryptoGenerator"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%
+	Map<String,String> publicKeyMap = CryptoGenerator.getGeneratorKey(session);
+%>
+<c:set var="publicKeyMap" value="<%=publicKeyMap%>"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,8 +30,12 @@
 <title>회원관리 관리자 로그인</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <!-- <script type="text/javascript" src="/ddit/js/validation.js"></script> -->
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/validation.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/cookieControl.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/validation.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/cookieControl.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jsbn.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/rsa.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/prng4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/rng.js"></script>
 <script>
 	$(function(){
 		//자바스크립트 내에 익스프레션 선언할때는 "" 또는 ''으로 익스크페션을 랩핑해야 함.
@@ -57,9 +68,27 @@
 			location.href='/ddit/05/loginCheck.jsp?mem_id='+$('input[name=mem_id]').val()+'&mem)pass='+$('input[name=mem_pass]').val();//get방식
 			location.replace('/ddit/05/loginCheck.jsp');//get방식
 			*/
+			
+			//180312 암호화 복호화
+			//http://www-cs-students.stanford.edu/~tjw/jsbn/
+			//	1.  prng5.js / rng.js / rsa.js / jsbn.js 다운로드
+			//	2. /js/import
+			//	3. import 순서대로 import해야 함
+			
+			var modulus = '${publicKeyMap["publicKeyModulus"]}';
+			var exponent = '${publicKeyMap["publicKeyExponent"]}';
+			
+			var rsaObj = new RSAKey();
+			rsaObj.setPublic(modulus, exponent);
+			
+			var encryptID = rsaObj.encrypt($('input[name=mem_id]').val());
+			//평문  mem_id를 공개키를 활용해서 암호화 처리
+			var encryptPWD = rsaObj.encrypt($('input[name=mem_pass]').val());
+			
+			
 			var $frm = $('<form method="POST" action="/ddit/05/loginCheck.jsp"></form>');
-			var $iptID = $('<input type="hidden" name="mem_id" value="'+$('input[name=mem_id]').val()+'"/>');
-			var $iptPWD = $('<input type="hidden" name="mem_pass value="'+$('input[name=mem_pass]').val()+'"/>');
+			var $iptID = $('<input type="hidden" name="mem_id" value="'+encryptID+'"/>');
+			var $iptPWD = $('<input type="hidden" name="mem_pass" value="'+encryptPWD+'"/>');
 			
 			$frm.append($iptID);
 			$frm.append($iptPWD);

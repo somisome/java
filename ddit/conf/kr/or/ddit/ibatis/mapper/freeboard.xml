@@ -11,32 +11,66 @@
 <sqlMap namespace="freeboard">
 	<typeAlias alias="freeboardVO" type="kr.or.ddit.vo.FreeboardVO"/>
 	
+	<sql id="selectAll">
+		SELECT * 
+			FROM FREEBOARD 
+			WHERE BO_STATUS='y'
+	</sql>
 	
 	<select id="freeboardInfo" parameterClass="map" resultClass="freeboardVO">
-		SELECT * FROM FREEBOARD WHERE BO_NO = '1'	
+		<include refid="selectAll"/> AND BO_NO = #bo_no#	
 	</select>
 	
 	<select id="freeboardList"  resultClass="freeboardVO">
-		SELECT * FROM FREEBOARD WHERE BO_STATUS = 'y'
+		SELECT B.*
+		FROM
+		(SELECT ROWNUM RNUM, A.* 
+			FROM (<include refid="selectAll"/>) A ) B
+		ORDER BY B.RNUM DESC
 	</select>
 	
-	<insert id="insertFreeboardInfo" parameterClass="freeboardVO">
-<!-- 		INSERT INTO FREEBOARD -->
-<!-- 		() -->
-<!-- 		VALUES -->
-<!-- 		() -->
+	<insert id="insertFreeboard" parameterClass="freeboardVO">
+		<selectKey keyProperty="bo_no" resultClass="string">
+			SELECT FREEBOARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO FREEBOARD(BO_NO,
+								BO_TITLE,
+								BO_WRITER,
+								BO_NICKNAME,
+								BO_PWD,
+								BO_MAIL,
+								BO_IP,
+								BO_CONTENT,
+								BO_GROUP)
+						VALUES(#bo_no#,
+								#bo_title#,
+								#bo_writer#,
+								#bo_nickname#,
+								#bo_pwd#,
+								#bo_mail#,
+								#bo_ip#,
+								#bo_content#,
+								#bo_no#)
 	</insert>
 	
-	<update id="updateFreeboardInfo" parameterClass="freeboardVO">
-<!-- 			UPDATE FREEBOARD -->
-<!-- 			SET MEM_PASS=#mem_pass#, -->
-<!-- 			WHERE  -->
+	<update id="updateFreeboard" parameterClass="freeboardVO">
+			UPDATE FREEBOARD
+			SET
+				BO_TITLE=#bo_title#,
+				BO_WRITER=#bo_writer#,
+				BO_NICKNAME=#bo_nickname#,
+				BO_PWD=#bo_pwd#,
+				BO_MAIL=#bo_mail#,
+				BO_IP=#bo_ip#,
+				BO_CONTENT=#bo_content#
+			WHERE 
+				BO_NO=#bo_no#
 	</update>
 	
 	<update id="deleteFreeboardInfo" parameterClass="map">
-<!-- 			UPDATE FREEBOARD -->
-<!-- 			SET  -->
-<!-- 			WHERE  -->
+			UPDATE FREEBOARD
+			SET BO_STATUS='n'
+			WHERE BO_NO=#bo_no#
 	</update>
 	
 	

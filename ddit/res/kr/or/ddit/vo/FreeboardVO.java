@@ -1,6 +1,8 @@
 package kr.or.ddit.vo;
 
 public class FreeboardVO {
+	
+	private String rnum;
 	private String bo_no;
 	private String bo_title;
 	private String bo_writer;
@@ -15,6 +17,12 @@ public class FreeboardVO {
 	private String bo_group;
 	private String bo_seq;
 	private String bo_depth;
+	public String getRnum() {
+		return rnum;
+	}
+	public void setRnum(String rnum) {
+		this.rnum = rnum;
+	}
 	public String getBo_no() {
 		return bo_no;
 	}
@@ -104,3 +112,14 @@ public class FreeboardVO {
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+

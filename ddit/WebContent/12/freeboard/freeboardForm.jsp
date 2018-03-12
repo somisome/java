@@ -1,5 +1,8 @@
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>    
+<c:url var="main" value="/12/main.jsp"></c:url>
+<c:url var="insertFreeboard" value="/12/freeboard/insertFreeboard.jsp"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +59,7 @@ $(function(){
 </script>
 </head>
 <body>
-<form class="form-horizontal" role="form" action="" method="post">
+<form class="form-horizontal" role="form" action="" method="post" name="freeboardForm">
 	<input type="hidden" name="bo_writer" value="${LOGIN_MEMBERINFO.mem_id }"/>
 	<input type="hidden" name="bo_ip" value="${pageContext.request.remoteAddr}"/>
 	<div class="form-group">
@@ -86,7 +89,7 @@ $(function(){
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="bo_content">내용:</label>
 		<div class="col-sm-10"> 
-			<div id="bo_content"><p>내용을 입력해주세요...</p></div>
+			<div id="bo_content">내용을 입력해주세요...</div>
 		</div>
 	</div>
 	<div class="form-group">
@@ -114,10 +117,52 @@ $(function(){
 	$(function(){
 		
 		$('#freeboardListBtn').click(function(){
-			$(location).attr('href','${pageContext.request.contextPath}/12/main.jsp');
+			$(location).attr('href','${main}');
 		});
 		
-		
+		$('form[name=freeboardForm]').submit(function(){
+			if(!$('#bo_title').val().validationTITLE()){
+				BootstrapDialog.show({
+					title:'경고',
+					message:'게시글 제목을 입력해주세요.!'
+				});
+				return false;
+			}
+			if(!$('#bo_nickname').val().validationNICKNAME()){
+				BootstrapDialog.show({
+					title:'경고',
+					message:'작성자 닉네임을 입력해주세요.!'
+				});
+				return false;
+			}
+			if(!$('#bo_pwd').val().validationPWD()){
+				BootstrapDialog.show({
+					title:'경고',
+					message:'패스워드를 입력해주세요.!'
+				});
+				return false;
+			}
+			if(!$('#bo_mail').val().validationMAIL()){
+				BootstrapDialog.show({
+					title:'경고',
+					message:'이메일을 입력해주세요.!'
+				});
+				return false;
+			}
+		     
+			$content = $('<input type="hidden" name="bo_content" value="'+$('#bo_content').summernote('code')+'"></input>')
+			if($content.val()==''){
+				BootstrapDialog.show({
+					title:'경고',
+					message:'게시글 내용을 입력해주세요.!'
+				});
+				return false;
+			}
+			$(this).append($content);
+			$(this).attr('action','${insertFreeboard}');
+			$(this).submit();
+			
+		});
 		
 		
 		

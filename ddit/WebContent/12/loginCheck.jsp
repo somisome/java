@@ -13,6 +13,7 @@
  * </pre>
 ===============================================================--%>
 
+<%@page import="kr.or.ddit.utils.CryptoGenerator"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="kr.or.ddit.vo.MemberVO"%>
 <%@page import="kr.or.ddit.service.member.IMemberServiceImpl"%>
@@ -23,7 +24,9 @@
     pageEncoding="UTF-8"%>
 <%
 	String mem_id = request.getParameter("mem_id");
+	mem_id=CryptoGenerator.decryptoRSA(session, mem_id);
 	String mem_pass = request.getParameter("mem_pass");
+	mem_pass=CryptoGenerator.decryptoRSA(session, mem_pass);
 	
 	Map<String, String> params=new HashMap<String,String>();
 	

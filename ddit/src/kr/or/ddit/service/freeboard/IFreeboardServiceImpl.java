@@ -44,13 +44,13 @@ public class IFreeboardServiceImpl implements IFreeboardService {
 
 	@Override
 	public String insertFreeboardInfo(FreeboardVO freeboardInfo) {
-		String res = null;
+		String bo_no = null;
 		try {
-			res = dao.insertFreeboardInfo(freeboardInfo);
+			bo_no = dao.insertFreeboardInfo(freeboardInfo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return res;
+		return bo_no;
 	}
 
 	@Override

@@ -1,5 +1,22 @@
+<%@page import="kr.or.ddit.vo.FreeboardVO"%>
+<%@page import="kr.or.ddit.service.freeboard.IFreeboardServiceImpl"%>
+<%@page import="kr.or.ddit.service.freeboard.IFreeboardService"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@ page language="JAVA" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>    
+<% 
+	String bo_no = request.getParameter("bo_no");
+	Map<String,String> params = new HashMap<String,String>();
+	params.put("bo_no",bo_no);
+	IFreeboardService service = IFreeboardServiceImpl.getInstance();
+	FreeboardVO freeboardInfo = service.getFreeboardInfo(params);
+%>    
+<c:set var="freeboardInfo" value="<%=freeboardInfo %>"></c:set>
+<c:url var="main" value="/12/main.jsp"></c:url>
+<c:url var="deleteFreeboard" value="/12/freeboard/deleteFreeboard.jsp"></c:url>
+<c:url var="updateFreeboard" value="/12/freeboard/updateFreeboard.jsp"></c:url>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +48,9 @@ $(function(){
 </script>
 </head>
 <body>
-<form class="form-horizontal" role="form" action="" method="post">
+<form class="form-horizontal" role="form" action="" method="post" name="freeboardForm">
+	<input type="hidden" name="bo_writer" value="${LOGIN_MEMBERINFO.mem_id }"/>
+	<input type="hidden" name="bo_ip" value="${pageContext.request.remoteAddr}"/>
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="bo_title">제목:</label>
 		<div class="col-sm-10">
@@ -59,7 +78,7 @@ $(function(){
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="bo_content">내용:</label>
 		<div class="col-sm-10"> 
-			<div id="bo_content"><p></p></div>
+			<div id="bo_content"></div>
 		</div>
 	</div>
 	<div class="form-group">
@@ -98,13 +117,132 @@ $(function(){
 	</div>
 	<div class="form-group"> 
 		<div class="col-sm-offset-2 col-sm-10">
-			<button type="button" class="btn btn-success">글쓰기</button>
-			<button type="button" class="btn btn-danger">삭제</button>
+			<button type="button" class="btn btn-success" id="freeboardFormBtn">글쓰기</button>
+			<button type="button" class="btn btn-danger" id="freeboardDeleteBtn">삭제</button>
 			<button type="button" class="btn btn-primary">답글</button>
-			<button type="button" class="btn btn-info">목록</button>
+			<button type="button" class="btn btn-info" id="freeboardListBtn">목록</button>
 			<button type="submit" class="btn btn-default" style="float: right">수정</button>
 		</div>
 	</div>
 </form>
 </body>
+<script type="text/javascript">
+$(function(){
+// 	$('#bo_title').val('${pageScope.freeboardInfo.bo_title}');
+	$('#bo_title').val('${freeboardInfo.bo_title}');
+	$('#bo_nickname').val('${freeboardInfo.bo_nickname}');
+	$('#bo_pwd').val('${freeboardInfo.bo_pwd}');
+	$('#bo_mail').val('${freeboardInfo.bo_mail}');
+    $('#bo_content').summernote('code', '${freeboardInfo.bo_content}');
+    
+    
+	//목록버튼	
+	$('#freeboardListBtn').click(function(){
+		$(location).attr('href','${main}');
+	});
+	
+	//글쓰기버튼
+	$('#freeboardFormBtn').click(function(){
+		if(eval('${empty LOGIN_MEMBERINFO}')){
+			BootstrapDialog.show({
+			    title: '경고',
+			    message: '로그인해주세요'
+			});
+			return false;
+		}
+		$(location).attr('href','${pageContext.request.contextPath}/12/main.jsp?contentPage=/12/freeboard/freeboardForm.jsp');
+	});
+	
+	//삭제버튼
+	$('#freeboardDeleteBtn').click(function(){
+		if(eval('${empty LOGIN_MEMBERINFO}')){
+			BootstrapDialog.show({
+			    title: '경고',
+			    message: '로그인해주세요'
+			});
+			return;
+		}
+		
+		if('${freeboardInfo.bo_writer}'!='${LOGIN_MEMBERINFO.mem_id}'){
+			BootstrapDialog.show({
+			    title: '경고',
+			    message: '작성자만 삭제 가능합니다.'
+			});
+			return false;
+		}
+		var bo_no = ${freeboardInfo.bo_no};	
+		$(location).attr('href','${pageContext.request.contextPath}/12/freeboard/deleteFreeboard.jsp?bo_no='+bo_no);
+	
+	});
+	
+	//수정버튼(submit)
+	$('form[name=freeboardForm]').submit(function(){
+		if(eval('${empty LOGIN_MEMBERINFO}')){
+			BootstrapDialog.show({
+			    title: '경고',
+			    message: '로그인해주세요'
+			});
+			return false;
+		}
+		
+		if('${freeboardInfo.bo_writer}'!='${LOGIN_MEMBERINFO.mem_id}'){
+			BootstrapDialog.show({
+			    title: '경고',
+			    message: '작성자만 수정 가능합니다.'
+			});
+			return false;
+		}
+		
+		
+		if(!$('#bo_title').val().validationTITLE()){
+			BootstrapDialog.show({
+				title:'경고',
+				message:'게시글 제목을 입력해주세요.!'
+			});
+			return false;
+		}
+		if(!$('#bo_nickname').val().validationNICKNAME()){
+			BootstrapDialog.show({
+				title:'경고',
+				message:'작성자 닉네임을 입력해주세요.!'
+			});
+			return false;
+		}
+		if(!$('#bo_pwd').val().validationPWD()){
+			BootstrapDialog.show({
+				title:'경고',
+				message:'패스워드를 입력해주세요.!'
+			});
+			return false;
+		}
+		if(!$('#bo_mail').val().validationMAIL()){
+			BootstrapDialog.show({
+				title:'경고',
+				message:'이메일을 입력해주세요.!'
+			});
+			return false;
+		}
+		$content = $('<input type="hidden" name="bo_content" value="'+$('#bo_content').summernote('code')+'"></input>')
+		
+		if($content.val()==''){
+			BootstrapDialog.show({
+				title:'경고',
+				message:'게시글 내용을 입력해주세요.!'
+			});
+			return false;
+		}
+		
+		$no = $('<input type="hidden" name="bo_no" value="'+<%=bo_no%>+'"></input>')
+		$(this).append($content);
+		$(this).append($no);
+		$(this).attr('action','${updateFreeboard}');
+		$(this).submit();
+	});
+	
+    
+});
+
+</script>
+
+
 </html>

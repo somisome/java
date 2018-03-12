@@ -87,6 +87,13 @@ String.prototype.validationProdLgu= function(){
 	return /^P\d{3}$/.test(this);
 };
 
+String.prototype.validationTITLE = function(){
+	return /^[0-9a-z가-힣]+$/.test(this);
+};
+
+String.prototype.validationNICKNAME = function(){
+	return /^[가-힣]{1,4}$/.test(this);
+};
 
 
 //String.prototype.validationProdLgu=function(){

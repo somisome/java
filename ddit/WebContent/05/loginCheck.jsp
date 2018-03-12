@@ -13,6 +13,7 @@
  * </pre>
 ===============================================================--%>
 
+<%@page import="kr.or.ddit.utils.CryptoGenerator"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="kr.or.ddit.vo.MemberVO"%>
 <%@page import="kr.or.ddit.service.member.IMemberServiceImpl"%>
@@ -23,7 +24,11 @@
     pageEncoding="UTF-8"%>
 <%
 	String mem_id = request.getParameter("mem_id");
+	//암호문을 세션 내 저장된 비밀키를 활용해서 평문으로 변경
+	mem_id = CryptoGenerator.decryptoRSA(session, mem_id);
+	
 	String mem_pass = request.getParameter("mem_pass");
+	mem_pass = CryptoGenerator.decryptoRSA(session, mem_pass);
 	
 	Map<String, String> params=new HashMap<String,String>();
 	
