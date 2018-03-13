@@ -9,6 +9,7 @@
  *    수정일       수정자          수정내용
  *    -------      -------     -------------------
  *    2018.02.20.  윤소미      최초작성
+ *    2018.03.13.  윤소미      el수정
  * Copyright (c) 2018 by DDIT  All right reserved
  * </pre>
 ===============================================================--%>
@@ -16,6 +17,9 @@
 <%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="blood" value="${param.blood}"></c:set>
+<c:set var="name" value="${param.name}"></c:set>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,22 +27,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% 
-		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		String blood = request.getParameter("blood");
-		//String name = request.getParameter("name");
-		String name = URLEncoder.encode(request.getParameter("name"),"UTF-8");
-		if(blood.equals("A")){
-			response.sendRedirect("view/a.jsp?blood=A&name="+name+"");					
-		}else if(blood.equals("B")){
-			response.sendRedirect("view/b.jsp?blood=B&name="+name+"");					
-		}else if(blood.equals("AB")){
-			response.sendRedirect("view/ab.jsp?blood=AB&name="+name+"");					
-		}else if(blood.equals("O")){
-			response.sendRedirect("view/o.jsp?blood=O&name="+name+"");					
-		}
-	%>
+	
+	<c:if test="${blood=='A'}">
+		<c:redirect url="view/a.jsp">
+			<c:param name="name" value="${name}"></c:param>
+			<c:param name="blood" value="${blood}"></c:param>
+		</c:redirect>	
+	</c:if>
+	<c:if test="${blood=='B'}">
+		<c:redirect url="view/b.jsp">
+			<c:param name="name" value="${name}"></c:param>
+			<c:param name="blood" value="${blood}"></c:param>
+		</c:redirect>	
+	</c:if>
+	<c:if test="${blood=='AB'}">
+		<c:redirect url="view/ab.jsp">
+			<c:param name="name" value="${name}"></c:param>
+			<c:param name="blood" value="${blood}"></c:param>
+		</c:redirect>	
+	</c:if>
+	<c:if test="${blood=='O'}">
+		<c:redirect url="view/o.jsp">
+			<c:param name="name" value="${name}"></c:param>
+			<c:param name="blood" value="${blood}"></c:param>
+		</c:redirect>	
+	</c:if>
+	
+	
+	
+	
 	
 <!-- 	혈액형취득 -->
 <!-- 	A=> /02/view/a.jsp 리다이렉트(response.sendRedirect(URI)) -->

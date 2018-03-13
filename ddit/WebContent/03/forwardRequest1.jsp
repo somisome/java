@@ -20,7 +20,10 @@
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- public void _jspService(request,response){ -->
+<c:param name="mem_id" value="a001"></c:param>
+<c:param name="mem_pass" value="asdfasdf"></c:param>
 <% 
 	Map<String, String> params = new HashMap<String, String>();
 	params.put("mem_id","a001");
@@ -61,5 +64,7 @@
 	dispatcher.forward(request,response );
 	
 %>
+
+
 
 <!-- } -->

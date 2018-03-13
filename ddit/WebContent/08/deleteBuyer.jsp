@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
-	request.setCharacterEncoding("UTF-8");
+	
 	String buyer_id = request.getParameter("buyer_id");
 	Map<String,String> params = new HashMap<String,String>();
 	params.put("buyer_id",buyer_id);

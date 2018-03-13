@@ -1,3 +1,19 @@
+<%--==============================================================
+ * 자유게시판 목록 페이지
+ * @author 윤소미
+ * @since  2018.03.11.
+ * @version 1.0
+ * @see
+ * <pre>
+ * << 개정이력(Modification Information) >>
+ *    수정일       수정자          수정내용
+ *    -------      -------     -------------------
+ *    2018.03.11.  윤소미      최초작성
+ * Copyright (c) 2018 by DDIT  All right reserved
+ * </pre>
+===============================================================--%>
+
+
 <%@page import="kr.or.ddit.vo.FreeboardVO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.service.freeboard.IFreeboardServiceImpl"%>

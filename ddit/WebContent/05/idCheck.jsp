@@ -12,7 +12,7 @@
 //	contentType="text/html;" or "text/xml;" or "text/plain;"
 //plain은 그저 문자열로 인식
 
-// 	request.setCharacterEncoding("UTF-8");
+// 	
 	String mem_id = request.getParameter("mem_id");
 	Map<String,String> params = new HashMap<String,String>();
 	params.put("mem_id",mem_id);

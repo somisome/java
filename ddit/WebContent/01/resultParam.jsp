@@ -25,7 +25,7 @@
 			param_group=첫번째&param_group=다섯번째
 -->
 <%
-	request.setCharacterEncoding("UTF-8");
+	
 %>
 <!--  
 	html 태그 랜더링 처리

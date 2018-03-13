@@ -9,12 +9,14 @@
  *    수정일       수정자          수정내용
  *    -------      -------     -------------------
  *    2018.02.20.  윤소미      최초작성
+ *    2018.03.13.  윤소미     	 el수정
  * Copyright (c) 2018 by DDIT  All right reserved
  * </pre>
 ===============================================================--%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,15 +37,15 @@
 %>
 	현재시간 : <%=new Date() %><br>
 	<hr>
-	클라이언트 주소: <%=request.getRemoteAddr() %><br>
-	요청시 파라메터 사이즈 : <%=request.getContentLength() %><br>
-	요청시 프로토콜 : <%=request.getProtocol() %><br>
-	URL : <%=request.getRequestURL() %><br>
-	URI : <%=request.getRequestURI() %><br>
-	컨텍스트 패스|루트 : <%=request.getContextPath() %><br>
-	서블릿 패스 : <%=request.getServletPath() %><br>
-	전송방식 : <%=request.getMethod() %><br>
-	User-Agent: <%=request.getHeader("User-Agent") %><br>
-	Accept: <%=request.getHeader("Accept") %><br>
+	클라이언트 주소: ${pageContext.request.remoteAddr}<br>
+	요청시 파라메터 사이즈 : ${pageContext.request.contentLength }<br>
+	요청시 프로토콜 : ${pageContext.request.protocol}<br>
+	URL : ${pageContext.request.requestURL}<br>
+	URI : ${pageContext.request.requestURI}<br>
+	컨텍스트 패스|루트 :  ${pageContext.request.contextPath}<br>
+	서블릿 패스 :  ${pageContext.request.servletPath}<br>
+	전송방식 :  ${pageContext.request.method}<br>
+	User-Agent:  ${header["User-Agent"]}<br>
+	Accept: ${header["Accept"] }<br>
 </body>
 </html>
