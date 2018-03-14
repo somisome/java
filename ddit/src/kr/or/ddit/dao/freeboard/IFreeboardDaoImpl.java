@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+
 import kr.or.ddit.ibatis.factory.SqlMapClientFactory;
 import kr.or.ddit.vo.FreeboardVO;
 

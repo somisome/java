@@ -24,9 +24,7 @@
 	전송패킷 : mem_id=a001&mem_pass=asdfasdf&mem_name=김은대&
 			param_group=첫번째&param_group=다섯번째
 -->
-<%
-	
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!--  
 	html 태그 랜더링 처리
 		uninitialized 	: 서버로부터 취득한 응답 컨텐츠의 취득 완료
@@ -42,10 +40,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	아이디 : <%=request.getParameter("mem_id") %>	<br>
-	패스워드 : <%=request.getParameter("mem_pass") %><br>	
-	이름 : <%=request.getParameter("mem_name") %>	<br>
-	미스테리 : <%=request.getParameter("param_group") %>	<br>
+	아이디 : ${param.mem_id}	<br>
+	패스워드 : ${param.mem_pass}<br>	
+	이름 : ${param.mem_name}	<br>
+	미스테리 : ${param.param_group}	<br>
 	<h4>request.getParameterValues(키) : 단일키의 다중값 취득</h4>
 	<% 
 		String[] params = request.getParameterValues("param_group");

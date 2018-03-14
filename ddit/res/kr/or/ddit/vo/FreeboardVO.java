@@ -1,5 +1,7 @@
 package kr.or.ddit.vo;
 
+import java.util.List;
+
 public class FreeboardVO {
 	
 	private String rnum;
@@ -17,6 +19,10 @@ public class FreeboardVO {
 	private String bo_group;
 	private String bo_seq;
 	private String bo_depth;
+	private List<FileItemVO> fileItemList;
+	
+	
+	
 	public String getRnum() {
 		return rnum;
 	}
@@ -106,6 +112,12 @@ public class FreeboardVO {
 	}
 	public void setBo_depth(String bo_depth) {
 		this.bo_depth = bo_depth;
+	}
+	public List<FileItemVO> getFileItemList() {
+		return fileItemList;
+	}
+	public void setFileItemList(List<FileItemVO> fileItemList) {
+		this.fileItemList = fileItemList;
 	}
 	
 	

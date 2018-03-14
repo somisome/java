@@ -54,6 +54,56 @@ td a:hover {
 }
 
 </style>
+<!--  
+	ajax를 활용한 파일 업로드 처리
+	1. http://malsup.com/jquery/form/#download      http://malsup.github.io/jquery.form.js
+-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.form.js"></script>
+<script type="text/javascript">
+var fileSaveName;
+function idPicInput(fileName){
+	//	d:\\a.png
+	//	d:\\temp\\a.png
+	var fileInfo = fileName.split('\\');
+	fileName = fileInfo[fileInfo.length-1];
+	$('#fileName').val(fileName);
+	
+	if(!/\.(jpg|jpeg|png|gif)/.test(fileName.toLowerCase())){
+		alert('이미지 파일을 선택해주세요.');
+		return;
+	}
+	
+	if($(opener.document).find('input[name=mem_id]').val()==''){
+		alert('아이디를 입력해주세요.');
+		return;
+	}
+	
+	
+	$('#idPicForm').append('<input type="hidden" name="mem_id" value="'+$(opener.document).find('input[name=mem_id]').val()+'" />');
+	
+	$('#idPicForm').ajaxForm({
+		dataType:'json',
+		success:function(result){
+			fileSaveName=result.file_save_name;
+			$('#viewTable').html('<input type="image" src="/image/'+fileSaveName+'" width="230" height="250" onclick="popClose();"/>');
+		}
+	});
+	$('#idPicForm').submit();
+	
+}
+function popClose(){
+	$(opener.document).find('#viewTable').html('<input type="image" src="/image/'+fileSaveName+'" width="150" height="200"/>');
+	self.close();
+	
+	 
+	
+	
+	
+}
+
+</script>
+
 </head>
 <body>
 	<table width="354" border="0" cellspacing="0" cellpadding="0">
@@ -77,10 +127,10 @@ td a:hover {
 					</tr>
 					<tr>
 						<td height="38" background="../image/open_tt.gif" align="center">
-							<form id="idPicForm" action="" >
+							<form id="idPicForm" action="${pageContext.request.contextPath}/05/idPickFileUpload.jsp" method="post" enctype="multipart/form-data" >
 								<input type="text" id="fileName" name="fileName"/>
 								<span id="hiddenFileInput">
-	    							<input type="file" id="idPic" name="idPic"/>
+	    							<input type="file" id="idPic" name="idPic" onchange="idPicInput(this.value);"/>
 								</span>
 							</form>
 						</td>

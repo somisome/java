@@ -40,8 +40,10 @@ td {text-align: left; }
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr><td class="tLine" colspan="2"></td></tr>
 	<tr><td rowspan="13" class="pic" colspan="2" style="vertical-align: bottom; width: 150px; text-align: center;">
+	
+		<div style="overflow: auto; white-space: nowrap; overflow-X: hidden; height: 200px;" id="viewTable"></div>
 			<img src="${pageContext.request.contextPath }/image/btn_pic.gif" alt="사진올리기" class="btn" title="인적사항에 올릴 증명	을 검색합니다." 
-				style="cursor: pointer;"/><br/>
+				style="cursor: pointer;" id="picBtn"/><br/>
 			<div style="width: 100%" align="center">
 				size : 235x315 이하
 			</div>
@@ -289,6 +291,17 @@ td {text-align: left; }
 			return true;
 		});
 	});
+	
+	
+	$('#picBtn').click(function(){
+		var url = '<%=request.getContextPath()%>/05/idPicFileupload.jsp';
+		var opts = 'toolber=no,location=no,directories=no,status=no' +
+					'menubar=no,scrollbars=no,resizable=no,copyhistory=no' +
+					'width=375,height=400';
+		window.open(url, '증명사진업로드', opts);
+	});
+	
+	
 	
 	function stopSubmit(message){
 		alert(message);		

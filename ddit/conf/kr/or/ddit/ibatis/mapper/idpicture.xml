@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- idpicture 테이블 쿼리 정의                  -->
+<!-- << 개정이력(Modification Information) >>            -->
+<!--  수정일       수정자          수정내용              -->
+<!--  =======      =======     =====================     -->
+<!--  2018.03.14.  윤소미       최초작성                 -->
+<!-- Copyright (c) 2018 by DDIT  All right reserved      -->
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="idPic">
+	<typeAlias alias="idPictureVO" type="kr.or.ddit.vo.IDPictureVO"/>
+	
+	<insert id="insertIDPicture" parameterClass="idPictureVO">
+		<selectKey keyProperty="file_seq">
+			select idpicture_seq.nextval from dual
+		</selectKey>
+		insert into IDPICTURE(file_seq
+							,file_mem_id
+							,file_name
+							,file_save_name
+							,file_content_type
+							,file_size)
+		values(#file_seq#
+				,#file_mem_id#
+				,#file_name#
+				,#file_save_name#
+				,#file_content_type#
+				,#file_size#)
+	</insert>
+	
+	
+</sqlMap>
+
+
+
+
+

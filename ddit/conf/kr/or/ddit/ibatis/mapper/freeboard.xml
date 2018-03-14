@@ -11,13 +11,34 @@
 <sqlMap namespace="freeboard">
 	<typeAlias alias="freeboardVO" type="kr.or.ddit.vo.FreeboardVO"/>
 	
+	<!-- 쿼리 질의 결과를 VO와 맵핑하기위한 선언 -->
+	<resultMap class="freeboardVO" id="freeboardMap">
+<!-- 		<result property="vo상의 다른 이름" column="bo_no" javaType="int" jdbcType="CHAR" nullValue="널대신 세팅"/> -->
+		<result property="bo_no" column="bo_no"/>
+		<result property="bo_title" column="bo_title"/>
+		<result property="bo_writer" column="bo_writer"/>
+		<result property="bo_nickname" column="bo_nickname"/>
+		<result property="bo_pwd" column="bo_pwd"/>
+		<result property="bo_mail" column="bo_mail"/>
+		<result property="bo_ip" column="bo_ip"/>
+		<result property="bo_content" column="bo_content"/>
+		<result property="bo_hit" column="bo_hit"/>
+		<result property="bo_reg_date" column="bo_reg_date"/>
+		<result property="bo_status" column="bo_status"/>
+		<result property="bo_group" column="bo_group"/>
+		<result property="bo_seq" column="bo_seq"/>
+		<result property="bo_depth" column="bo_depth"/>
+<!-- 		<result property="fileItemList" select="또다른 쿼리 질의!!할 수 있음"/> -->
+		<result property="fileItemList" column="bo_no" select="fileItem.fileItemList"/>
+	</resultMap>
+	
 	<sql id="selectAll">
 		SELECT * 
 			FROM FREEBOARD 
 			WHERE BO_STATUS='y'
 	</sql>
 	
-	<select id="freeboardInfo" parameterClass="map" resultClass="freeboardVO">
+	<select id="freeboardInfo" parameterClass="map" resultMap="freeboardMap">
 		<include refid="selectAll"/> AND BO_NO = #bo_no#	
 	</select>
 	

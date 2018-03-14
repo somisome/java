@@ -59,7 +59,7 @@ $(function(){
 </script>
 </head>
 <body>
-<form class="form-horizontal" role="form" action="" method="post" name="freeboardForm">
+<form class="form-horizontal" role="form" action="" method="post" name="freeboardForm" enctype="multipart/form-data">
 	<input type="hidden" name="bo_writer" value="${LOGIN_MEMBERINFO.mem_id }"/>
 	<input type="hidden" name="bo_ip" value="${pageContext.request.remoteAddr}"/>
 	<div class="form-group">
@@ -95,13 +95,13 @@ $(function(){
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="file01">첨부파일1:</label>
 		<div class="col-sm-10">
-			 <input type="file" class="filestyle" id="file01" name="file01" data-buttonName="btn-primary">
+			 <input type="file" class="filestyle" id="file01" name="files" data-buttonName="btn-primary">
 		</div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="file02">첨부파일2:</label>
 		<div class="col-sm-10">
-			 <input type="file" class="filestyle" id="file02" name="file02" data-buttonName="btn-primary">
+			 <input type="file" class="filestyle" id="file02" name="files" data-buttonName="btn-primary">
 		</div>
 	</div>
 	<div class="form-group"> 
@@ -160,6 +160,21 @@ $(function(){
 			}
 			$(this).append($content);
 			$(this).attr('action','${insertFreeboard}');
+			
+ 			var flag= true;
+			$('input[name=files]').each(function(idx,tag){
+				if($(tag).val()!=''){
+					if(!/\.(jpg|jpeg|png|gif)/.test($(tag).val().toLowerCase())){
+						BootstrapDialog.show({
+							title:'경고',
+							message:'이미지 파일만 업로드 할 수 있습니다.'
+						});
+						flag=false;
+					}
+				}
+			});
+			if(!flag) return false;
+			 
 			$(this).submit();
 			
 		});

@@ -88,27 +88,20 @@ $(function(){
 			<ol class="carousel-indicators">
 				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 				<li data-target="#myCarousel" data-slide-to="1"></li>
-				<li data-target="#myCarousel" data-slide-to="2"></li>
-				<li data-target="#myCarousel" data-slide-to="3"></li>
 			</ol>
 	
 			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox" style="height: 200px;">
-				<div class="item active">
-					<img src="./images/thumbs/arch-1.jpg" alt="pic1">
-				</div>
-		
-				<div class="item">
-					<img src="./images/thumbs/arch-2.jpg" alt="pic2">
-				</div>
-		
-				<div class="item">
-					<img src="./images/thumbs/autumn-1.jpg" alt="pic3">
-				</div>
-		
-				<div class="item">
-					<img src="./images/thumbs/boats-1.jpg" alt="pic4">
-				</div>
+			<div class="carousel-inner" role="listbox" style= "height: 200px;">
+				<c:forEach items="${freeboardInfo.fileItemList}" var="fileItemInfo" varStatus="stat" >
+					<c:if test="${stat.first}">
+						<div class="item active">
+					</c:if>
+					<c:if test="${stat.last}">
+						<div class="item">
+					</c:if>
+					<img src="/image/${fileItemInfo.file_save_name}" alt="pic1" onclick="javascript:location.href='${pageContext.request.contextPath}/12/fileDownload.jsp?fileSeq=${fileItemInfo.file_seq}';">
+					</div>
+				</c:forEach>
 			</div>
 			<!-- Left and right controls -->
 			<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
