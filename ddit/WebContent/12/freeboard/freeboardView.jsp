@@ -112,7 +112,7 @@ $(function(){
 		<div class="col-sm-offset-2 col-sm-10">
 			<button type="button" class="btn btn-success" id="freeboardFormBtn">글쓰기</button>
 			<button type="button" class="btn btn-danger" id="freeboardDeleteBtn">삭제</button>
-			<button type="button" class="btn btn-primary">답글</button>
+			<button type="button" class="btn btn-primary" id="replyBtn">댓글</button>
 			<button type="button" class="btn btn-info" id="freeboardListBtn">목록</button>
 			<button type="submit" class="btn btn-default" style="float: right">수정</button>
 		</div>
@@ -167,6 +167,23 @@ $(function(){
 		$(location).attr('href','${pageContext.request.contextPath}/12/freeboard/deleteFreeboard.jsp?bo_no='+bo_no);
 	
 	});
+	
+	//댓글 버튼
+	$('#replyBtn').click(function(){
+		if(eval('${empty LOGIN_MEMBERINFO}')){
+			return alertPrt('로그인해주세요');
+		}	
+		var bo_group = '${freeboardInfo.bo_group}';
+		var bo_seq = '${freeboardInfo.bo_seq}';
+		var bo_depth = '${freeboardInfo.bo_depth}';
+		var title = encodeURIComponent('${freeboardInfo.bo_title}');
+		var params = '?rnum=${param.rnum}&bo_title='+title+'&bo_group='+bo_group+'&bo_seq='+bo_seq+'&bo_depth='+bo_depth;
+		
+		
+		$(location).attr('href','${pageContext.request.contextPath}/12/main.jsp?contentPage=/12/freeboard/freeboardReplyForm.jsp'+params);
+	});
+	
+	
 	
 	//수정버튼(submit)
 	$('form[name=freeboardForm]').submit(function(){
@@ -233,6 +250,10 @@ $(function(){
 	});
 	
     
+	
+	
+	
+	
 });
 
 </script>

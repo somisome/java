@@ -9,8 +9,9 @@ import kr.or.ddit.vo.FreeboardVO;
 
 public interface IFreeboardService {
 	public FreeboardVO getFreeboardInfo(Map<String,String> params);
-	public List<FreeboardVO> getFreeboardList();
+	public List<FreeboardVO> getFreeboardList(Map<String,String> params);
 	public String insertFreeboardInfo(FreeboardVO freeboardInfo,FileItem[] items);
+	public String insertFreeboardReplyInfo(FreeboardVO freeboardInfo);
 	public void updateFreeboardInfo(FreeboardVO freeboardInfo);
 	public void deleteFreeboardInfo(Map<String,String> params);
 	

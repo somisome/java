@@ -40,10 +40,10 @@ public class IFreeboardServiceImpl implements IFreeboardService {
 	}
 
 	@Override
-	public List<FreeboardVO> getFreeboardList() {
+	public List<FreeboardVO> getFreeboardList(Map<String,String> params) {
 		List<FreeboardVO> freeboardList = null;
 		try {
-			freeboardList= dao.getFreeboardList();
+			freeboardList= dao.getFreeboardList(params);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -57,6 +57,16 @@ public class IFreeboardServiceImpl implements IFreeboardService {
 			bo_no = dao.insertFreeboardInfo(freeboardInfo);
 			List<FileItemVO> fileItemList = AttachFileMapper.mapping(bo_no, items);
 			fileItemDao.insertFileItemInfo(fileItemList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return bo_no;
+	}
+	@Override
+	public String insertFreeboardReplyInfo(FreeboardVO freeboardInfo) {
+		String bo_no = null;
+		try {
+			bo_no = dao.insertFreeboardReplyInfo(freeboardInfo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -80,5 +90,6 @@ public class IFreeboardServiceImpl implements IFreeboardService {
 			e.printStackTrace();
 		}
 	}
+
 
 }
