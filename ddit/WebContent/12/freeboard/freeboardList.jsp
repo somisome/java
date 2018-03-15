@@ -12,6 +12,7 @@
  * Copyright (c) 2018 by DDIT  All right reserved
  * </pre>
 ===============================================================--%>
+<%@page import="kr.or.ddit.utils.RolePagingUtil"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="kr.or.ddit.vo.FreeboardVO"%>
@@ -23,6 +24,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <% 
+	//main.jsp?currentPage=5
+	String currentPage = request.getParameter("currentPage");
+	if(currentPage==null){
+		currentPage="1";
+	}
+	
+	
+
+
 	//freeboardList.jsp[검색: main.jsp]
 	//redirect	main.jsp[request(search_keycode,search_keyword)]
 	//		forwarding<c:import url=freeboardList.jsp/>
@@ -35,10 +45,27 @@
 	params.put("search_keyword", search_keyword);
 	
 	IFreeboardService service = IFreeboardServiceImpl.getInstance();
+	
+	//총 게시글 갯수
+	int totalCount = service.getTotalCount(params);
+	
+	//페이지 네비게이션 메뉴를 동적으로 작성
+	//사용자정의태그(paging.tld) 로 프로젝트때에는 그렇게 만들어서 써야 함
+	RolePagingUtil pagingUtil = new RolePagingUtil(Integer.parseInt(currentPage), totalCount, request);
+	
+	String startCount = String.valueOf(pagingUtil.getStartCount());
+	String endCount = String.valueOf(pagingUtil.getEndCount());
+	
+	params.put("startCount", startCount);
+	params.put("endCount", endCount);
+	
+	String pagingContent = pagingUtil.getPageHtmls().toString();
+	
 	List<FreeboardVO> freeboardList = service.getFreeboardList(params);
 	//pageContext.setAttribute("freeboardList",freeboardList);
 %>
 <c:set var="freeboardList" value="<%=freeboardList %>"></c:set>
+<c:set var="pagingContent" value="<%=pagingContent %>"></c:set>
 <c:url var="main" value="/12/main.jsp">
 	<c:param name="contentPage" value="/12/freeboard/freeboardForm.jsp"></c:param>
 </c:url>
@@ -101,6 +128,7 @@
 
 			</tbody>
 		</table>
+		${pagingContent }
 	</div>
 </div>
 <div >

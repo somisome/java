@@ -9,6 +9,7 @@ import java.util.Map;
 
 
 
+
 import kr.or.ddit.ibatis.factory.SqlMapClientFactory;
 import kr.or.ddit.vo.FreeboardVO;
 
@@ -85,6 +86,12 @@ public class IFreeboardDaoImpl implements IFreeboardDao {
 			client.endTransaction();
 		}
 		return  bo_no;
+	}
+
+	@Override
+	public int getTotalCount(Map<String, String> params) throws SQLException {
+		int totalCount = (int) client.queryForObject("freeboard.totalCount",params);
+		return totalCount;
 	}
 	
 	

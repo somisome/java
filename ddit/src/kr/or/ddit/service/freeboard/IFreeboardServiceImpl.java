@@ -91,5 +91,16 @@ public class IFreeboardServiceImpl implements IFreeboardService {
 		}
 	}
 
+	@Override
+	public int getTotalCount(Map<String, String> params) {
+		int totalCount = 0;
+		try{
+		totalCount = dao.getTotalCount(params);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return totalCount;
+	}
+
 
 }

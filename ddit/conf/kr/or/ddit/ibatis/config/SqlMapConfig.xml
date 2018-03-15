@@ -24,6 +24,22 @@
 					                     commitTransaction();
 										 endTransaction();
 	-->
+	
+	<!--  
+		type="SIMPLE"	: 프로그래밍 코드로부터 데이터베이스 커넥션 취득 요청시 
+							매번 신규 커넥션 생성 제공
+		type="DBCP"		: 서비스 환경을 고려한 커넥션 제공과 반납 운영				
+							DataBase Connection Pool(DBCP)를 활용.( 커넥션 미리 만들어두고 달라는 데 주고 다쓰면 반납받고)
+							1. http://commons.apache.org  http://commons.apache.org/proper/commons-dbcp/download_dbcp.cgi commons-dbcp-1.4-bin.zip
+							http://commons.apache.org/proper/commons-pool/download_pool.cgi commons-pool-1.6-bin.zip
+							commons-dbcp-1.4.jar, commons-pool-1.6.jar 다운받은 두개 jar파일 lib에 복붙(import)
+		
+		JNDI(Java Naming Directory Invoke) : 로컬 또는 원격지 서버의 자원을 해당 자원 등록시의 이름을 활용해서 취득.
+		
+							
+							
+	-->
+	<!-- 
 	<transactionManager type="JDBC">
  	<dataSource type="SIMPLE"> 
 		<property name="JDBC.Driver" value="${driver}" />
@@ -32,6 +48,28 @@
 		<property name="JDBC.Password" value="${password}" />
 	</dataSource> 
 	</transactionManager>
+ -->	
+	<transactionManager type="JDBC">
+		<dataSource type="JNDI">
+			<property name="DBJndiContext" value="java:comp/env/jdbc/ddit"/>
+		</dataSource>
+	</transactionManager>
+	
+<!-- 	<transactionManager type="JDBC">
+		<dataSource type="DBCP">
+			<property name="driverClassName" value="${driver}"/>
+			<property name="url" value="${url}"/>
+			<property name="username" value="${username}"/>
+			<property name="password" value="${password}"/>
+			<property name="maxActive" value="10"/>
+			<property name="maxIdel" value="8"/>
+			<property name="maxWait" value="-1"/>
+			<property name="removeAbandoned" value="true"/>
+			<property name="removeAbandonedTimeout" value="60"/>
+		</dataSource>
+	</transactionManager> -->
+	
+	
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/member.xml"/>
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/prod.xml"/>
 	<sqlMap resource="kr/or/ddit/ibatis/mapper/buyer.xml"/>
